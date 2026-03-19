@@ -1,0 +1,25 @@
+input:
+  file: "./texts/b1-exam-topics.md"  # Provide your own text
+  language: de
+
+structure:
+  split_pattern: "^## \\d"
+  title_pattern: "^## \\d+\\.\\s*(.+)"
+  include_sections:
+    - "Person A"
+    - "Person B"
+    - "Пример ответа"
+  exclude_patterns:
+    - "^\\|"
+    - "^<img"
+    - "^<br"
+    - "^---"
+    - "^\\*\\*Prüfer"
+
+analysis:
+  stemmer: simplemma
+  min_word_length: 2
+  stop_words: true
+
+output:
+  path: "./output/b1-exam-topics.json"

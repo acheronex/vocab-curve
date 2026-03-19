@@ -1,0 +1,20 @@
+{
+  "name": "extensive-reader",
+  "version": "0.1.0",
+  "description": "Universal text analysis pipeline for language learners — word frequency, vocabulary progression, and interactive visualization",
+  "type": "module",
+  "scripts": {
+    "analyze": "tsx src/cli.ts",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "snowball-stemmers": "^0.6.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}

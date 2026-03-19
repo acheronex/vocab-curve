@@ -1,0 +1,4186 @@
+{
+  "generatedAt": "2026-03-19T11:03:51.776Z",
+  "texts": [
+    {
+      "id": "b1-topics",
+      "label": "82 B1 Exam Topics",
+      "totalWords": 19168,
+      "totalTokens": 8775,
+      "totalUniqueStems": 1623,
+      "sections": 82,
+      "topWords": [
+        {
+          "displayForm": "gut",
+          "count": 217
+        },
+        {
+          "displayForm": "finden",
+          "count": 162
+        },
+        {
+          "displayForm": "Kind",
+          "count": 158
+        },
+        {
+          "displayForm": "Meinung",
+          "count": 121
+        },
+        {
+          "displayForm": "lernen",
+          "count": 119
+        },
+        {
+          "displayForm": "Tag",
+          "count": 118
+        },
+        {
+          "displayForm": "wichtig",
+          "count": 118
+        },
+        {
+          "displayForm": "alt",
+          "count": 104
+        },
+        {
+          "displayForm": "Jahr",
+          "count": 103
+        },
+        {
+          "displayForm": "machen",
+          "count": 100
+        },
+        {
+          "displayForm": "Thema",
+          "count": 99
+        },
+        {
+          "displayForm": "lesen",
+          "count": 94
+        },
+        {
+          "displayForm": "Heimatland",
+          "count": 92
+        },
+        {
+          "displayForm": "Frage",
+          "count": 87
+        },
+        {
+          "displayForm": "Guter",
+          "count": 86
+        },
+        {
+          "displayForm": "Vorteil",
+          "count": 75
+        },
+        {
+          "displayForm": "heißen",
+          "count": 74
+        },
+        {
+          "displayForm": "Nachteil",
+          "count": 74
+        },
+        {
+          "displayForm": "arbeiten",
+          "count": 72
+        },
+        {
+          "displayForm": "sagen",
+          "count": 70
+        },
+        {
+          "displayForm": "groß",
+          "count": 68
+        },
+        {
+          "displayForm": "geben",
+          "count": 61
+        },
+        {
+          "displayForm": "Zeit",
+          "count": 61
+        },
+        {
+          "displayForm": "Dank",
+          "count": 60
+        },
+        {
+          "displayForm": "gehen",
+          "count": 59
+        },
+        {
+          "displayForm": "Freund",
+          "count": 58
+        },
+        {
+          "displayForm": "Leben",
+          "count": 57
+        },
+        {
+          "displayForm": "Mensch",
+          "count": 55
+        },
+        {
+          "displayForm": "Eltern",
+          "count": 54
+        },
+        {
+          "displayForm": "Essen",
+          "count": 53
+        }
+      ],
+      "curve": [
+        {
+          "section": 0,
+          "newStems": 79,
+          "cumulative": 79
+        },
+        {
+          "section": 1,
+          "newStems": 63,
+          "cumulative": 142
+        },
+        {
+          "section": 2,
+          "newStems": 52,
+          "cumulative": 194
+        },
+        {
+          "section": 3,
+          "newStems": 33,
+          "cumulative": 227
+        },
+        {
+          "section": 4,
+          "newStems": 51,
+          "cumulative": 278
+        },
+        {
+          "section": 5,
+          "newStems": 27,
+          "cumulative": 305
+        },
+        {
+          "section": 6,
+          "newStems": 31,
+          "cumulative": 336
+        },
+        {
+          "section": 7,
+          "newStems": 33,
+          "cumulative": 369
+        },
+        {
+          "section": 8,
+          "newStems": 53,
+          "cumulative": 422
+        },
+        {
+          "section": 9,
+          "newStems": 30,
+          "cumulative": 452
+        },
+        {
+          "section": 10,
+          "newStems": 27,
+          "cumulative": 479
+        },
+        {
+          "section": 11,
+          "newStems": 37,
+          "cumulative": 516
+        },
+        {
+          "section": 12,
+          "newStems": 32,
+          "cumulative": 548
+        },
+        {
+          "section": 13,
+          "newStems": 13,
+          "cumulative": 561
+        },
+        {
+          "section": 14,
+          "newStems": 21,
+          "cumulative": 582
+        },
+        {
+          "section": 15,
+          "newStems": 29,
+          "cumulative": 611
+        },
+        {
+          "section": 16,
+          "newStems": 14,
+          "cumulative": 625
+        },
+        {
+          "section": 17,
+          "newStems": 24,
+          "cumulative": 649
+        },
+        {
+          "section": 18,
+          "newStems": 34,
+          "cumulative": 683
+        },
+        {
+          "section": 19,
+          "newStems": 17,
+          "cumulative": 700
+        },
+        {
+          "section": 20,
+          "newStems": 23,
+          "cumulative": 723
+        },
+        {
+          "section": 21,
+          "newStems": 19,
+          "cumulative": 742
+        },
+        {
+          "section": 22,
+          "newStems": 18,
+          "cumulative": 760
+        },
+        {
+          "section": 23,
+          "newStems": 26,
+          "cumulative": 786
+        },
+        {
+          "section": 24,
+          "newStems": 26,
+          "cumulative": 812
+        },
+        {
+          "section": 25,
+          "newStems": 16,
+          "cumulative": 828
+        },
+        {
+          "section": 26,
+          "newStems": 22,
+          "cumulative": 850
+        },
+        {
+          "section": 27,
+          "newStems": 23,
+          "cumulative": 873
+        },
+        {
+          "section": 28,
+          "newStems": 22,
+          "cumulative": 895
+        },
+        {
+          "section": 29,
+          "newStems": 13,
+          "cumulative": 908
+        },
+        {
+          "section": 30,
+          "newStems": 16,
+          "cumulative": 924
+        },
+        {
+          "section": 31,
+          "newStems": 17,
+          "cumulative": 941
+        },
+        {
+          "section": 32,
+          "newStems": 15,
+          "cumulative": 956
+        },
+        {
+          "section": 33,
+          "newStems": 14,
+          "cumulative": 970
+        },
+        {
+          "section": 34,
+          "newStems": 17,
+          "cumulative": 987
+        },
+        {
+          "section": 35,
+          "newStems": 18,
+          "cumulative": 1005
+        },
+        {
+          "section": 36,
+          "newStems": 11,
+          "cumulative": 1016
+        },
+        {
+          "section": 37,
+          "newStems": 16,
+          "cumulative": 1032
+        },
+        {
+          "section": 38,
+          "newStems": 10,
+          "cumulative": 1042
+        },
+        {
+          "section": 39,
+          "newStems": 18,
+          "cumulative": 1060
+        },
+        {
+          "section": 40,
+          "newStems": 14,
+          "cumulative": 1074
+        },
+        {
+          "section": 41,
+          "newStems": 14,
+          "cumulative": 1088
+        },
+        {
+          "section": 42,
+          "newStems": 19,
+          "cumulative": 1107
+        },
+        {
+          "section": 43,
+          "newStems": 10,
+          "cumulative": 1117
+        },
+        {
+          "section": 44,
+          "newStems": 16,
+          "cumulative": 1133
+        },
+        {
+          "section": 45,
+          "newStems": 15,
+          "cumulative": 1148
+        },
+        {
+          "section": 46,
+          "newStems": 9,
+          "cumulative": 1157
+        },
+        {
+          "section": 47,
+          "newStems": 13,
+          "cumulative": 1170
+        },
+        {
+          "section": 48,
+          "newStems": 19,
+          "cumulative": 1189
+        },
+        {
+          "section": 49,
+          "newStems": 17,
+          "cumulative": 1206
+        },
+        {
+          "section": 50,
+          "newStems": 18,
+          "cumulative": 1224
+        },
+        {
+          "section": 51,
+          "newStems": 16,
+          "cumulative": 1240
+        },
+        {
+          "section": 52,
+          "newStems": 13,
+          "cumulative": 1253
+        },
+        {
+          "section": 53,
+          "newStems": 11,
+          "cumulative": 1264
+        },
+        {
+          "section": 54,
+          "newStems": 12,
+          "cumulative": 1276
+        },
+        {
+          "section": 55,
+          "newStems": 7,
+          "cumulative": 1283
+        },
+        {
+          "section": 56,
+          "newStems": 12,
+          "cumulative": 1295
+        },
+        {
+          "section": 57,
+          "newStems": 7,
+          "cumulative": 1302
+        },
+        {
+          "section": 58,
+          "newStems": 22,
+          "cumulative": 1324
+        },
+        {
+          "section": 59,
+          "newStems": 14,
+          "cumulative": 1338
+        },
+        {
+          "section": 60,
+          "newStems": 9,
+          "cumulative": 1347
+        },
+        {
+          "section": 61,
+          "newStems": 11,
+          "cumulative": 1358
+        },
+        {
+          "section": 62,
+          "newStems": 14,
+          "cumulative": 1372
+        },
+        {
+          "section": 63,
+          "newStems": 17,
+          "cumulative": 1389
+        },
+        {
+          "section": 64,
+          "newStems": 17,
+          "cumulative": 1406
+        },
+        {
+          "section": 65,
+          "newStems": 10,
+          "cumulative": 1416
+        },
+        {
+          "section": 66,
+          "newStems": 26,
+          "cumulative": 1442
+        },
+        {
+          "section": 67,
+          "newStems": 11,
+          "cumulative": 1453
+        },
+        {
+          "section": 68,
+          "newStems": 13,
+          "cumulative": 1466
+        },
+        {
+          "section": 69,
+          "newStems": 8,
+          "cumulative": 1474
+        },
+        {
+          "section": 70,
+          "newStems": 6,
+          "cumulative": 1480
+        },
+        {
+          "section": 71,
+          "newStems": 8,
+          "cumulative": 1488
+        },
+        {
+          "section": 72,
+          "newStems": 9,
+          "cumulative": 1497
+        },
+        {
+          "section": 73,
+          "newStems": 10,
+          "cumulative": 1507
+        },
+        {
+          "section": 74,
+          "newStems": 8,
+          "cumulative": 1515
+        },
+        {
+          "section": 75,
+          "newStems": 15,
+          "cumulative": 1530
+        },
+        {
+          "section": 76,
+          "newStems": 22,
+          "cumulative": 1552
+        },
+        {
+          "section": 77,
+          "newStems": 17,
+          "cumulative": 1569
+        },
+        {
+          "section": 78,
+          "newStems": 15,
+          "cumulative": 1584
+        },
+        {
+          "section": 79,
+          "newStems": 11,
+          "cumulative": 1595
+        },
+        {
+          "section": 80,
+          "newStems": 13,
+          "cumulative": 1608
+        },
+        {
+          "section": 81,
+          "newStems": 15,
+          "cumulative": 1623
+        }
+      ]
+    },
+    {
+      "id": "panem",
+      "label": "Die Tribute von Panem",
+      "totalWords": 100249,
+      "totalTokens": 44757,
+      "totalUniqueStems": 7523,
+      "sections": 27,
+      "topWords": [
+        {
+          "displayForm": "sagen",
+          "count": 817
+        },
+        {
+          "displayForm": "Peeta",
+          "count": 541
+        },
+        {
+          "displayForm": "werden",
+          "count": 350
+        },
+        {
+          "displayForm": "sehen",
+          "count": 332
+        },
+        {
+          "displayForm": "er",
+          "count": 310
+        },
+        {
+          "displayForm": "gehen",
+          "count": 271
+        },
+        {
+          "displayForm": "wissen",
+          "count": 268
+        },
+        {
+          "displayForm": "gut",
+          "count": 265
+        },
+        {
+          "displayForm": "Distrikt",
+          "count": 255
+        },
+        {
+          "displayForm": "machen",
+          "count": 244
+        },
+        {
+          "displayForm": "kommen",
+          "count": 240
+        },
+        {
+          "displayForm": "sein",
+          "count": 228
+        },
+        {
+          "displayForm": "fragen",
+          "count": 221
+        },
+        {
+          "displayForm": "haben",
+          "count": 217
+        },
+        {
+          "displayForm": "Haymitch",
+          "count": 215
+        },
+        {
+          "displayForm": "lassen",
+          "count": 202
+        },
+        {
+          "displayForm": "Hand",
+          "count": 189
+        },
+        {
+          "displayForm": "erst",
+          "count": 186
+        },
+        {
+          "displayForm": "ander",
+          "count": 177
+        },
+        {
+          "displayForm": "können",
+          "count": 165
+        },
+        {
+          "displayForm": "vielleicht",
+          "count": 158
+        },
+        {
+          "displayForm": "hören",
+          "count": 155
+        },
+        {
+          "displayForm": "geben",
+          "count": 155
+        },
+        {
+          "displayForm": "tun",
+          "count": 148
+        },
+        {
+          "displayForm": "Tribut",
+          "count": 146
+        },
+        {
+          "displayForm": "Essen",
+          "count": 136
+        },
+        {
+          "displayForm": "halten",
+          "count": 132
+        },
+        {
+          "displayForm": "Rue",
+          "count": 131
+        },
+        {
+          "displayForm": "Paar",
+          "count": 126
+        },
+        {
+          "displayForm": "klein",
+          "count": 125
+        }
+      ],
+      "curve": [
+        {
+          "section": 0,
+          "newStems": 1233,
+          "cumulative": 1233
+        },
+        {
+          "section": 1,
+          "newStems": 550,
+          "cumulative": 1783
+        },
+        {
+          "section": 2,
+          "newStems": 484,
+          "cumulative": 2267
+        },
+        {
+          "section": 3,
+          "newStems": 414,
+          "cumulative": 2681
+        },
+        {
+          "section": 4,
+          "newStems": 426,
+          "cumulative": 3107
+        },
+        {
+          "section": 5,
+          "newStems": 356,
+          "cumulative": 3463
+        },
+        {
+          "section": 6,
+          "newStems": 426,
+          "cumulative": 3889
+        },
+        {
+          "section": 7,
+          "newStems": 202,
+          "cumulative": 4091
+        },
+        {
+          "section": 8,
+          "newStems": 323,
+          "cumulative": 4414
+        },
+        {
+          "section": 9,
+          "newStems": 289,
+          "cumulative": 4703
+        },
+        {
+          "section": 10,
+          "newStems": 243,
+          "cumulative": 4946
+        },
+        {
+          "section": 11,
+          "newStems": 193,
+          "cumulative": 5139
+        },
+        {
+          "section": 12,
+          "newStems": 214,
+          "cumulative": 5353
+        },
+        {
+          "section": 13,
+          "newStems": 149,
+          "cumulative": 5502
+        },
+        {
+          "section": 14,
+          "newStems": 169,
+          "cumulative": 5671
+        },
+        {
+          "section": 15,
+          "newStems": 170,
+          "cumulative": 5841
+        },
+        {
+          "section": 16,
+          "newStems": 148,
+          "cumulative": 5989
+        },
+        {
+          "section": 17,
+          "newStems": 147,
+          "cumulative": 6136
+        },
+        {
+          "section": 18,
+          "newStems": 182,
+          "cumulative": 6318
+        },
+        {
+          "section": 19,
+          "newStems": 210,
+          "cumulative": 6528
+        },
+        {
+          "section": 20,
+          "newStems": 138,
+          "cumulative": 6666
+        },
+        {
+          "section": 21,
+          "newStems": 122,
+          "cumulative": 6788
+        },
+        {
+          "section": 22,
+          "newStems": 150,
+          "cumulative": 6938
+        },
+        {
+          "section": 23,
+          "newStems": 103,
+          "cumulative": 7041
+        },
+        {
+          "section": 24,
+          "newStems": 148,
+          "cumulative": 7189
+        },
+        {
+          "section": 25,
+          "newStems": 178,
+          "cumulative": 7367
+        },
+        {
+          "section": 26,
+          "newStems": 156,
+          "cumulative": 7523
+        }
+      ]
+    },
+    {
+      "id": "drei-kameraden",
+      "label": "Drei Kameraden",
+      "totalWords": 127611,
+      "totalTokens": 60335,
+      "totalUniqueStems": 9152,
+      "sections": 28,
+      "topWords": [
+        {
+          "displayForm": "sagen",
+          "count": 1460
+        },
+        {
+          "displayForm": "sehen",
+          "count": 791
+        },
+        {
+          "displayForm": "gehen",
+          "count": 650
+        },
+        {
+          "displayForm": "daß",
+          "count": 634
+        },
+        {
+          "displayForm": "kommen",
+          "count": 582
+        },
+        {
+          "displayForm": "Pat",
+          "count": 487
+        },
+        {
+          "displayForm": "fragen",
+          "count": 422
+        },
+        {
+          "displayForm": "gut",
+          "count": 416
+        },
+        {
+          "displayForm": "stehen",
+          "count": 400
+        },
+        {
+          "displayForm": "sein",
+          "count": 400
+        },
+        {
+          "displayForm": "machen",
+          "count": 384
+        },
+        {
+          "displayForm": "Köster",
+          "count": 363
+        },
+        {
+          "displayForm": "er",
+          "count": 345
+        },
+        {
+          "displayForm": "erwidern",
+          "count": 303
+        },
+        {
+          "displayForm": "werden",
+          "count": 296
+        },
+        {
+          "displayForm": "haben",
+          "count": 285
+        },
+        {
+          "displayForm": "Frau",
+          "count": 281
+        },
+        {
+          "displayForm": "Lenz",
+          "count": 270
+        },
+        {
+          "displayForm": "geben",
+          "count": 251
+        },
+        {
+          "displayForm": "fahren",
+          "count": 236
+        },
+        {
+          "displayForm": "Wagen",
+          "count": 235
+        },
+        {
+          "displayForm": "Hand",
+          "count": 212
+        },
+        {
+          "displayForm": "Gesicht",
+          "count": 207
+        },
+        {
+          "displayForm": "Gottfried",
+          "count": 194
+        },
+        {
+          "displayForm": "zurück",
+          "count": 191
+        },
+        {
+          "displayForm": "Leben",
+          "count": 185
+        },
+        {
+          "displayForm": "Mann",
+          "count": 185
+        },
+        {
+          "displayForm": "Auge",
+          "count": 182
+        },
+        {
+          "displayForm": "Robby",
+          "count": 181
+        },
+        {
+          "displayForm": "nehmen",
+          "count": 176
+        }
+      ],
+      "curve": [
+        {
+          "section": 0,
+          "newStems": 1309,
+          "cumulative": 1309
+        },
+        {
+          "section": 1,
+          "newStems": 497,
+          "cumulative": 1806
+        },
+        {
+          "section": 2,
+          "newStems": 476,
+          "cumulative": 2282
+        },
+        {
+          "section": 3,
+          "newStems": 487,
+          "cumulative": 2769
+        },
+        {
+          "section": 4,
+          "newStems": 435,
+          "cumulative": 3204
+        },
+        {
+          "section": 5,
+          "newStems": 465,
+          "cumulative": 3669
+        },
+        {
+          "section": 6,
+          "newStems": 262,
+          "cumulative": 3931
+        },
+        {
+          "section": 7,
+          "newStems": 281,
+          "cumulative": 4212
+        },
+        {
+          "section": 8,
+          "newStems": 493,
+          "cumulative": 4705
+        },
+        {
+          "section": 9,
+          "newStems": 225,
+          "cumulative": 4930
+        },
+        {
+          "section": 10,
+          "newStems": 239,
+          "cumulative": 5169
+        },
+        {
+          "section": 11,
+          "newStems": 260,
+          "cumulative": 5429
+        },
+        {
+          "section": 12,
+          "newStems": 353,
+          "cumulative": 5782
+        },
+        {
+          "section": 13,
+          "newStems": 172,
+          "cumulative": 5954
+        },
+        {
+          "section": 14,
+          "newStems": 203,
+          "cumulative": 6157
+        },
+        {
+          "section": 15,
+          "newStems": 243,
+          "cumulative": 6400
+        },
+        {
+          "section": 16,
+          "newStems": 296,
+          "cumulative": 6696
+        },
+        {
+          "section": 17,
+          "newStems": 332,
+          "cumulative": 7028
+        },
+        {
+          "section": 18,
+          "newStems": 304,
+          "cumulative": 7332
+        },
+        {
+          "section": 19,
+          "newStems": 316,
+          "cumulative": 7648
+        },
+        {
+          "section": 20,
+          "newStems": 171,
+          "cumulative": 7819
+        },
+        {
+          "section": 21,
+          "newStems": 138,
+          "cumulative": 7957
+        },
+        {
+          "section": 22,
+          "newStems": 221,
+          "cumulative": 8178
+        },
+        {
+          "section": 23,
+          "newStems": 261,
+          "cumulative": 8439
+        },
+        {
+          "section": 24,
+          "newStems": 220,
+          "cumulative": 8659
+        },
+        {
+          "section": 25,
+          "newStems": 158,
+          "cumulative": 8817
+        },
+        {
+          "section": 26,
+          "newStems": 200,
+          "cumulative": 9017
+        },
+        {
+          "section": 27,
+          "newStems": 135,
+          "cumulative": 9152
+        }
+      ]
+    }
+  ],
+  "coverage": [
+    {
+      "sourceId": "b1-topics",
+      "sourceLabel": "82 B1 Exam Topics",
+      "targetId": "panem",
+      "targetLabel": "Die Tribute von Panem",
+      "targetTotalStems": 7523,
+      "coveredStems": 856,
+      "coveragePercent": 11.4,
+      "bridgeWords": [
+        {
+          "displayForm": "Peeta",
+          "stem": "peeta",
+          "countInTarget": 541
+        },
+        {
+          "displayForm": "Distrikt",
+          "stem": "distrikt",
+          "countInTarget": 255
+        },
+        {
+          "displayForm": "fragen",
+          "stem": "fragen",
+          "countInTarget": 221
+        },
+        {
+          "displayForm": "haben",
+          "stem": "haben",
+          "countInTarget": 217
+        },
+        {
+          "displayForm": "Haymitch",
+          "stem": "haymitch",
+          "countInTarget": 215
+        },
+        {
+          "displayForm": "Tribut",
+          "stem": "tribut",
+          "countInTarget": 146
+        },
+        {
+          "displayForm": "Rue",
+          "stem": "rue",
+          "countInTarget": 131
+        },
+        {
+          "displayForm": "zurück",
+          "stem": "zurück",
+          "countInTarget": 123
+        },
+        {
+          "displayForm": "Cato",
+          "stem": "cato",
+          "countInTarget": 113
+        },
+        {
+          "displayForm": "Kapitol",
+          "stem": "kapitol",
+          "countInTarget": 107
+        },
+        {
+          "displayForm": "Prim",
+          "stem": "prim",
+          "countInTarget": 104
+        },
+        {
+          "displayForm": "Pfeil",
+          "stem": "pfeil",
+          "countInTarget": 103
+        },
+        {
+          "displayForm": "Cinna",
+          "stem": "cinna",
+          "countInTarget": 103
+        },
+        {
+          "displayForm": "Baum",
+          "stem": "baum",
+          "countInTarget": 101
+        },
+        {
+          "displayForm": "Gale",
+          "stem": "gale",
+          "countInTarget": 99
+        },
+        {
+          "displayForm": "Gesicht",
+          "stem": "gesicht",
+          "countInTarget": 95
+        },
+        {
+          "displayForm": "Effie",
+          "stem": "effie",
+          "countInTarget": 84
+        },
+        {
+          "displayForm": "Arena",
+          "stem": "arena",
+          "countInTarget": 83
+        },
+        {
+          "displayForm": "Katniss",
+          "stem": "katniss",
+          "countInTarget": 79
+        },
+        {
+          "displayForm": "legen",
+          "stem": "legen",
+          "countInTarget": 75
+        },
+        {
+          "displayForm": "töten",
+          "stem": "töten",
+          "countInTarget": 74
+        },
+        {
+          "displayForm": "Bogen",
+          "stem": "bogen",
+          "countInTarget": 68
+        },
+        {
+          "displayForm": "kaum",
+          "stem": "kaum",
+          "countInTarget": 66
+        },
+        {
+          "displayForm": "letzt",
+          "stem": "letzt",
+          "countInTarget": 65
+        },
+        {
+          "displayForm": "Nacht",
+          "stem": "nacht",
+          "countInTarget": 65
+        },
+        {
+          "displayForm": "Kleid",
+          "stem": "kleid",
+          "countInTarget": 64
+        },
+        {
+          "displayForm": "Augenblick",
+          "stem": "augenblick",
+          "countInTarget": 63
+        },
+        {
+          "displayForm": "Los",
+          "stem": "los",
+          "countInTarget": 62
+        },
+        {
+          "displayForm": "Karrieros",
+          "stem": "karrieros",
+          "countInTarget": 62
+        },
+        {
+          "displayForm": "Bein",
+          "stem": "bein",
+          "countInTarget": 61
+        },
+        {
+          "displayForm": "Blick",
+          "stem": "blick",
+          "countInTarget": 61
+        },
+        {
+          "displayForm": "Name",
+          "stem": "name",
+          "countInTarget": 61
+        },
+        {
+          "displayForm": "tot",
+          "stem": "tot",
+          "countInTarget": 61
+        },
+        {
+          "displayForm": "Haar",
+          "stem": "haar",
+          "countInTarget": 60
+        },
+        {
+          "displayForm": "Spielmacher",
+          "stem": "spielmacher",
+          "countInTarget": 59
+        },
+        {
+          "displayForm": "wahrscheinlich",
+          "stem": "wahrscheinlich",
+          "countInTarget": 57
+        },
+        {
+          "displayForm": "feuern",
+          "stem": "feuern",
+          "countInTarget": 57
+        },
+        {
+          "displayForm": "Stimme",
+          "stem": "stimme",
+          "countInTarget": 56
+        },
+        {
+          "displayForm": "weiter",
+          "stem": "weiter",
+          "countInTarget": 55
+        },
+        {
+          "displayForm": "Caesar",
+          "stem": "caesar",
+          "countInTarget": 55
+        },
+        {
+          "displayForm": "Gedanke",
+          "stem": "gedanke",
+          "countInTarget": 54
+        },
+        {
+          "displayForm": "Jagen",
+          "stem": "jagen",
+          "countInTarget": 54
+        },
+        {
+          "displayForm": "Fuß",
+          "stem": "fuß",
+          "countInTarget": 53
+        },
+        {
+          "displayForm": "Peetas",
+          "stem": "peetas",
+          "countInTarget": 53
+        },
+        {
+          "displayForm": "Thresh",
+          "stem": "thresh",
+          "countInTarget": 53
+        },
+        {
+          "displayForm": "Finger",
+          "stem": "finger",
+          "countInTarget": 52
+        },
+        {
+          "displayForm": "Messer",
+          "stem": "messer",
+          "countInTarget": 52
+        },
+        {
+          "displayForm": "Mund",
+          "stem": "mund",
+          "countInTarget": 52
+        },
+        {
+          "displayForm": "Tod",
+          "stem": "tod",
+          "countInTarget": 51
+        },
+        {
+          "displayForm": "Schlafsack",
+          "stem": "schlafsack",
+          "countInTarget": 50
+        },
+        {
+          "displayForm": "himmeln",
+          "stem": "himmeln",
+          "countInTarget": 49
+        },
+        {
+          "displayForm": "Rucksack",
+          "stem": "rucksack",
+          "countInTarget": 49
+        },
+        {
+          "displayForm": "fällen",
+          "stem": "fällen",
+          "countInTarget": 48
+        },
+        {
+          "displayForm": "Bach",
+          "stem": "bach",
+          "countInTarget": 48
+        },
+        {
+          "displayForm": "heben",
+          "stem": "heben",
+          "countInTarget": 47
+        },
+        {
+          "displayForm": "stellen",
+          "stem": "stellen",
+          "countInTarget": 47
+        },
+        {
+          "displayForm": "je",
+          "stem": "je",
+          "countInTarget": 47
+        },
+        {
+          "displayForm": "Lippe",
+          "stem": "lippe",
+          "countInTarget": 45
+        },
+        {
+          "displayForm": "Menge",
+          "stem": "menge",
+          "countInTarget": 45
+        },
+        {
+          "displayForm": "Meter",
+          "stem": "meter",
+          "countInTarget": 45
+        },
+        {
+          "displayForm": "Ohr",
+          "stem": "ohr",
+          "countInTarget": 44
+        },
+        {
+          "displayForm": "Zuschauer",
+          "stem": "zuschauer",
+          "countInTarget": 44
+        },
+        {
+          "displayForm": "versucht",
+          "stem": "versucht",
+          "countInTarget": 43
+        },
+        {
+          "displayForm": "Waffe",
+          "stem": "waffe",
+          "countInTarget": 43
+        },
+        {
+          "displayForm": "erscheinen",
+          "stem": "erscheinen",
+          "countInTarget": 43
+        },
+        {
+          "displayForm": "fallen",
+          "stem": "fallen",
+          "countInTarget": 43
+        },
+        {
+          "displayForm": "Vogel",
+          "stem": "vogel",
+          "countInTarget": 43
+        },
+        {
+          "displayForm": "halb",
+          "stem": "halb",
+          "countInTarget": 42
+        },
+        {
+          "displayForm": "Vorrat",
+          "stem": "vorrat",
+          "countInTarget": 41
+        },
+        {
+          "displayForm": "Beere",
+          "stem": "beere",
+          "countInTarget": 40
+        },
+        {
+          "displayForm": "Blut",
+          "stem": "blut",
+          "countInTarget": 40
+        },
+        {
+          "displayForm": "Schulter",
+          "stem": "schulter",
+          "countInTarget": 39
+        },
+        {
+          "displayForm": "plötzlich",
+          "stem": "plötzlich",
+          "countInTarget": 39
+        },
+        {
+          "displayForm": "drehen",
+          "stem": "drehen",
+          "countInTarget": 39
+        },
+        {
+          "displayForm": "Füllhorn",
+          "stem": "füllhorn",
+          "countInTarget": 39
+        },
+        {
+          "displayForm": "Rues",
+          "stem": "rues",
+          "countInTarget": 39
+        },
+        {
+          "displayForm": "stecken",
+          "stem": "stecken",
+          "countInTarget": 38
+        },
+        {
+          "displayForm": "drücken",
+          "stem": "drücken",
+          "countInTarget": 38
+        },
+        {
+          "displayForm": "erkennen",
+          "stem": "erkennen",
+          "countInTarget": 38
+        },
+        {
+          "displayForm": "schlagen",
+          "stem": "schlagen",
+          "countInTarget": 38
+        },
+        {
+          "displayForm": "Wort",
+          "stem": "wort",
+          "countInTarget": 37
+        },
+        {
+          "displayForm": "falls",
+          "stem": "falls",
+          "countInTarget": 36
+        },
+        {
+          "displayForm": "wirken",
+          "stem": "wirken",
+          "countInTarget": 35
+        },
+        {
+          "displayForm": "Ast",
+          "stem": "ast",
+          "countInTarget": 35
+        },
+        {
+          "displayForm": "irgendwie",
+          "stem": "irgendwie",
+          "countInTarget": 35
+        },
+        {
+          "displayForm": "schließlich",
+          "stem": "schließlich",
+          "countInTarget": 34
+        },
+        {
+          "displayForm": "her",
+          "stem": "her",
+          "countInTarget": 33
+        },
+        {
+          "displayForm": "flüstern",
+          "stem": "flüstern",
+          "countInTarget": 33
+        },
+        {
+          "displayForm": "wagen",
+          "stem": "wagen",
+          "countInTarget": 32
+        },
+        {
+          "displayForm": "Kamera",
+          "stem": "kamera",
+          "countInTarget": 32
+        },
+        {
+          "displayForm": "Fuchsgesicht",
+          "stem": "fuchsgesicht",
+          "countInTarget": 32
+        },
+        {
+          "displayForm": "wund",
+          "stem": "wund",
+          "countInTarget": 32
+        },
+        {
+          "displayForm": "Haut",
+          "stem": "haut",
+          "countInTarget": 31
+        },
+        {
+          "displayForm": "hängen",
+          "stem": "hängen",
+          "countInTarget": 31
+        },
+        {
+          "displayForm": "müssen",
+          "stem": "müssen",
+          "countInTarget": 31
+        },
+        {
+          "displayForm": "schießen",
+          "stem": "schießen",
+          "countInTarget": 31
+        },
+        {
+          "displayForm": "nicken",
+          "stem": "nicken",
+          "countInTarget": 30
+        },
+        {
+          "displayForm": "rufen",
+          "stem": "rufen",
+          "countInTarget": 30
+        },
+        {
+          "displayForm": "aller",
+          "stem": "aller",
+          "countInTarget": 30
+        },
+        {
+          "displayForm": "Interview",
+          "stem": "interview",
+          "countInTarget": 30
+        }
+      ],
+      "bridgeWordsTotal": 6667
+    },
+    {
+      "sourceId": "b1-topics",
+      "sourceLabel": "82 B1 Exam Topics",
+      "targetId": "drei-kameraden",
+      "targetLabel": "Drei Kameraden",
+      "targetTotalStems": 9152,
+      "coveredStems": 906,
+      "coveragePercent": 9.9,
+      "bridgeWords": [
+        {
+          "displayForm": "daß",
+          "stem": "daß",
+          "countInTarget": 634
+        },
+        {
+          "displayForm": "Pat",
+          "stem": "pat",
+          "countInTarget": 487
+        },
+        {
+          "displayForm": "fragen",
+          "stem": "fragen",
+          "countInTarget": 422
+        },
+        {
+          "displayForm": "Köster",
+          "stem": "köster",
+          "countInTarget": 363
+        },
+        {
+          "displayForm": "erwidern",
+          "stem": "erwidern",
+          "countInTarget": 303
+        },
+        {
+          "displayForm": "haben",
+          "stem": "haben",
+          "countInTarget": 285
+        },
+        {
+          "displayForm": "Lenz",
+          "stem": "lenz",
+          "countInTarget": 270
+        },
+        {
+          "displayForm": "Wagen",
+          "stem": "wagen",
+          "countInTarget": 235
+        },
+        {
+          "displayForm": "Gesicht",
+          "stem": "gesicht",
+          "countInTarget": 207
+        },
+        {
+          "displayForm": "Gottfried",
+          "stem": "gottfried",
+          "countInTarget": 194
+        },
+        {
+          "displayForm": "zurück",
+          "stem": "zurück",
+          "countInTarget": 191
+        },
+        {
+          "displayForm": "Robby",
+          "stem": "robby",
+          "countInTarget": 181
+        },
+        {
+          "displayForm": "plötzlich",
+          "stem": "plötzlich",
+          "countInTarget": 151
+        },
+        {
+          "displayForm": "los",
+          "stem": "los",
+          "countInTarget": 130
+        },
+        {
+          "displayForm": "müssen",
+          "stem": "müssen",
+          "countInTarget": 128
+        },
+        {
+          "displayForm": "Otto",
+          "stem": "otto",
+          "countInTarget": 127
+        },
+        {
+          "displayForm": "nicken",
+          "stem": "nicken",
+          "countInTarget": 126
+        },
+        {
+          "displayForm": "rasch",
+          "stem": "rasch",
+          "countInTarget": 120
+        },
+        {
+          "displayForm": "Fenster",
+          "stem": "fenster",
+          "countInTarget": 114
+        },
+        {
+          "displayForm": "her",
+          "stem": "her",
+          "countInTarget": 109
+        },
+        {
+          "displayForm": "holen",
+          "stem": "holen",
+          "countInTarget": 106
+        },
+        {
+          "displayForm": "weiter",
+          "stem": "weiter",
+          "countInTarget": 103
+        },
+        {
+          "displayForm": "wußte",
+          "stem": "wußte",
+          "countInTarget": 102
+        },
+        {
+          "displayForm": "Licht",
+          "stem": "licht",
+          "countInTarget": 102
+        },
+        {
+          "displayForm": "Augenblick",
+          "stem": "augenblick",
+          "countInTarget": 100
+        },
+        {
+          "displayForm": "Alfons",
+          "stem": "alfons",
+          "countInTarget": 98
+        },
+        {
+          "displayForm": "Karl",
+          "stem": "karl",
+          "countInTarget": 92
+        },
+        {
+          "displayForm": "legen",
+          "stem": "legen",
+          "countInTarget": 92
+        },
+        {
+          "displayForm": "mußte",
+          "stem": "mußte",
+          "countInTarget": 91
+        },
+        {
+          "displayForm": "schütteln",
+          "stem": "schütteln",
+          "countInTarget": 87
+        },
+        {
+          "displayForm": "Ferdinand",
+          "stem": "ferdinand",
+          "countInTarget": 86
+        },
+        {
+          "displayForm": "rufen",
+          "stem": "rufen",
+          "countInTarget": 85
+        },
+        {
+          "displayForm": "Rosa",
+          "stem": "rosa",
+          "countInTarget": 83
+        },
+        {
+          "displayForm": "Gustav",
+          "stem": "gustav",
+          "countInTarget": 80
+        },
+        {
+          "displayForm": "heben",
+          "stem": "heben",
+          "countInTarget": 78
+        },
+        {
+          "displayForm": "Jaffé",
+          "stem": "jaffé",
+          "countInTarget": 77
+        },
+        {
+          "displayForm": "Mark",
+          "stem": "mark",
+          "countInTarget": 76
+        },
+        {
+          "displayForm": "Schulter",
+          "stem": "schulter",
+          "countInTarget": 74
+        },
+        {
+          "displayForm": "Na",
+          "stem": "na",
+          "countInTarget": 73
+        },
+        {
+          "displayForm": "blicken",
+          "stem": "blicken",
+          "countInTarget": 73
+        },
+        {
+          "displayForm": "halb",
+          "stem": "halb",
+          "countInTarget": 71
+        },
+        {
+          "displayForm": "Zalewski",
+          "stem": "zalewski",
+          "countInTarget": 70
+        },
+        {
+          "displayForm": "schlagen",
+          "stem": "schlagen",
+          "countInTarget": 69
+        },
+        {
+          "displayForm": "fallen",
+          "stem": "fallen",
+          "countInTarget": 68
+        },
+        {
+          "displayForm": "Nacht",
+          "stem": "nacht",
+          "countInTarget": 67
+        },
+        {
+          "displayForm": "schieben",
+          "stem": "schieben",
+          "countInTarget": 66
+        },
+        {
+          "displayForm": "Hass",
+          "stem": "hass",
+          "countInTarget": 66
+        },
+        {
+          "displayForm": "rot",
+          "stem": "rot",
+          "countInTarget": 63
+        },
+        {
+          "displayForm": "Gott",
+          "stem": "gott",
+          "countInTarget": 63
+        },
+        {
+          "displayForm": "Stimme",
+          "stem": "stimme",
+          "countInTarget": 61
+        },
+        {
+          "displayForm": "Rum",
+          "stem": "rum",
+          "countInTarget": 61
+        },
+        {
+          "displayForm": "Jupp",
+          "stem": "jupp",
+          "countInTarget": 61
+        },
+        {
+          "displayForm": "Liebling",
+          "stem": "liebling",
+          "countInTarget": 61
+        },
+        {
+          "displayForm": "Weile",
+          "stem": "weile",
+          "countInTarget": 59
+        },
+        {
+          "displayForm": "starren",
+          "stem": "starren",
+          "countInTarget": 59
+        },
+        {
+          "displayForm": "Flasche",
+          "stem": "flasche",
+          "countInTarget": 59
+        },
+        {
+          "displayForm": "hängen",
+          "stem": "hängen",
+          "countInTarget": 59
+        },
+        {
+          "displayForm": "steigen",
+          "stem": "steigen",
+          "countInTarget": 59
+        },
+        {
+          "displayForm": "Hollmann",
+          "stem": "hollmann",
+          "countInTarget": 59
+        },
+        {
+          "displayForm": "Ach",
+          "stem": "ach",
+          "countInTarget": 59
+        },
+        {
+          "displayForm": "Wort",
+          "stem": "wort",
+          "countInTarget": 58
+        },
+        {
+          "displayForm": "Blumenthal",
+          "stem": "blumenthal",
+          "countInTarget": 58
+        },
+        {
+          "displayForm": "heran",
+          "stem": "heran",
+          "countInTarget": 57
+        },
+        {
+          "displayForm": "heraus",
+          "stem": "heraus",
+          "countInTarget": 55
+        },
+        {
+          "displayForm": "Fräulein",
+          "stem": "fräulein",
+          "countInTarget": 55
+        },
+        {
+          "displayForm": "wunderbar",
+          "stem": "wunderbar",
+          "countInTarget": 54
+        },
+        {
+          "displayForm": "schweigen",
+          "stem": "schweigen",
+          "countInTarget": 53
+        },
+        {
+          "displayForm": "wenden",
+          "stem": "wenden",
+          "countInTarget": 53
+        },
+        {
+          "displayForm": "Blick",
+          "stem": "blick",
+          "countInTarget": 52
+        },
+        {
+          "displayForm": "herum",
+          "stem": "herum",
+          "countInTarget": 51
+        },
+        {
+          "displayForm": "hinüber",
+          "stem": "hinüber",
+          "countInTarget": 50
+        },
+        {
+          "displayForm": "drehen",
+          "stem": "drehen",
+          "countInTarget": 50
+        },
+        {
+          "displayForm": "Sitz",
+          "stem": "sitz",
+          "countInTarget": 49
+        },
+        {
+          "displayForm": "schmal",
+          "stem": "schmal",
+          "countInTarget": 49
+        },
+        {
+          "displayForm": "bißchen",
+          "stem": "bißchen",
+          "countInTarget": 48
+        },
+        {
+          "displayForm": "hell",
+          "stem": "hell",
+          "countInTarget": 48
+        },
+        {
+          "displayForm": "Liebe",
+          "stem": "liebe",
+          "countInTarget": 48
+        },
+        {
+          "displayForm": "Cadillac",
+          "stem": "cadillac",
+          "countInTarget": 47
+        },
+        {
+          "displayForm": "fort",
+          "stem": "fort",
+          "countInTarget": 47
+        },
+        {
+          "displayForm": "schließlich",
+          "stem": "schließlich",
+          "countInTarget": 46
+        },
+        {
+          "displayForm": "Mund",
+          "stem": "mund",
+          "countInTarget": 45
+        },
+        {
+          "displayForm": "stellen",
+          "stem": "stellen",
+          "countInTarget": 45
+        },
+        {
+          "displayForm": "winken",
+          "stem": "winken",
+          "countInTarget": 45
+        },
+        {
+          "displayForm": "still",
+          "stem": "still",
+          "countInTarget": 45
+        },
+        {
+          "displayForm": "Patrice",
+          "stem": "patrice",
+          "countInTarget": 45
+        },
+        {
+          "displayForm": "hinaus",
+          "stem": "hinaus",
+          "countInTarget": 43
+        },
+        {
+          "displayForm": "Bar",
+          "stem": "bar",
+          "countInTarget": 43
+        },
+        {
+          "displayForm": "weißen",
+          "stem": "weißen",
+          "countInTarget": 43
+        },
+        {
+          "displayForm": "hinein",
+          "stem": "hinein",
+          "countInTarget": 42
+        },
+        {
+          "displayForm": "schließen",
+          "stem": "schließen",
+          "countInTarget": 41
+        },
+        {
+          "displayForm": "zucken",
+          "stem": "zucken",
+          "countInTarget": 41
+        },
+        {
+          "displayForm": "wahrscheinlich",
+          "stem": "wahrscheinlich",
+          "countInTarget": 41
+        },
+        {
+          "displayForm": "nachher",
+          "stem": "nachher",
+          "countInTarget": 41
+        },
+        {
+          "displayForm": "Schatten",
+          "stem": "schatten",
+          "countInTarget": 41
+        },
+        {
+          "displayForm": "Antonio",
+          "stem": "antonio",
+          "countInTarget": 41
+        },
+        {
+          "displayForm": "dicht",
+          "stem": "dicht",
+          "countInTarget": 40
+        },
+        {
+          "displayForm": "Kognak",
+          "stem": "kognak",
+          "countInTarget": 39
+        },
+        {
+          "displayForm": "Fred",
+          "stem": "fred",
+          "countInTarget": 39
+        },
+        {
+          "displayForm": "tot",
+          "stem": "tot",
+          "countInTarget": 38
+        },
+        {
+          "displayForm": "Haar",
+          "stem": "haar",
+          "countInTarget": 38
+        }
+      ],
+      "bridgeWordsTotal": 8246
+    },
+    {
+      "sourceId": "panem",
+      "sourceLabel": "Die Tribute von Panem",
+      "targetId": "b1-topics",
+      "targetLabel": "82 B1 Exam Topics",
+      "targetTotalStems": 1623,
+      "coveredStems": 856,
+      "coveragePercent": 52.7,
+      "bridgeWords": [
+        {
+          "displayForm": "Meinung",
+          "stem": "meinung",
+          "countInTarget": 121
+        },
+        {
+          "displayForm": "Heimatland",
+          "stem": "heimatland",
+          "countInTarget": 92
+        },
+        {
+          "displayForm": "Frage",
+          "stem": "frage",
+          "countInTarget": 87
+        },
+        {
+          "displayForm": "Guter",
+          "stem": "guter",
+          "countInTarget": 86
+        },
+        {
+          "displayForm": "Sport",
+          "stem": "sport",
+          "countInTarget": 30
+        },
+        {
+          "displayForm": "Deutschland",
+          "stem": "deutschland",
+          "countInTarget": 22
+        },
+        {
+          "displayForm": "Gesundheit",
+          "stem": "gesundheit",
+          "countInTarget": 18
+        },
+        {
+          "displayForm": "Handy",
+          "stem": "handy",
+          "countInTarget": 16
+        },
+        {
+          "displayForm": "fit",
+          "stem": "fit",
+          "countInTarget": 15
+        },
+        {
+          "displayForm": "Computer",
+          "stem": "computer",
+          "countInTarget": 15
+        },
+        {
+          "displayForm": "Internet",
+          "stem": "internet",
+          "countInTarget": 14
+        },
+        {
+          "displayForm": "Wochenende",
+          "stem": "wochenende",
+          "countInTarget": 13
+        },
+        {
+          "displayForm": "App",
+          "stem": "app",
+          "countInTarget": 12
+        },
+        {
+          "displayForm": "Anna",
+          "stem": "anna",
+          "countInTarget": 12
+        },
+        {
+          "displayForm": "Restaurant",
+          "stem": "restaurant",
+          "countInTarget": 12
+        },
+        {
+          "displayForm": "Fahrrad",
+          "stem": "fahrrad",
+          "countInTarget": 12
+        },
+        {
+          "displayForm": "Technik",
+          "stem": "technik",
+          "countInTarget": 12
+        },
+        {
+          "displayForm": "Hobby",
+          "stem": "hobby",
+          "countInTarget": 12
+        },
+        {
+          "displayForm": "Bus",
+          "stem": "bus",
+          "countInTarget": 12
+        },
+        {
+          "displayForm": "Büro",
+          "stem": "büro",
+          "countInTarget": 11
+        },
+        {
+          "displayForm": "Job",
+          "stem": "job",
+          "countInTarget": 11
+        },
+        {
+          "displayForm": "Note",
+          "stem": "note",
+          "countInTarget": 11
+        },
+        {
+          "displayForm": "sozial",
+          "stem": "sozial",
+          "countInTarget": 11
+        },
+        {
+          "displayForm": "Großeltern",
+          "stem": "großeltern",
+          "countInTarget": 11
+        },
+        {
+          "displayForm": "Student",
+          "stem": "student",
+          "countInTarget": 10
+        },
+        {
+          "displayForm": "Supermarkt",
+          "stem": "supermarkt",
+          "countInTarget": 10
+        },
+        {
+          "displayForm": "Lisa",
+          "stem": "lisa",
+          "countInTarget": 9
+        },
+        {
+          "displayForm": "Oma",
+          "stem": "oma",
+          "countInTarget": 9
+        },
+        {
+          "displayForm": "Park",
+          "stem": "park",
+          "countInTarget": 9
+        },
+        {
+          "displayForm": "super",
+          "stem": "super",
+          "countInTarget": 8
+        },
+        {
+          "displayForm": "Energie",
+          "stem": "energie",
+          "countInTarget": 8
+        },
+        {
+          "displayForm": "Müller",
+          "stem": "müller",
+          "countInTarget": 8
+        },
+        {
+          "displayForm": "Beruf",
+          "stem": "beruf",
+          "countInTarget": 8
+        },
+        {
+          "displayForm": "selbstständig",
+          "stem": "selbstständig",
+          "countInTarget": 8
+        },
+        {
+          "displayForm": "Lehrer",
+          "stem": "lehrer",
+          "countInTarget": 8
+        },
+        {
+          "displayForm": "alleine",
+          "stem": "alleine",
+          "countInTarget": 8
+        },
+        {
+          "displayForm": "Miete",
+          "stem": "miete",
+          "countInTarget": 8
+        },
+        {
+          "displayForm": "Heim",
+          "stem": "heim",
+          "countInTarget": 8
+        },
+        {
+          "displayForm": "Museum",
+          "stem": "museum",
+          "countInTarget": 8
+        },
+        {
+          "displayForm": "Freizeit",
+          "stem": "freizeit",
+          "countInTarget": 7
+        },
+        {
+          "displayForm": "Erfahrung",
+          "stem": "erfahrung",
+          "countInTarget": 7
+        },
+        {
+          "displayForm": "Kultur",
+          "stem": "kultur",
+          "countInTarget": 7
+        },
+        {
+          "displayForm": "Schmidt",
+          "stem": "schmidt",
+          "countInTarget": 7
+        },
+        {
+          "displayForm": "Haushalt",
+          "stem": "haushalt",
+          "countInTarget": 7
+        },
+        {
+          "displayForm": "Umwelt",
+          "stem": "umwelt",
+          "countInTarget": 7
+        },
+        {
+          "displayForm": "Bioprodukt",
+          "stem": "bioprodukt",
+          "countInTarget": 7
+        },
+        {
+          "displayForm": "Fitnessstudio",
+          "stem": "fitnessstudio",
+          "countInTarget": 7
+        },
+        {
+          "displayForm": "pro",
+          "stem": "pro",
+          "countInTarget": 7
+        },
+        {
+          "displayForm": "Hausaufgabe",
+          "stem": "hausaufgabe",
+          "countInTarget": 7
+        },
+        {
+          "displayForm": "Claudia",
+          "stem": "claudia",
+          "countInTarget": 7
+        },
+        {
+          "displayForm": "Kindergarten",
+          "stem": "kindergarten",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "studieren",
+          "stem": "studieren",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "Urlaub",
+          "stem": "urlaub",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "Hoffmann",
+          "stem": "hoffmann",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "Studentin",
+          "stem": "studentin",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "sinnvoll",
+          "stem": "sinnvoll",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "Küche",
+          "stem": "küche",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "rauchen",
+          "stem": "rauchen",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "ausgeben",
+          "stem": "ausgeben",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "Maria",
+          "stem": "maria",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "Trinkgeld",
+          "stem": "trinkgeld",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "Plastik",
+          "stem": "plastik",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "billig",
+          "stem": "billig",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "Klaus",
+          "stem": "klaus",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "Zoo",
+          "stem": "zoo",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "Weber",
+          "stem": "weber",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Universität",
+          "stem": "universität",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "telefonieren",
+          "stem": "telefonieren",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Video",
+          "stem": "video",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Tom",
+          "stem": "tom",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "gesünder",
+          "stem": "gesünder",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "möbeln",
+          "stem": "möbeln",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Qualität",
+          "stem": "qualität",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Smartphone",
+          "stem": "smartphone",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Fertiggericht",
+          "stem": "fertiggericht",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Schulz",
+          "stem": "schulz",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Kur",
+          "stem": "kur",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Café",
+          "stem": "café",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Hochzeit",
+          "stem": "hochzeit",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Erika",
+          "stem": "erika",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "kostenlos",
+          "stem": "kostenlos",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Media",
+          "stem": "media",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Sportverein",
+          "stem": "sportverein",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "motiviert",
+          "stem": "motiviert",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Senior",
+          "stem": "senior",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Tanja",
+          "stem": "tanja",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Fußball",
+          "stem": "fußball",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Marken",
+          "stem": "marken",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Verein",
+          "stem": "verein",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "fleißig",
+          "stem": "fleißig",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Eintritt",
+          "stem": "eintritt",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Uni",
+          "stem": "uni",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "Prof",
+          "stem": "prof",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "Berger",
+          "stem": "berger",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "Laptop",
+          "stem": "laptop",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "Produkt",
+          "stem": "produkt",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "Bio",
+          "stem": "bio",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "ungesund",
+          "stem": "ungesund",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "notwendig",
+          "stem": "notwendig",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "Joggen",
+          "stem": "joggen",
+          "countInTarget": 4
+        }
+      ],
+      "bridgeWordsTotal": 767
+    },
+    {
+      "sourceId": "panem",
+      "sourceLabel": "Die Tribute von Panem",
+      "targetId": "drei-kameraden",
+      "targetLabel": "Drei Kameraden",
+      "targetTotalStems": 9152,
+      "coveredStems": 3225,
+      "coveragePercent": 35.2,
+      "bridgeWords": [
+        {
+          "displayForm": "daß",
+          "stem": "daß",
+          "countInTarget": 634
+        },
+        {
+          "displayForm": "Pat",
+          "stem": "pat",
+          "countInTarget": 487
+        },
+        {
+          "displayForm": "Köster",
+          "stem": "köster",
+          "countInTarget": 363
+        },
+        {
+          "displayForm": "Lenz",
+          "stem": "lenz",
+          "countInTarget": 270
+        },
+        {
+          "displayForm": "Gottfried",
+          "stem": "gottfried",
+          "countInTarget": 194
+        },
+        {
+          "displayForm": "Robby",
+          "stem": "robby",
+          "countInTarget": 181
+        },
+        {
+          "displayForm": "Otto",
+          "stem": "otto",
+          "countInTarget": 127
+        },
+        {
+          "displayForm": "wußte",
+          "stem": "wußte",
+          "countInTarget": 102
+        },
+        {
+          "displayForm": "Alfons",
+          "stem": "alfons",
+          "countInTarget": 98
+        },
+        {
+          "displayForm": "Karl",
+          "stem": "karl",
+          "countInTarget": 92
+        },
+        {
+          "displayForm": "mußte",
+          "stem": "mußte",
+          "countInTarget": 91
+        },
+        {
+          "displayForm": "Ferdinand",
+          "stem": "ferdinand",
+          "countInTarget": 86
+        },
+        {
+          "displayForm": "Gustav",
+          "stem": "gustav",
+          "countInTarget": 80
+        },
+        {
+          "displayForm": "Jaffé",
+          "stem": "jaffé",
+          "countInTarget": 77
+        },
+        {
+          "displayForm": "blicken",
+          "stem": "blicken",
+          "countInTarget": 73
+        },
+        {
+          "displayForm": "Zalewski",
+          "stem": "zalewski",
+          "countInTarget": 70
+        },
+        {
+          "displayForm": "Rum",
+          "stem": "rum",
+          "countInTarget": 61
+        },
+        {
+          "displayForm": "Jupp",
+          "stem": "jupp",
+          "countInTarget": 61
+        },
+        {
+          "displayForm": "Hollmann",
+          "stem": "hollmann",
+          "countInTarget": 59
+        },
+        {
+          "displayForm": "Blumenthal",
+          "stem": "blumenthal",
+          "countInTarget": 58
+        },
+        {
+          "displayForm": "Fräulein",
+          "stem": "fräulein",
+          "countInTarget": 55
+        },
+        {
+          "displayForm": "wunderbar",
+          "stem": "wunderbar",
+          "countInTarget": 54
+        },
+        {
+          "displayForm": "Sitz",
+          "stem": "sitz",
+          "countInTarget": 49
+        },
+        {
+          "displayForm": "schmal",
+          "stem": "schmal",
+          "countInTarget": 49
+        },
+        {
+          "displayForm": "Werkstatt",
+          "stem": "werkstatt",
+          "countInTarget": 48
+        },
+        {
+          "displayForm": "bißchen",
+          "stem": "bißchen",
+          "countInTarget": 48
+        },
+        {
+          "displayForm": "Cadillac",
+          "stem": "cadillac",
+          "countInTarget": 47
+        },
+        {
+          "displayForm": "Patrice",
+          "stem": "patrice",
+          "countInTarget": 45
+        },
+        {
+          "displayForm": "Bar",
+          "stem": "bar",
+          "countInTarget": 43
+        },
+        {
+          "displayForm": "Antonio",
+          "stem": "antonio",
+          "countInTarget": 41
+        },
+        {
+          "displayForm": "Kognak",
+          "stem": "kognak",
+          "countInTarget": 39
+        },
+        {
+          "displayForm": "tanzen",
+          "stem": "tanzen",
+          "countInTarget": 39
+        },
+        {
+          "displayForm": "Fred",
+          "stem": "fred",
+          "countInTarget": 39
+        },
+        {
+          "displayForm": "Hof",
+          "stem": "hof",
+          "countInTarget": 37
+        },
+        {
+          "displayForm": "Mantel",
+          "stem": "mantel",
+          "countInTarget": 37
+        },
+        {
+          "displayForm": "Zigarette",
+          "stem": "zigarette",
+          "countInTarget": 36
+        },
+        {
+          "displayForm": "Bude",
+          "stem": "bude",
+          "countInTarget": 35
+        },
+        {
+          "displayForm": "Valentin",
+          "stem": "valentin",
+          "countInTarget": 35
+        },
+        {
+          "displayForm": "Frida",
+          "stem": "frida",
+          "countInTarget": 35
+        },
+        {
+          "displayForm": "sonderbar",
+          "stem": "sonderbar",
+          "countInTarget": 33
+        },
+        {
+          "displayForm": "Müller",
+          "stem": "müller",
+          "countInTarget": 33
+        },
+        {
+          "displayForm": "Sanatorium",
+          "stem": "sanatorium",
+          "countInTarget": 33
+        },
+        {
+          "displayForm": "International",
+          "stem": "international",
+          "countInTarget": 32
+        },
+        {
+          "displayForm": "Binding",
+          "stem": "binding",
+          "countInTarget": 32
+        },
+        {
+          "displayForm": "Korridor",
+          "stem": "korridor",
+          "countInTarget": 32
+        },
+        {
+          "displayForm": "Taxi",
+          "stem": "taxi",
+          "countInTarget": 32
+        },
+        {
+          "displayForm": "Guter",
+          "stem": "guter",
+          "countInTarget": 31
+        },
+        {
+          "displayForm": "Motor",
+          "stem": "motor",
+          "countInTarget": 31
+        },
+        {
+          "displayForm": "Georgie",
+          "stem": "georgie",
+          "countInTarget": 29
+        },
+        {
+          "displayForm": "Pats",
+          "stem": "pats",
+          "countInTarget": 28
+        },
+        {
+          "displayForm": "Breuer",
+          "stem": "breuer",
+          "countInTarget": 28
+        },
+        {
+          "displayForm": "Telefon",
+          "stem": "telefon",
+          "countInTarget": 27
+        },
+        {
+          "displayForm": "Koffer",
+          "stem": "koffer",
+          "countInTarget": 27
+        },
+        {
+          "displayForm": "Lohkamp",
+          "stem": "lohkamp",
+          "countInTarget": 26
+        },
+        {
+          "displayForm": "Theke",
+          "stem": "theke",
+          "countInTarget": 26
+        },
+        {
+          "displayForm": "Prost",
+          "stem": "prost",
+          "countInTarget": 26
+        },
+        {
+          "displayForm": "zuviel",
+          "stem": "zuviel",
+          "countInTarget": 25
+        },
+        {
+          "displayForm": "Mußt",
+          "stem": "mußt",
+          "countInTarget": 25
+        },
+        {
+          "displayForm": "Guido",
+          "stem": "guido",
+          "countInTarget": 25
+        },
+        {
+          "displayForm": "anrufen",
+          "stem": "anrufen",
+          "countInTarget": 24
+        },
+        {
+          "displayForm": "Friedhof",
+          "stem": "friedhof",
+          "countInTarget": 24
+        },
+        {
+          "displayForm": "nebeln",
+          "stem": "nebeln",
+          "countInTarget": 24
+        },
+        {
+          "displayForm": "Zeitlang",
+          "stem": "zeitlang",
+          "countInTarget": 23
+        },
+        {
+          "displayForm": "Steuer",
+          "stem": "steuer",
+          "countInTarget": 23
+        },
+        {
+          "displayForm": "nebenan",
+          "stem": "nebenan",
+          "countInTarget": 23
+        },
+        {
+          "displayForm": "Alois",
+          "stem": "alois",
+          "countInTarget": 23
+        },
+        {
+          "displayForm": "schreiten",
+          "stem": "schreiten",
+          "countInTarget": 22
+        },
+        {
+          "displayForm": "einzig",
+          "stem": "einzig",
+          "countInTarget": 22
+        },
+        {
+          "displayForm": "Brief",
+          "stem": "brief",
+          "countInTarget": 22
+        },
+        {
+          "displayForm": "Café",
+          "stem": "café",
+          "countInTarget": 21
+        },
+        {
+          "displayForm": "Erna",
+          "stem": "erna",
+          "countInTarget": 21
+        },
+        {
+          "displayForm": "Ford",
+          "stem": "ford",
+          "countInTarget": 21
+        },
+        {
+          "displayForm": "Vogt",
+          "stem": "vogt",
+          "countInTarget": 21
+        },
+        {
+          "displayForm": "nachmittags",
+          "stem": "nachmittags",
+          "countInTarget": 20
+        },
+        {
+          "displayForm": "Gas",
+          "stem": "gas",
+          "countInTarget": 20
+        },
+        {
+          "displayForm": "Kamerad",
+          "stem": "kamerad",
+          "countInTarget": 20
+        },
+        {
+          "displayForm": "erstaunt",
+          "stem": "erstaunt",
+          "countInTarget": 20
+        },
+        {
+          "displayForm": "obschon",
+          "stem": "obschon",
+          "countInTarget": 20
+        },
+        {
+          "displayForm": "Braumüller",
+          "stem": "braumüller",
+          "countInTarget": 20
+        },
+        {
+          "displayForm": "telefonieren",
+          "stem": "telefonieren",
+          "countInTarget": 20
+        },
+        {
+          "displayForm": "Büro",
+          "stem": "büro",
+          "countInTarget": 20
+        },
+        {
+          "displayForm": "Arthur",
+          "stem": "arthur",
+          "countInTarget": 20
+        },
+        {
+          "displayForm": "Professor",
+          "stem": "professor",
+          "countInTarget": 20
+        },
+        {
+          "displayForm": "Zweck",
+          "stem": "zweck",
+          "countInTarget": 19
+        },
+        {
+          "displayForm": "Schlitten",
+          "stem": "schlitten",
+          "countInTarget": 19
+        },
+        {
+          "displayForm": "Hure",
+          "stem": "hure",
+          "countInTarget": 19
+        },
+        {
+          "displayForm": "Unsinn",
+          "stem": "unsinn",
+          "countInTarget": 19
+        },
+        {
+          "displayForm": "müßte",
+          "stem": "müßte",
+          "countInTarget": 19
+        },
+        {
+          "displayForm": "Polizei",
+          "stem": "polizei",
+          "countInTarget": 19
+        },
+        {
+          "displayForm": "drüben",
+          "stem": "drüben",
+          "countInTarget": 18
+        },
+        {
+          "displayForm": "Dasein",
+          "stem": "dasein",
+          "countInTarget": 18
+        },
+        {
+          "displayForm": "Robert",
+          "stem": "robert",
+          "countInTarget": 18
+        },
+        {
+          "displayForm": "vorverlegen",
+          "stem": "vorverlegen",
+          "countInTarget": 18
+        },
+        {
+          "displayForm": "Scheinwerfer",
+          "stem": "scheinwerfer",
+          "countInTarget": 18
+        },
+        {
+          "displayForm": "Portier",
+          "stem": "portier",
+          "countInTarget": 18
+        },
+        {
+          "displayForm": "Orlow",
+          "stem": "orlow",
+          "countInTarget": 17
+        },
+        {
+          "displayForm": "Wirt",
+          "stem": "wirt",
+          "countInTarget": 17
+        },
+        {
+          "displayForm": "fabelhaft",
+          "stem": "fabelhaft",
+          "countInTarget": 17
+        },
+        {
+          "displayForm": "Karte",
+          "stem": "karte",
+          "countInTarget": 17
+        },
+        {
+          "displayForm": "Lilly",
+          "stem": "lilly",
+          "countInTarget": 17
+        }
+      ],
+      "bridgeWordsTotal": 5927
+    },
+    {
+      "sourceId": "drei-kameraden",
+      "sourceLabel": "Drei Kameraden",
+      "targetId": "b1-topics",
+      "targetLabel": "82 B1 Exam Topics",
+      "targetTotalStems": 1623,
+      "coveredStems": 906,
+      "coveragePercent": 55.8,
+      "bridgeWords": [
+        {
+          "displayForm": "Heimatland",
+          "stem": "heimatland",
+          "countInTarget": 92
+        },
+        {
+          "displayForm": "Nachteil",
+          "stem": "nachteil",
+          "countInTarget": 74
+        },
+        {
+          "displayForm": "Sport",
+          "stem": "sport",
+          "countInTarget": 30
+        },
+        {
+          "displayForm": "Stress",
+          "stem": "stress",
+          "countInTarget": 25
+        },
+        {
+          "displayForm": "bisschen",
+          "stem": "bisschen",
+          "countInTarget": 21
+        },
+        {
+          "displayForm": "Kleidung",
+          "stem": "kleidung",
+          "countInTarget": 16
+        },
+        {
+          "displayForm": "Handy",
+          "stem": "handy",
+          "countInTarget": 16
+        },
+        {
+          "displayForm": "fit",
+          "stem": "fit",
+          "countInTarget": 15
+        },
+        {
+          "displayForm": "Problem",
+          "stem": "problem",
+          "countInTarget": 15
+        },
+        {
+          "displayForm": "Computer",
+          "stem": "computer",
+          "countInTarget": 15
+        },
+        {
+          "displayForm": "Internet",
+          "stem": "internet",
+          "countInTarget": 14
+        },
+        {
+          "displayForm": "Wochenende",
+          "stem": "wochenende",
+          "countInTarget": 13
+        },
+        {
+          "displayForm": "günstig",
+          "stem": "günstig",
+          "countInTarget": 13
+        },
+        {
+          "displayForm": "Dr",
+          "stem": "dr",
+          "countInTarget": 12
+        },
+        {
+          "displayForm": "perfekt",
+          "stem": "perfekt",
+          "countInTarget": 12
+        },
+        {
+          "displayForm": "tollen",
+          "stem": "tollen",
+          "countInTarget": 12
+        },
+        {
+          "displayForm": "App",
+          "stem": "app",
+          "countInTarget": 12
+        },
+        {
+          "displayForm": "Anna",
+          "stem": "anna",
+          "countInTarget": 12
+        },
+        {
+          "displayForm": "Technik",
+          "stem": "technik",
+          "countInTarget": 12
+        },
+        {
+          "displayForm": "Hobby",
+          "stem": "hobby",
+          "countInTarget": 12
+        },
+        {
+          "displayForm": "Bus",
+          "stem": "bus",
+          "countInTarget": 12
+        },
+        {
+          "displayForm": "Job",
+          "stem": "job",
+          "countInTarget": 11
+        },
+        {
+          "displayForm": "Note",
+          "stem": "note",
+          "countInTarget": 11
+        },
+        {
+          "displayForm": "Information",
+          "stem": "information",
+          "countInTarget": 11
+        },
+        {
+          "displayForm": "Großeltern",
+          "stem": "großeltern",
+          "countInTarget": 11
+        },
+        {
+          "displayForm": "Tradition",
+          "stem": "tradition",
+          "countInTarget": 10
+        },
+        {
+          "displayForm": "Supermarkt",
+          "stem": "supermarkt",
+          "countInTarget": 10
+        },
+        {
+          "displayForm": "toll",
+          "stem": "toll",
+          "countInTarget": 10
+        },
+        {
+          "displayForm": "Kontakt",
+          "stem": "kontakt",
+          "countInTarget": 10
+        },
+        {
+          "displayForm": "Oma",
+          "stem": "oma",
+          "countInTarget": 9
+        },
+        {
+          "displayForm": "spazieren",
+          "stem": "spazieren",
+          "countInTarget": 9
+        },
+        {
+          "displayForm": "Fernsehen",
+          "stem": "fernsehen",
+          "countInTarget": 9
+        },
+        {
+          "displayForm": "super",
+          "stem": "super",
+          "countInTarget": 8
+        },
+        {
+          "displayForm": "Energie",
+          "stem": "energie",
+          "countInTarget": 8
+        },
+        {
+          "displayForm": "selbstständig",
+          "stem": "selbstständig",
+          "countInTarget": 8
+        },
+        {
+          "displayForm": "Team",
+          "stem": "team",
+          "countInTarget": 8
+        },
+        {
+          "displayForm": "Disziplin",
+          "stem": "disziplin",
+          "countInTarget": 8
+        },
+        {
+          "displayForm": "konzentrieren",
+          "stem": "konzentrieren",
+          "countInTarget": 7
+        },
+        {
+          "displayForm": "Freizeit",
+          "stem": "freizeit",
+          "countInTarget": 7
+        },
+        {
+          "displayForm": "Schmidt",
+          "stem": "schmidt",
+          "countInTarget": 7
+        },
+        {
+          "displayForm": "Haushalt",
+          "stem": "haushalt",
+          "countInTarget": 7
+        },
+        {
+          "displayForm": "Umwelt",
+          "stem": "umwelt",
+          "countInTarget": 7
+        },
+        {
+          "displayForm": "Bioprodukt",
+          "stem": "bioprodukt",
+          "countInTarget": 7
+        },
+        {
+          "displayForm": "Fitnessstudio",
+          "stem": "fitnessstudio",
+          "countInTarget": 7
+        },
+        {
+          "displayForm": "Hausaufgabe",
+          "stem": "hausaufgabe",
+          "countInTarget": 7
+        },
+        {
+          "displayForm": "privat",
+          "stem": "privat",
+          "countInTarget": 7
+        },
+        {
+          "displayForm": "Claudia",
+          "stem": "claudia",
+          "countInTarget": 7
+        },
+        {
+          "displayForm": "Kindergarten",
+          "stem": "kindergarten",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "nützlich",
+          "stem": "nützlich",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "planen",
+          "stem": "planen",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "okay",
+          "stem": "okay",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "Studentin",
+          "stem": "studentin",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "sinnvoll",
+          "stem": "sinnvoll",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "achter",
+          "stem": "achter",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "Plastik",
+          "stem": "plastik",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "Fernseher",
+          "stem": "fernseher",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "Picknick",
+          "stem": "picknick",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "Klaus",
+          "stem": "klaus",
+          "countInTarget": 6
+        },
+        {
+          "displayForm": "Weber",
+          "stem": "weber",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Universität",
+          "stem": "universität",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Mischung",
+          "stem": "mischung",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Video",
+          "stem": "video",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "besucht",
+          "stem": "besucht",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "flexibel",
+          "stem": "flexibel",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Tom",
+          "stem": "tom",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "gesünder",
+          "stem": "gesünder",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Qualität",
+          "stem": "qualität",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Smartphone",
+          "stem": "smartphone",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Fertiggericht",
+          "stem": "fertiggericht",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Schulz",
+          "stem": "schulz",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Kur",
+          "stem": "kur",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "konzentriert",
+          "stem": "konzentriert",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Erika",
+          "stem": "erika",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Media",
+          "stem": "media",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "motiviert",
+          "stem": "motiviert",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Senior",
+          "stem": "senior",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Tanja",
+          "stem": "tanja",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Fußball",
+          "stem": "fußball",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Marken",
+          "stem": "marken",
+          "countInTarget": 5
+        },
+        {
+          "displayForm": "Uni",
+          "stem": "uni",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "Prof",
+          "stem": "prof",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "Talent",
+          "stem": "talent",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "beliebt",
+          "stem": "beliebt",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "vermisst",
+          "stem": "vermisst",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "erwachsen",
+          "stem": "erwachsen",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "Partner",
+          "stem": "partner",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "Laptop",
+          "stem": "laptop",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "Produkt",
+          "stem": "produkt",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "Bio",
+          "stem": "bio",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "Salat",
+          "stem": "salat",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "Zeitverschwendung",
+          "stem": "zeitverschwendung",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "Joggen",
+          "stem": "joggen",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "professionell",
+          "stem": "professionell",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "Obst",
+          "stem": "obst",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "online",
+          "stem": "online",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "traditionell",
+          "stem": "traditionell",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "Unterricht",
+          "stem": "unterricht",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "Entwicklung",
+          "stem": "entwicklung",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "Süßigkeit",
+          "stem": "süßigkeit",
+          "countInTarget": 4
+        },
+        {
+          "displayForm": "Tablet",
+          "stem": "tablet",
+          "countInTarget": 4
+        }
+      ],
+      "bridgeWordsTotal": 717
+    },
+    {
+      "sourceId": "drei-kameraden",
+      "sourceLabel": "Drei Kameraden",
+      "targetId": "panem",
+      "targetLabel": "Die Tribute von Panem",
+      "targetTotalStems": 7523,
+      "coveredStems": 3225,
+      "coveragePercent": 42.9,
+      "bridgeWords": [
+        {
+          "displayForm": "Peeta",
+          "stem": "peeta",
+          "countInTarget": 541
+        },
+        {
+          "displayForm": "Distrikt",
+          "stem": "distrikt",
+          "countInTarget": 255
+        },
+        {
+          "displayForm": "Haymitch",
+          "stem": "haymitch",
+          "countInTarget": 215
+        },
+        {
+          "displayForm": "Tribut",
+          "stem": "tribut",
+          "countInTarget": 146
+        },
+        {
+          "displayForm": "Rue",
+          "stem": "rue",
+          "countInTarget": 131
+        },
+        {
+          "displayForm": "Cato",
+          "stem": "cato",
+          "countInTarget": 113
+        },
+        {
+          "displayForm": "Kapitol",
+          "stem": "kapitol",
+          "countInTarget": 107
+        },
+        {
+          "displayForm": "Prim",
+          "stem": "prim",
+          "countInTarget": 104
+        },
+        {
+          "displayForm": "Cinna",
+          "stem": "cinna",
+          "countInTarget": 103
+        },
+        {
+          "displayForm": "Gale",
+          "stem": "gale",
+          "countInTarget": 99
+        },
+        {
+          "displayForm": "Effie",
+          "stem": "effie",
+          "countInTarget": 84
+        },
+        {
+          "displayForm": "Arena",
+          "stem": "arena",
+          "countInTarget": 83
+        },
+        {
+          "displayForm": "Katniss",
+          "stem": "katniss",
+          "countInTarget": 79
+        },
+        {
+          "displayForm": "Bogen",
+          "stem": "bogen",
+          "countInTarget": 68
+        },
+        {
+          "displayForm": "bisschen",
+          "stem": "bisschen",
+          "countInTarget": 63
+        },
+        {
+          "displayForm": "Karrieros",
+          "stem": "karrieros",
+          "countInTarget": 62
+        },
+        {
+          "displayForm": "Spielmacher",
+          "stem": "spielmacher",
+          "countInTarget": 59
+        },
+        {
+          "displayForm": "Caesar",
+          "stem": "caesar",
+          "countInTarget": 55
+        },
+        {
+          "displayForm": "Peetas",
+          "stem": "peetas",
+          "countInTarget": 53
+        },
+        {
+          "displayForm": "Thresh",
+          "stem": "thresh",
+          "countInTarget": 53
+        },
+        {
+          "displayForm": "Schlafsack",
+          "stem": "schlafsack",
+          "countInTarget": 50
+        },
+        {
+          "displayForm": "Rucksack",
+          "stem": "rucksack",
+          "countInTarget": 49
+        },
+        {
+          "displayForm": "Vorrat",
+          "stem": "vorrat",
+          "countInTarget": 41
+        },
+        {
+          "displayForm": "Beere",
+          "stem": "beere",
+          "countInTarget": 40
+        },
+        {
+          "displayForm": "Füllhorn",
+          "stem": "füllhorn",
+          "countInTarget": 39
+        },
+        {
+          "displayForm": "Rues",
+          "stem": "rues",
+          "countInTarget": 39
+        },
+        {
+          "displayForm": "falls",
+          "stem": "falls",
+          "countInTarget": 36
+        },
+        {
+          "displayForm": "durchdenken",
+          "stem": "durchdenken",
+          "countInTarget": 34
+        },
+        {
+          "displayForm": "Kamera",
+          "stem": "kamera",
+          "countInTarget": 32
+        },
+        {
+          "displayForm": "Fuchsgesicht",
+          "stem": "fuchsgesicht",
+          "countInTarget": 32
+        },
+        {
+          "displayForm": "Interview",
+          "stem": "interview",
+          "countInTarget": 30
+        },
+        {
+          "displayForm": "Saum",
+          "stem": "saum",
+          "countInTarget": 29
+        },
+        {
+          "displayForm": "offenbar",
+          "stem": "offenbar",
+          "countInTarget": 29
+        },
+        {
+          "displayForm": "Sieger",
+          "stem": "sieger",
+          "countInTarget": 28
+        },
+        {
+          "displayForm": "Armer",
+          "stem": "armer",
+          "countInTarget": 28
+        },
+        {
+          "displayForm": "Kaninchen",
+          "stem": "kaninchen",
+          "countInTarget": 27
+        },
+        {
+          "displayForm": "Portia",
+          "stem": "portia",
+          "countInTarget": 27
+        },
+        {
+          "displayForm": "Hungerspiele",
+          "stem": "hungerspiele",
+          "countInTarget": 26
+        },
+        {
+          "displayForm": "Sponsor",
+          "stem": "sponsor",
+          "countInTarget": 26
+        },
+        {
+          "displayForm": "zuminde",
+          "stem": "zuminde",
+          "countInTarget": 25
+        },
+        {
+          "displayForm": "Kuss",
+          "stem": "kuss",
+          "countInTarget": 24
+        },
+        {
+          "displayForm": "hassen",
+          "stem": "hassen",
+          "countInTarget": 23
+        },
+        {
+          "displayForm": "Mine",
+          "stem": "mine",
+          "countInTarget": 23
+        },
+        {
+          "displayForm": "Clove",
+          "stem": "clove",
+          "countInTarget": 23
+        },
+        {
+          "displayForm": "Einzige",
+          "stem": "einzige",
+          "countInTarget": 22
+        },
+        {
+          "displayForm": "absehen",
+          "stem": "absehen",
+          "countInTarget": 22
+        },
+        {
+          "displayForm": "Hovercraft",
+          "stem": "hovercraft",
+          "countInTarget": 22
+        },
+        {
+          "displayForm": "Prims",
+          "stem": "prims",
+          "countInTarget": 21
+        },
+        {
+          "displayForm": "Panem",
+          "stem": "panem",
+          "countInTarget": 20
+        },
+        {
+          "displayForm": "sich",
+          "stem": "sich",
+          "countInTarget": 20
+        },
+        {
+          "displayForm": "Pflanze",
+          "stem": "pflanze",
+          "countInTarget": 20
+        },
+        {
+          "displayForm": "Spotttölpel",
+          "stem": "spotttölpel",
+          "countInTarget": 19
+        },
+        {
+          "displayForm": "Karrieretribute",
+          "stem": "karrieretribute",
+          "countInTarget": 19
+        },
+        {
+          "displayForm": "Eichhörnchen",
+          "stem": "eichhörnchen",
+          "countInTarget": 18
+        },
+        {
+          "displayForm": "Beute",
+          "stem": "beute",
+          "countInTarget": 18
+        },
+        {
+          "displayForm": "sodass",
+          "stem": "sodass",
+          "countInTarget": 18
+        },
+        {
+          "displayForm": "Bildschirm",
+          "stem": "bildschirm",
+          "countInTarget": 18
+        },
+        {
+          "displayForm": "Mutation",
+          "stem": "mutation",
+          "countInTarget": 18
+        },
+        {
+          "displayForm": "Mellark",
+          "stem": "mellark",
+          "countInTarget": 17
+        },
+        {
+          "displayForm": "Handvoll",
+          "stem": "handvoll",
+          "countInTarget": 17
+        },
+        {
+          "displayForm": "anschauen",
+          "stem": "anschauen",
+          "countInTarget": 17
+        },
+        {
+          "displayForm": "Schlamm",
+          "stem": "schlamm",
+          "countInTarget": 17
+        },
+        {
+          "displayForm": "Team",
+          "stem": "team",
+          "countInTarget": 17
+        },
+        {
+          "displayForm": "Okay",
+          "stem": "okay",
+          "countInTarget": 17
+        },
+        {
+          "displayForm": "Catos",
+          "stem": "catos",
+          "countInTarget": 17
+        },
+        {
+          "displayForm": "Zuschauen",
+          "stem": "zuschauen",
+          "countInTarget": 16
+        },
+        {
+          "displayForm": "Horn",
+          "stem": "horn",
+          "countInTarget": 16
+        },
+        {
+          "displayForm": "Köcher",
+          "stem": "köcher",
+          "countInTarget": 15
+        },
+        {
+          "displayForm": "Laib",
+          "stem": "laib",
+          "countInTarget": 15
+        },
+        {
+          "displayForm": "Tümpel",
+          "stem": "tümpel",
+          "countInTarget": 15
+        },
+        {
+          "displayForm": "glimmern",
+          "stem": "glimmern",
+          "countInTarget": 15
+        },
+        {
+          "displayForm": "Jägerwespen",
+          "stem": "jägerwespen",
+          "countInTarget": 15
+        },
+        {
+          "displayForm": "Näher",
+          "stem": "näher",
+          "countInTarget": 14
+        },
+        {
+          "displayForm": "betreten",
+          "stem": "betreten",
+          "countInTarget": 14
+        },
+        {
+          "displayForm": "Friedenswächter",
+          "stem": "friedenswächter",
+          "countInTarget": 14
+        },
+        {
+          "displayForm": "Aufgabe",
+          "stem": "aufgabe",
+          "countInTarget": 14
+        },
+        {
+          "displayForm": "Arznei",
+          "stem": "arznei",
+          "countInTarget": 14
+        },
+        {
+          "displayForm": "Kohl",
+          "stem": "kohl",
+          "countInTarget": 14
+        },
+        {
+          "displayForm": "Haymitchs",
+          "stem": "haymitchs",
+          "countInTarget": 14
+        },
+        {
+          "displayForm": "Stylisten",
+          "stem": "stylisten",
+          "countInTarget": 14
+        },
+        {
+          "displayForm": "Plan",
+          "stem": "plan",
+          "countInTarget": 14
+        },
+        {
+          "displayForm": "auslösen",
+          "stem": "auslösen",
+          "countInTarget": 14
+        },
+        {
+          "displayForm": "Zaun",
+          "stem": "zaun",
+          "countInTarget": 13
+        },
+        {
+          "displayForm": "überlebt",
+          "stem": "überlebt",
+          "countInTarget": 13
+        },
+        {
+          "displayForm": "Strategie",
+          "stem": "strategie",
+          "countInTarget": 13
+        },
+        {
+          "displayForm": "Mentor",
+          "stem": "mentor",
+          "countInTarget": 13
+        },
+        {
+          "displayForm": "Grusling",
+          "stem": "grusling",
+          "countInTarget": 13
+        },
+        {
+          "displayForm": "Bürgermeister",
+          "stem": "bürgermeister",
+          "countInTarget": 12
+        },
+        {
+          "displayForm": "Madge",
+          "stem": "madge",
+          "countInTarget": 12
+        },
+        {
+          "displayForm": "Eintopf",
+          "stem": "eintopf",
+          "countInTarget": 12
+        },
+        {
+          "displayForm": "Bitte",
+          "stem": "bitte",
+          "countInTarget": 12
+        },
+        {
+          "displayForm": "zurückkehren",
+          "stem": "zurückkehren",
+          "countInTarget": 12
+        },
+        {
+          "displayForm": "Sonnenlicht",
+          "stem": "sonnenlicht",
+          "countInTarget": 11
+        },
+        {
+          "displayForm": "stattdessen",
+          "stem": "stattdessen",
+          "countInTarget": 11
+        },
+        {
+          "displayForm": "Netz",
+          "stem": "netz",
+          "countInTarget": 11
+        },
+        {
+          "displayForm": "sobald",
+          "stem": "sobald",
+          "countInTarget": 11
+        },
+        {
+          "displayForm": "Getreide",
+          "stem": "getreide",
+          "countInTarget": 11
+        },
+        {
+          "displayForm": "Fernsehen",
+          "stem": "fernsehen",
+          "countInTarget": 11
+        },
+        {
+          "displayForm": "Schluss",
+          "stem": "schluss",
+          "countInTarget": 11
+        },
+        {
+          "displayForm": "Hm",
+          "stem": "hm",
+          "countInTarget": 11
+        }
+      ],
+      "bridgeWordsTotal": 4298
+    }
+  ],
+  "cumulativeLadder": {
+    "steps": [
+      {
+        "id": "b1-topics",
+        "label": "82 B1 Exam Topics",
+        "stemsAdded": 1623,
+        "cumulativeStems": 1623,
+        "coverageOfNext": 11.4
+      },
+      {
+        "id": "panem",
+        "label": "Die Tribute von Panem",
+        "stemsAdded": 6667,
+        "cumulativeStems": 8290,
+        "coverageOfNext": 37.3
+      },
+      {
+        "id": "drei-kameraden",
+        "label": "Drei Kameraden",
+        "stemsAdded": 5735,
+        "cumulativeStems": 14025,
+        "coverageOfNext": null
+      }
+    ],
+    "finalVocabulary": 14025
+  }
+}
