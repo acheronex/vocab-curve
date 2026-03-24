@@ -1,145 +1,159 @@
 # Vocab Curve
 
-Interactive vocabulary analysis tool for language learners. Visualizes how your vocabulary grows as you read — shows the growth curve, frequency distribution, and compares coverage across multiple texts.
+An interactive vocabulary analysis tool for language learners. Quantifies vocabulary progression as you read, visualizes coverage across texts, and exports frequency-tiered vocabulary lists for Anki.
 
-**Demo data included** — the app ships with pre-computed vocabulary analysis for 3 German texts at different difficulty levels. No source texts included.
+## Concept
 
-## What It Does
+Vocabulary acquisition follows a predictable curve — new texts introduce many new words at first, but as you read more, fewer words are truly new. This tool makes that curve visible, helps you choose what to read next, and tells you exactly which words to study.
 
-Feed it any text split into chapters/sections, and it will:
+## Demo
 
-- **Track new vocabulary per section** — see how the "new words" curve flattens as you read more
-- **Group word forms by lemma** — `sagt/sage/sagen/gesagt` → `sagen`, `ging/gegangen/gehen` → `gehen`
-- **Compare texts** — coverage matrix, bridge words between difficulty levels, vocabulary ladder
-- **Explore words** — search any word, see all its inflected forms and where they appear
+The included demo uses **Lutherbibel 1912** (public domain) — 696,962 words, 12,997 unique lemmas, 26 books.
 
-## Demo Data
+You can analyze any text in any language supported by [simplemma](https://github.com/adbar/simplemma) (German, English, French, Spanish, Italian, Portuguese, Dutch, and 40+ more).
 
-The included demo analyzes 3 German texts at B1 → B2 → C1 levels:
-
-| Text | Level | Words | Unique Lemmas | Sections |
-|------|-------|-------|---------------|----------|
-| 82 B1 Exam Topics | B1 | 19,168 | 1,623 | 82 topics |
-| Die Tribute von Panem | B2 | 100,249 | 7,523 | 27 chapters |
-| Drei Kameraden (Remarque) | C1 | 127,611 | 9,152 | 28 chapters |
-
-**The Vocabulary Ladder** — reading all three texts in order:
-
-```
-B1 Topics:        1,623 lemmas
-+ Panem:         +6,667 new → 8,290 total
-+ Drei Kameraden: +5,735 new → 14,025 total vocabulary
-```
-
-## Quick Start (View Demo)
-
-```bash
-cd web && npm install && npm run dev
-```
-
-Opens at `http://localhost:5173` with the pre-computed demo data.
-
-## Analyze Your Own Text
-
-### Prerequisites
+## Quick Start
 
 ```bash
 npm install
 cd web && npm install && cd ..
 python3 -m venv .venv && source .venv/bin/activate && pip install simplemma
+cd web && npm run dev             # → http://localhost:5173
 ```
 
-### 1. Format your text as markdown
-
-```markdown
-## Chapter 1
-
-Your text here...
-
-## Chapter 2
-
-More text...
-```
-
-### 2. Create a config
-
-```yaml
-input:
-  file: "./texts/my-book.md"
-  language: de
-
-structure:
-  split_pattern: "^## "
-  title_pattern: "^## (.+)"
-
-analysis:
-  stemmer: simplemma
-  min_word_length: 2
-  stop_words: true
-
-output:
-  path: "./output/my-book.json"
-```
-
-### 3. Run the pipeline
+To analyze your own text:
 
 ```bash
-npx tsx src/cli.ts my-config.yaml
-cp output/my-book.json web/public/
-cd web && npm run dev
+npx tsx src/cli.ts config-lutherbibel.yaml   # or your own config
+npx tsx src/compare.ts                        # cross-text comparison + manifest
+cp output/*.json web/public/
+```
+
+## Visualization (React dashboard)
+
+**Single text view:**
+- **Flatten the Curve** — filter by frequency threshold (All / 2+ / 6+ / 20+) to see the "hard core" vocabulary
+- **Vocabulary Curve** — bars (new words/section) + cumulative line; click any bar to explore that section's words; toggle between "All unique" and "New only" modes
+- **Word Frequency Distribution** — horizontal bar chart showing hapax, rare, medium, core tiers with word counts and text coverage %
+- **Word Explorer** — search any word, see all inflected forms, sections, example sentences; filter by frequency tier; linked to chart bar clicks
+- **Vocabulary metrics** — Sections, Words, Unique Words, Density, Normalized Density (Guiraud's Index V/√N with explanatory tooltip), Core Coverage
+
+**Comparison view** (when multiple texts analyzed):
+- **The Ladder** — waterfall chart of vocabulary accumulation across texts; drag-to-reorder with live recalculation
+- **Coverage Matrix** — N×N grid showing how much each text's vocabulary covers another
+- **Curves Compared** — overlaid vocabulary growth curves for selected texts
+- **Bridge Words** — the specific words you need to level up from one text to the next; proper noun filter toggle
+- **Text Overview Cards** — stats, normalized density, raw density, core coverage, and top words per text
+- **Text selection chips** — toggle up to 4 texts for comparison
+
+UI supports **English / Russian** toggle.
+
+**Single text view** also includes an **Anki Export** button that generates frequency-tiered TSV files directly from the dashboard.
+
+## Analyzing Your Own Text
+
+1. Format as markdown with `## ` section headers.
+2. Create a config file (copy `config-lutherbibel.yaml` as template).
+3. Run: `npx tsx src/cli.ts my-config.yaml`
+
+Key config options:
+```yaml
+input:
+  file: "./for-analysis/my-text.md"
+  language: de
+  label: "My Text Name"
+structure:
+  split_pattern: "^## Chapter"          # regex to split sections
+  title_pattern: "^## Chapter\\s+(\\d+)" # regex to extract section title
+  exclude_patterns:                      # skip lines matching these
+    - "^<img"
+    - "^---"
+analysis:
+  stemmer: simplemma   # or: snowball (faster, less accurate), none
+  min_word_length: 2
+  stop_words: true
+output:
+  path: "./output/my-text.json"
+```
+
+## Adding Texts to Comparison View
+
+Adding a new text requires **zero code changes**:
+
+1. Prepare your markdown file in `for-analysis/`
+2. Create a config YAML (copy `config-lutherbibel.yaml` as template — include a `label` field)
+3. Run analysis: `npx tsx src/cli.ts config-new.yaml`
+4. Run comparison: `npx tsx src/compare.ts` (auto-discovers all output JSONs)
+5. Copy to web: `cp output/*.json web/public/`
+
+`compare.ts` auto-discovers all analysis JSONs in `output/`, sorts the vocabulary ladder by complexity, and generates `manifest.json` which drives the web UI dropdowns and comparison chips.
+
+## Anki Export
+
+Exports frequency-tiered vocabulary lists as `.txt` files ready for Anki import. Optionally enriches cards with dictionary definitions if you provide a Yomitan-format dictionary.
+
+**Frequency tiers:**
+
+| Tier | Description |
+|------|-------------|
+| 1× (hapax) | Words appearing only once |
+| 2–5× (rare) | Less common but useful vocabulary |
+| 6–19× (medium) | Important words for fluency |
+| 20+× (core) | Essential vocabulary — typically covers ~60% of text |
+
+```bash
+# Show statistics only
+python3 scripts/anki_export.py output/lutherbibel-1912.json --stats-only
+
+# Export all tiers
+python3 scripts/anki_export.py output/lutherbibel-1912.json
+
+# Export a specific tier
+python3 scripts/anki_export.py output/lutherbibel-1912.json --tier 20+
+
+# Options: --tier [1|2-5|6-19|20+|all]  --output-dir DIR  --dict-path PATH
 ```
 
 ## How It Works
 
 ```
-Markdown → Tokenize → simplemma Lemmatizer → Frequency Analysis → JSON → React Dashboard
+Markdown → Tokenize → simplemma lemmatizer → Frequency analysis → JSON → React dashboard
+                                                                       ↘ Anki TSV export
 ```
 
-The pipeline extracts text from markdown, groups inflected word forms by lemma using [simplemma](https://github.com/adbar/simplemma) (dictionary-based Python lemmatizer, 0.95 accuracy on German), and computes per-section vocabulary progression. The dashboard reads the pre-computed JSON — no runtime parsing.
-
-## Visualization
-
-### Single Text View
-
-- **Vocabulary Curve** — bars (new words/section) + line (cumulative unique)
-- **Flatten the Curve** — filter by frequency threshold to see core vs rare vocabulary
-- **Frequency Distribution** — words appearing 1x, 2x, 5x, 10x+
-- **Word Explorer** — search, see all inflected forms, section occurrences
-
-### Comparison View
-
-- **The Ladder** — waterfall chart of vocabulary accumulation across texts
-- **Coverage Matrix** — N×N overlap grid
-- **Curves Compared** — overlaid vocabulary growth curves
-- **Bridge Words** — most frequent words you'd need to learn for the next level
-- **Text Overview** — stats and top words per text
-
-## Tech Stack
-
-- **Analysis**: TypeScript + Node.js + simplemma (Python)
-- **Visualization**: React + Vite + Recharts + Tailwind CSS v4
-- **Data**: Pre-computed JSON, no runtime analysis
-- **i18n**: English / Russian UI toggle
+[simplemma](https://github.com/adbar/simplemma) is a dictionary-based Python lemmatizer (0.95 accuracy on German). It groups inflected forms correctly — `sagt/sage/sagen/gesagt` → `sagen`, `wäre` → `sein` — and preserves noun capitalization. Runs as a batch Python bridge; results are cached per analysis.
 
 ## Project Structure
 
 ```
-├── scripts/lemmatize.py          # simplemma Python bridge
+├── scripts/
+│   ├── lemmatize.py         # simplemma Python bridge
+│   ├── anki_export.py       # Frequency tier analysis & Anki TSV export
+│   ├── bible_to_md.py       # Lutherbibel PDF converter
+│   └── pdf_to_md.py         # Generic PDF-to-markdown converter
 ├── src/
-│   ├── cli.ts                    # Single-text analysis
-│   ├── compare.ts                # Cross-text comparison
-│   ├── config.ts                 # YAML config loader
-│   └── analyze/                  # Tokenizer, lemmatizer, frequency, progression
-├── web/
-│   ├── public/*.json             # Pre-computed demo data
+│   ├── cli.ts               # Single-text analysis pipeline
+│   ├── compare.ts           # Auto-discovery cross-text comparison + manifest
+│   ├── config.ts            # YAML config loader
+│   ├── types.ts             # TypeScript interfaces & frequency tier definitions
+│   ├── ingest/markdown.ts   # Markdown parser (config-driven section splitting)
+│   └── analyze/             # tokenize, stem, frequency, progression, stop-words
+├── web/                     # React + Vite dashboard
 │   └── src/
-│       ├── components/           # React panels (single + comparison views)
-│       ├── hooks/                # Data loading hooks
-│       └── i18n/                 # Translations
-├── config*.yaml                  # Example pipeline configs
-└── texts/                        # Your markdown texts go here
+│       ├── components/      # Panel1-4, ComparisonView, AnkiExportButton, InfoTooltip
+│       │   └── comparison/  # PanelA-E (Ladder, Coverage, Curves, Bridge, Overview)
+│       ├── hooks/           # useAnalysisData, useComparisonData, useManifest
+│       ├── i18n/            # EN/RU translations (250+ keys)
+│       └── utils/colors.ts  # Shared color palette
+├── for-analysis/            # Input texts (.md)
+├── output/                  # Generated analysis JSON + comparison.json + manifest.json
+└── config*.yaml             # Per-text analysis configs
 ```
 
-## License
+## Tech Stack
 
-MIT
+- **Analysis pipeline**: TypeScript + Node.js + Python (simplemma)
+- **Visualization**: React 19 + Vite 8 + Recharts + Tailwind CSS v4
+- **Anki export**: Python, optionally reads Yomitan dictionary format, outputs TSV
+- **Data**: pre-computed JSON, no runtime parsing
+- **i18n**: English / Russian toggle (250+ translated keys)

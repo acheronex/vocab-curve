@@ -1,0 +1,16 @@
+input:
+  file: "./for-analysis/lutherbibel-1912.md"
+  language: de
+  label: "Lutherbibel 1912"
+
+structure:
+  split_pattern: "^## "
+  title_pattern: "^## (.+)"
+
+analysis:
+  stemmer: simplemma
+  min_word_length: 2
+  stop_words: true
+
+output:
+  path: "./output/lutherbibel-1912.json"

@@ -10,7 +10,6 @@ import {
   ComposedChart,
 } from 'recharts';
 import type { AnalysisResult } from '../hooks/useAnalysisData';
-import { useFilteredSections } from '../hooks/useAnalysisData';
 import { useLanguage } from '../App';
 import { t } from '../i18n/translations';
 
@@ -18,33 +17,67 @@ interface Panel2Props {
   data: AnalysisResult | null;
 }
 
+type ThresholdTier = 'all' | '20' | '6' | '2';
+
+const TIER_BUTTONS: { tier: ThresholdTier; labelEn: string; labelRu: string; color: string }[] = [
+  { tier: 'all', labelEn: 'All', labelRu: 'Все', color: '#6b7280' },
+  { tier: '2', labelEn: '2+', labelRu: '2+', color: '#60a5fa' },
+  { tier: '6', labelEn: '6+', labelRu: '6+', color: '#f59e0b' },
+  { tier: '20', labelEn: '20+', labelRu: '20+', color: '#22c55e' },
+];
+
 export function Panel2({ data }: Panel2Props) {
   const { language } = useLanguage();
-  const [threshold, setThreshold] = useState(1);
-  const filteredSections = useFilteredSections(data, threshold);
+  const [selectedTier, setSelectedTier] = useState<ThresholdTier>('all');
 
-  const THRESHOLDS = [
-    { value: 1, label: language === 'ru' ? 'Все слова' : 'All words' },
-    { value: 2, label: language === 'ru' ? '2+ раза' : '2+ occurrences' },
-    { value: 5, label: language === 'ru' ? '5+ раз' : '5+ occurrences' },
-    { value: 10, label: language === 'ru' ? '10+ раз' : '10+ occurrences' },
-    { value: 20, label: language === 'ru' ? '20+ раз' : '20+ occurrences' },
-  ];
+  const tierWords = useMemo(() => {
+    if (!data) return new Set<string>();
+
+    if (selectedTier === 'all') {
+      return new Set(data.vocabulary.map(v => v.stem));
+    }
+
+    const minCount = Number(selectedTier);
+    return new Set(
+      data.vocabulary
+        .filter(v => v.totalCount >= minCount)
+        .map(v => v.stem)
+    );
+  }, [data, selectedTier]);
 
   const chartData = useMemo(() => {
-    return filteredSections.map((s) => ({
-      name: s.index.toString(),
-      title: s.title,
-      newStems: s.newStems,
-      cumulative: s.cumulativeUniqueStems,
-      index: s.index,
-    }));
-  }, [filteredSections]);
+    if (!data) return [];
+    
+    const seenStems = new Set<string>();
+    let cumulative = 0;
+    
+    return data.sections.map((section) => {
+      const sectionWords = data.vocabulary.filter(
+        v => v.sections.includes(section.index) && tierWords.has(v.stem)
+      );
+      
+      let newStemsCount = 0;
+      for (const word of sectionWords) {
+        if (!seenStems.has(word.stem)) {
+          seenStems.add(word.stem);
+          newStemsCount++;
+        }
+      }
+      
+      cumulative += newStemsCount;
+      
+      return {
+        name: (section.index + 1).toString(),
+        title: section.title,
+        newStems: newStemsCount,
+        cumulative,
+        index: section.index,
+      };
+    });
+  }, [data, tierWords]);
 
-  const totalWordsAtThreshold = useMemo(() => {
-    if (!data) return 0;
-    return data.vocabulary.filter((v) => v.totalCount >= threshold).length;
-  }, [data, threshold]);
+  const tierWordCount = tierWords.size;
+  const totalWords = data?.meta.totalUniqueStems || 0;
 
   if (!data) return null;
 
@@ -62,23 +95,24 @@ export function Panel2({ data }: Panel2Props) {
         
         <div className="flex flex-col items-end gap-2">
           <div className="flex gap-2 bg-background p-1 rounded-lg border border-border">
-            {THRESHOLDS.map((t) => (
+            {TIER_BUTTONS.map((btn) => (
               <button
-                key={t.value}
-                onClick={() => setThreshold(t.value)}
+                key={btn.tier}
+                onClick={() => setSelectedTier(btn.tier)}
                 className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
-                  threshold === t.value
-                    ? 'bg-primary text-primary-foreground shadow-sm'
+                  selectedTier === btn.tier
+                    ? 'text-white shadow-sm'
                     : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                 }`}
+                style={selectedTier === btn.tier ? { backgroundColor: btn.color } : {}}
               >
-                {t.label}
+                {language === 'ru' ? btn.labelRu : btn.labelEn}
               </button>
             ))}
           </div>
           <p className="text-xs text-muted-foreground">
-            {language === 'ru' ? 'Показано' : 'Showing'} <span className="font-mono text-foreground">{totalWordsAtThreshold}</span> {language === 'ru' ? 'из' : 'of'}{' '}
-            <span className="font-mono text-foreground">{data.meta.totalUniqueStems}</span> {language === 'ru' ? 'слов' : 'words'}
+            {language === 'ru' ? 'Показано' : 'Showing'} <span className="font-mono text-foreground">{tierWordCount.toLocaleString()}</span> {language === 'ru' ? 'из' : 'of'}{' '}
+            <span className="font-mono text-foreground">{totalWords.toLocaleString()}</span> {language === 'ru' ? 'слов' : 'words'}
           </p>
         </div>
       </div>
@@ -115,25 +149,25 @@ export function Panel2({ data }: Panel2Props) {
               tickLine={false}
               axisLine={false}
               tickFormatter={(value) => `${value}`}
-              domain={[0, data.meta.totalUniqueStems]}
+              domain={[0, tierWordCount + 50]}
             />
             <Tooltip
               content={({ active, payload }) => {
                 if (active && payload && payload.length) {
-                  const data = payload[0].payload;
+                  const d = payload[0].payload;
                   return (
                     <div className="bg-card border border-border p-3 rounded-lg shadow-lg max-w-[250px]">
-                      <p className="text-xs text-muted-foreground mb-1">Topic {data.index + 1}</p>
+                      <p className="text-xs text-muted-foreground mb-1">{language === 'ru' ? 'Раздел' : 'Topic'} {d.index + 1}</p>
                       <p className="text-sm font-medium text-foreground mb-2 leading-tight">
-                        {data.title}
+                        {d.title}
                       </p>
                       <div className="flex justify-between items-center text-sm">
                         <span className="text-primary">{t('New Words', language)}:</span>
-                        <span className="font-mono">{data.newStems}</span>
+                        <span className="font-mono">{d.newStems}</span>
                       </div>
                       <div className="flex justify-between items-center text-sm">
                         <span className="text-secondary">{t('Total Words', language)}:</span>
-                        <span className="font-mono">{data.cumulative}</span>
+                        <span className="font-mono">{d.cumulative}</span>
                       </div>
                     </div>
                   );

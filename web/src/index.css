@@ -40,10 +40,19 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif);
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button, a {
+    touch-action: manipulation;
   }
 }
 
@@ -63,5 +72,12 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-muted-foreground);
+}
+
+@media (max-width: 640px) {
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
 }
 

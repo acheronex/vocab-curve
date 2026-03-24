@@ -43,12 +43,14 @@ function splitIntoRawSections(
   const sections: RawSection[] = [];
   let currentTitle = "";
   let currentLines: string[] = [];
+  let seenFirstSplit = false;
 
   for (const line of lines) {
     if (splitRe.test(line)) {
-      if (currentLines.length > 0 || currentTitle) {
+      if (seenFirstSplit && (currentLines.length > 0 || currentTitle)) {
         sections.push({ title: currentTitle, lines: currentLines });
       }
+      seenFirstSplit = true;
       const match = titleRe.exec(line);
       currentTitle = match?.[1]?.trim() ?? line.replace(splitRe, "").trim();
       currentLines = [];

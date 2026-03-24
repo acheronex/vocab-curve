@@ -1,4 +1,5 @@
-import type { Document, SectionStats, FrequencyBucket } from "../types.js";
+import type { Document, SectionStats, FrequencyBucket, FrequencyTierStats } from "../types.js";
+import { FREQUENCY_TIERS } from "../types.js";
 import type { SectionTokenData } from "./frequency.js";
 
 export function buildProgression(
@@ -56,6 +57,35 @@ export function buildFrequencyDistribution(
       percentage: totalUniqueStems > 0
         ? Math.round((stemCount / totalUniqueStems) * 1000) / 10
         : 0,
+    };
+  });
+}
+
+export function buildTierStats(vocabulary: { totalCount: number }[]): FrequencyTierStats[] {
+  const totalTokens = vocabulary.reduce((sum, v) => sum + v.totalCount, 0);
+  
+  return FREQUENCY_TIERS.map((tier) => {
+    const [min, max] = tier.range;
+    const wordsInTier = vocabulary.filter((v) => {
+      if (max === Infinity) {
+        return v.totalCount >= min;
+      }
+      return v.totalCount >= min && v.totalCount <= max;
+    });
+    
+    const wordCount = wordsInTier.length;
+    const tokenCount = wordsInTier.reduce((sum, v) => sum + v.totalCount, 0);
+    const coveragePercentage = totalTokens > 0
+      ? Math.round((tokenCount / totalTokens) * 1000) / 10
+      : 0;
+    
+    return {
+      name: tier.name,
+      label: tier.label,
+      color: tier.color,
+      wordCount,
+      tokenCount,
+      coveragePercentage,
     };
   });
 }

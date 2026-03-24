@@ -1,0 +1,14 @@
+{
+  "generatedAt": "2026-03-24T20:00:00.000Z",
+  "texts": [
+    {
+      "id": "lutherbibel-1912",
+      "label": "Lutherbibel 1912",
+      "file": "lutherbibel-1912.json",
+      "totalWords": 696962,
+      "totalTokens": 358919,
+      "totalUniqueStems": 12997,
+      "sections": 26
+    }
+  ]
+}

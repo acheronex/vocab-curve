@@ -1,6 +1,6 @@
 {
-  "name": "extensive-reader",
-  "version": "0.1.0",
+  "name": "vocab-curve",
+  "version": "0.2.0",
   "description": "Universal text analysis pipeline for language learners — word frequency, vocabulary progression, and interactive visualization",
   "type": "module",
   "scripts": {

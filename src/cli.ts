@@ -10,6 +10,7 @@ import {
 import {
   buildProgression,
   buildFrequencyDistribution,
+  buildTierStats,
 } from "./analyze/progression.js";
 import { tokenize } from "./analyze/tokenize.js";
 import type { AnalysisResult } from "./types.js";
@@ -58,7 +59,7 @@ if (config.analysis.stemmer === "simplemma") {
 
 const sectionData = buildSectionTokenData(doc, stem, tokenOpts);
 
-const vocabulary = buildVocabulary(sectionData, lemmaDisplayForms);
+const vocabulary = buildVocabulary(sectionData, stem, lemmaDisplayForms);
 const progression = buildProgression(doc, sectionData);
 
 const totalWords = sectionData.reduce(
@@ -75,10 +76,12 @@ const frequencyDistribution = buildFrequencyDistribution(
   totalUniqueStems,
   vocabulary,
 );
+const tierStats = buildTierStats(vocabulary);
 
 const result: AnalysisResult = {
   meta: {
     source: config.input.file,
+    label: config.input.label,
     language: config.input.language,
     analyzedAt: new Date().toISOString(),
     totalSections: doc.sections.length,
@@ -90,6 +93,7 @@ const result: AnalysisResult = {
   sections: progression,
   vocabulary,
   frequencyDistribution,
+  tierStats,
 };
 
 const outputPath = resolve(config.output.path);
@@ -107,6 +111,13 @@ console.log("\nFrequency distribution:");
 for (const bucket of frequencyDistribution) {
   console.log(
     `  Words appearing ${bucket.minOccurrences}+ times: ${bucket.stemCount} (${bucket.percentage}%)`,
+  );
+}
+
+console.log("\nFrequency tiers:");
+for (const tier of tierStats) {
+  console.log(
+    `  ${tier.label.padEnd(8)} ${String(tier.wordCount).padStart(5)} words, ${String(tier.tokenCount).padStart(6)} tokens, ${tier.coveragePercentage}% coverage`,
   );
 }
 

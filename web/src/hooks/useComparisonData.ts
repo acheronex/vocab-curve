@@ -4,11 +4,15 @@ export interface ComparisonResult {
   texts: Array<{
     id: string;
     label: string;
+    totalWords: number;
     totalTokens: number;
     totalUniqueStems: number;
     sections: number;
+    coreCoverage: number;
+    densityNormalized: number;
     topWords: Array<{ displayForm: string; count: number }>;
     curve: Array<{ section: number; newStems: number; cumulative: number }>;
+    stems: string[];
   }>;
   coverage: Array<{
     sourceId: string;

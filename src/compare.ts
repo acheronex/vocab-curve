@@ -1,6 +1,9 @@
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { readFileSync, readdirSync, writeFileSync, mkdirSync } from "node:fs";
+import { dirname, resolve, basename } from "node:path";
 import type { AnalysisResult } from "./types.js";
+
+const OUTPUT_DIR = resolve("./output");
+const EXCLUDE_FILES = new Set(["comparison.json", "manifest.json"]);
 
 interface TextSource {
   id: string;
@@ -31,8 +34,11 @@ interface TextSummary {
   totalTokens: number;
   totalUniqueStems: number;
   sections: number;
+  coreCoverage: number;
+  densityNormalized: number;
   topWords: Array<{ displayForm: string; count: number }>;
   curve: Array<{ section: number; newStems: number; cumulative: number }>;
+  stems: string[];
 }
 
 interface ComparisonResult {
@@ -51,11 +57,30 @@ interface ComparisonResult {
   };
 }
 
-const SOURCES: TextSource[] = [
-  { id: "b1-topics", label: "82 B1 Exam Topics", file: "./output/analysis.json" },
-  { id: "panem", label: "Die Tribute von Panem", file: "./output/tribute-von-panem.json" },
-  { id: "drei-kameraden", label: "Drei Kameraden", file: "./output/drei-kameraden.json" },
-];
+// ── Auto-discover all analysis JSONs in output/ ─────────────────
+
+function discoverSources(): TextSource[] {
+  const files = readdirSync(OUTPUT_DIR)
+    .filter((f) => f.endsWith(".json") && !EXCLUDE_FILES.has(f));
+
+  return files.map((f) => {
+    const filePath = resolve(OUTPUT_DIR, f);
+    const data = JSON.parse(readFileSync(filePath, "utf-8")) as AnalysisResult;
+    const id = basename(f, ".json");
+    return {
+      id,
+      label: (data.meta as any).label || id,
+      file: `./output/${f}`,
+    };
+  });
+}
+
+const SOURCES = discoverSources();
+console.log(
+  `Discovered ${SOURCES.length} texts: ${SOURCES.map((s) => s.label).join(", ")}`,
+);
+
+// ── Load & analyze ──────────────────────────────────────────────
 
 function loadAnalysis(file: string): AnalysisResult {
   return JSON.parse(readFileSync(resolve(file), "utf-8")) as AnalysisResult;
@@ -100,7 +125,7 @@ function computeCoverage(
     coveredStems: covered,
     coveragePercent:
       Math.round((covered / targetStems.size) * 1000) / 10,
-    bridgeWords: bridge.slice(0, 100),
+    bridgeWords: bridge.slice(0, 500),
     bridgeWordsTotal: bridge.length,
   };
 }
@@ -110,23 +135,46 @@ const analyses = SOURCES.map((s) => ({
   data: loadAnalysis(s.file),
 }));
 
-const texts: TextSummary[] = analyses.map(({ source, data }) => ({
-  id: source.id,
-  label: source.label,
-  totalWords: data.meta.totalWords ?? data.meta.totalTokens,
-  totalTokens: data.meta.totalTokens,
-  totalUniqueStems: data.meta.totalUniqueStems,
-  sections: data.meta.totalSections,
-  topWords: data.vocabulary.slice(0, 30).map((w) => ({
-    displayForm: w.displayForm,
-    count: w.totalCount,
-  })),
-  curve: data.sections.map((s) => ({
-    section: s.index,
-    newStems: s.newStems,
-    cumulative: s.cumulativeUniqueStems,
-  })),
-}));
+// ── Sort ladder by ascending totalUniqueStems (simplest → most complex) ──
+
+const ladderOrder = [...analyses]
+  .sort((a, b) => a.data.meta.totalUniqueStems - b.data.meta.totalUniqueStems)
+  .map((a) => a.source.id);
+
+console.log(
+  `Ladder order: ${ladderOrder.map((id) => analyses.find((a) => a.source.id === id)!.source.label).join(" → ")}`,
+);
+
+// ── Build texts ─────────────────────────────────────────────────
+
+const texts: TextSummary[] = analyses.map(({ source, data }) => {
+  const coreTier = data.tierStats?.find(t => t.name === 'core');
+  const N = data.meta.totalWords ?? data.meta.totalTokens;
+  const V = data.meta.totalUniqueStems;
+
+  return {
+    id: source.id,
+    label: source.label,
+    totalWords: data.meta.totalWords ?? data.meta.totalTokens,
+    totalTokens: data.meta.totalTokens,
+    totalUniqueStems: data.meta.totalUniqueStems,
+    sections: data.meta.totalSections,
+    coreCoverage: coreTier?.coveragePercentage ?? 0,
+    densityNormalized: Math.round((V / Math.sqrt(N)) * 100) / 100,
+    topWords: data.vocabulary.slice(0, 30).map((w) => ({
+      displayForm: w.displayForm,
+      count: w.totalCount,
+    })),
+    curve: data.sections.map((s) => ({
+      section: s.index,
+      newStems: s.newStems,
+      cumulative: s.cumulativeUniqueStems,
+    })),
+    stems: data.vocabulary.map((w) => w.stem),
+  };
+});
+
+// ── Build coverage matrix ───────────────────────────────────────
 
 const coverage: CoveragePair[] = [];
 for (let i = 0; i < analyses.length; i++) {
@@ -143,7 +191,8 @@ for (let i = 0; i < analyses.length; i++) {
   }
 }
 
-const ladderOrder = ["b1-topics", "panem", "drei-kameraden"];
+// ── Build cumulative ladder ─────────────────────────────────────
+
 const cumulativeStems = new Set<string>();
 const ladderSteps = ladderOrder.map((id, idx) => {
   const entry = analyses.find((a) => a.source.id === id)!;
@@ -174,6 +223,8 @@ const ladderSteps = ladderOrder.map((id, idx) => {
   };
 });
 
+// ── Write comparison.json ───────────────────────────────────────
+
 const result: ComparisonResult = {
   generatedAt: new Date().toISOString(),
   texts,
@@ -188,18 +239,48 @@ const outputPath = resolve("./output/comparison.json");
 mkdirSync(dirname(outputPath), { recursive: true });
 writeFileSync(outputPath, JSON.stringify(result, null, 2), "utf-8");
 
+// ── Write manifest.json ─────────────────────────────────────────
+
+const manifest = {
+  generatedAt: new Date().toISOString(),
+  texts: ladderOrder.map((id) => {
+    const entry = analyses.find((a) => a.source.id === id)!;
+    return {
+      id: entry.source.id,
+      label: entry.source.label,
+      file: basename(entry.source.file),
+      totalWords: entry.data.meta.totalWords ?? entry.data.meta.totalTokens,
+      totalTokens: entry.data.meta.totalTokens,
+      totalUniqueStems: entry.data.meta.totalUniqueStems,
+      sections: entry.data.meta.totalSections,
+    };
+  }),
+};
+
+const manifestPath = resolve("./output/manifest.json");
+writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), "utf-8");
+
+// ── Console output ──────────────────────────────────────────────
+
 console.log("\n✓ Comparison complete\n");
 console.log("=== TEXT OVERVIEW ===");
 for (const t of texts) {
-  console.log(`  ${t.label}: ${t.totalTokens.toLocaleString()} tokens, ${t.totalUniqueStems.toLocaleString()} unique stems, ${t.sections} sections`);
+  console.log(
+    `  ${t.label}: ${t.totalTokens.toLocaleString()} tokens, ${t.totalUniqueStems.toLocaleString()} unique stems, ${t.sections} sections`,
+  );
 }
 
 console.log("\n=== COVERAGE MATRIX ===");
 console.log("(What % of TARGET's vocabulary is covered by SOURCE)\n");
-console.log("".padEnd(28) + ladderOrder.map((id) => {
-  const label = texts.find((t) => t.id === id)!.label;
-  return label.slice(0, 14).padStart(16);
-}).join(""));
+console.log(
+  "".padEnd(28) +
+    ladderOrder
+      .map((id) => {
+        const label = texts.find((t) => t.id === id)!.label;
+        return label.slice(0, 14).padStart(16);
+      })
+      .join(""),
+);
 
 for (const sourceId of ladderOrder) {
   const sourceLabel = texts.find((t) => t.id === sourceId)!.label;
@@ -220,32 +301,14 @@ for (const sourceId of ladderOrder) {
 console.log("\n=== CUMULATIVE LADDER ===");
 console.log("(Read in this order: how your vocabulary grows)\n");
 for (const step of ladderSteps) {
-  const nextInfo = step.coverageOfNext !== null
-    ? ` → covers ${step.coverageOfNext}% of next text`
-    : "";
+  const nextInfo =
+    step.coverageOfNext !== null
+      ? ` → covers ${step.coverageOfNext}% of next text`
+      : "";
   console.log(
     `  ${step.label.padEnd(26)} +${String(step.stemsAdded).padStart(5)} new stems → ${String(step.cumulativeStems).padStart(6)} total${nextInfo}`,
   );
 }
 
-console.log("\n=== TOP BRIDGE WORDS (B1 → Panem) ===");
-const b1ToPanem = coverage.find(
-  (c) => c.sourceId === "b1-topics" && c.targetId === "panem",
-)!;
-console.log(`  ${b1ToPanem.bridgeWordsTotal} words in Panem NOT covered by B1 topics`);
-console.log(`  Top 20 bridge words (most frequent in Panem):`);
-for (const w of b1ToPanem.bridgeWords.slice(0, 20)) {
-  console.log(`    ${w.displayForm.padEnd(20)} ${w.countInTarget}×`);
-}
-
-console.log("\n=== TOP BRIDGE WORDS (B1 → Drei Kameraden) ===");
-const b1ToDK = coverage.find(
-  (c) => c.sourceId === "b1-topics" && c.targetId === "drei-kameraden",
-)!;
-console.log(`  ${b1ToDK.bridgeWordsTotal} words in Drei Kameraden NOT covered by B1 topics`);
-console.log(`  Top 20 bridge words (most frequent in Drei Kameraden):`);
-for (const w of b1ToDK.bridgeWords.slice(0, 20)) {
-  console.log(`    ${w.displayForm.padEnd(20)} ${w.countInTarget}×`);
-}
-
 console.log(`\nOutput: ${outputPath}`);
+console.log(`Manifest: ${manifestPath}`);

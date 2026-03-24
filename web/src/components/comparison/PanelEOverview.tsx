@@ -1,18 +1,22 @@
 import type { ComparisonResult } from '../../hooks/useComparisonData';
 import { useLanguage } from '../../App';
 import { t } from '../../i18n/translations';
+import { getCardColorClass } from '../../utils/colors';
+import { InfoTooltip } from '../InfoTooltip';
 
 interface PanelEOverviewProps {
   data: ComparisonResult;
+  colorIndexMap: Map<string, number>;
 }
 
-export function PanelEOverview({ data }: PanelEOverviewProps) {
+export function PanelEOverview({ data, colorIndexMap }: PanelEOverviewProps) {
   const { language } = useLanguage();
-  const colors = [
-    'text-primary border-primary/20 bg-primary/5',
-    'text-[#4a8b9d] border-[#4a8b9d]/20 bg-[#4a8b9d]/5',
-    'text-[#d4a373] border-[#d4a373]/20 bg-[#d4a373]/5',
-  ];
+
+  const gridCols = data.texts.length <= 2
+    ? 'grid-cols-1 md:grid-cols-2'
+    : data.texts.length === 3
+      ? 'grid-cols-1 md:grid-cols-3'
+      : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4';
 
   return (
     <div className="bg-card border border-border rounded-xl p-6 shadow-sm h-full">
@@ -23,37 +27,56 @@ export function PanelEOverview({ data }: PanelEOverviewProps) {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {data.texts.map((text, index) => {
-          const colorClass = colors[index % colors.length];
-          
+      <div className={`grid ${gridCols} gap-4`}>
+        {data.texts.map((text) => {
+          const colorIdx = colorIndexMap.get(text.id) ?? 0;
+          const colorClass = getCardColorClass(colorIdx);
+          const densityPct = text.totalUniqueStems / text.totalWords * 100;
+          const density = densityPct >= 10 ? `${densityPct.toFixed(1)}%` : `${densityPct.toFixed(2)}%`;
+
           return (
             <div key={text.id} className={`border rounded-lg p-4 flex flex-col ${colorClass}`}>
-              <h3 className="font-serif font-medium text-lg mb-4 truncate" title={text.label}>
+              <h3 className="font-serif font-medium text-lg mb-3 truncate" title={text.label}>
                 {text.label}
               </h3>
-              
-              <div className="space-y-3 mb-6 flex-1">
+
+              <div className="space-y-2 mb-4 flex-1">
                 <div className="flex justify-between items-center">
                   <span className="text-xs uppercase tracking-wider opacity-70">{t('Words', language)}</span>
-                  <span className="font-mono font-medium">{text.totalTokens.toLocaleString()}</span>
+                  <span className="font-mono font-medium text-sm">{text.totalWords.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-xs uppercase tracking-wider opacity-70">{language === 'ru' ? 'Уникальных стемов' : 'Unique Stems'}</span>
-                  <span className="font-mono font-medium">{text.totalUniqueStems.toLocaleString()}</span>
+                  <span className="font-mono font-medium text-sm">{text.totalUniqueStems.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-xs uppercase tracking-wider opacity-70">{language === 'ru' ? 'Разделов' : 'Sections'}</span>
-                  <span className="font-mono font-medium">{text.sections}</span>
+                  <span className="font-mono font-medium text-sm">{text.sections}</span>
+                </div>
+                <div className="h-px bg-current/10 my-1"></div>
+                <div className="flex justify-between items-center">
+                  <span className="text-xs uppercase tracking-wider flex items-center gap-1">
+                    <span className="opacity-70">{language === 'ru' ? 'Плотность (норм.)' : 'Density (norm.)'}</span>
+                    <InfoTooltip />
+                  </span>
+                  <span className="font-mono font-bold text-sm">{text.densityNormalized?.toFixed(1) ?? '—'}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-xs uppercase tracking-wider opacity-70" title={language === 'ru' ? 'Процент уникальных слов от общего числа слов' : 'Percentage of unique stems out of total words'}>{language === 'ru' ? 'Плотность' : 'Density'}</span>
+                  <span className="font-mono text-sm opacity-70">{density}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-xs uppercase tracking-wider opacity-70" title={language === 'ru' ? '% текста, покрытый словами с частотой 20+' : '% of text covered by words appearing 20+ times'}>{t('Core Coverage', language)}</span>
+                  <span className="font-mono text-sm opacity-70">{text.coreCoverage.toFixed(1)}%</span>
                 </div>
               </div>
 
               <div>
                 <h4 className="text-xs uppercase tracking-wider opacity-70 mb-2">{language === 'ru' ? 'Топ слов' : 'Top Words'}</h4>
                 <div className="flex flex-wrap gap-1.5">
-                  {text.topWords.slice(0, 10).map((word, i) => (
-                    <span 
-                      key={i} 
+                  {text.topWords.slice(0, 20).map((word, i) => (
+                    <span
+                      key={i}
                       className="text-xs bg-background/50 px-2 py-1 rounded border border-current/10"
                     >
                       {word.displayForm}

@@ -11,6 +11,58 @@ export interface TokenizeResult {
   originalForms: Map<string, string>;
 }
 
+const GERMAN_ABBREVIATIONS = new Set([
+  "z.B.", "z. B.", "u.a.", "u. a.", "usw.", "bzw.", "d.h.", "d. h.",
+  "ca.", "etc.", "evtl.", "ggf.", "s.o.", "s.u.", "vgl.", "Nr.", "S.",
+  "Bd.", "Hrsg.", "Jg.", "Jh.", "ca", "Dr.", "Prof.", "Hr.", "Fr.",
+  "b.A.", "n.Chr.", "v.Chr.", "Mio.", "Mrd.", "Std.", "Min.", "Sek.",
+  "Tab.", "Abb.", "Abs.", "Kap.", "Art.", "Abschn.", "Sept.", "Okt.",
+  "Nov.", "Dez.", "Jan.", "Feb.", "März", "Apr.", "Mai", "Jun.",
+  "Jul.", "Aug.", "Mo.", "Di.", "Mi.", "Do.", "Fr.", "Sa.", "So.",
+  "Hrsg", "Hg", "Aufl", "Bd", "Nr", "S"
+]);
+
+const SENTENCE_END_PATTERN = /[.!?]+[\s\n]+(?=[A-ZÄÖÜ])|[.!?]+$/g;
+
+export function tokenizeSentences(text: string): string[] {
+  const sentences: string[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  
+  const content = text.replace(/\n+/g, " ").trim();
+  
+  SENTENCE_END_PATTERN.lastIndex = 0;
+  
+  while ((match = SENTENCE_END_PATTERN.exec(content)) !== null) {
+    const sentence = content.slice(lastIndex, match.index + match[0].length).trim();
+    if (sentence.length > 0) {
+      const wordCount = sentence.split(/\s+/).filter(w =>/\p{L}/u.test(w)).length;
+      if (wordCount >= 4) {
+        sentences.push(sentence);
+      }
+    }
+    lastIndex = match.index + match[0].length;
+  }
+  
+  const remaining = content.slice(lastIndex).trim();
+  if (remaining.length > 0) {
+    const wordCount = remaining.split(/\s+/).filter(w =>/\p{L}/u.test(w)).length;
+    if (wordCount >= 4) {
+      sentences.push(remaining);
+    }
+  }
+  
+  return sentences.filter(s => {
+    const lower = s.toLowerCase();
+    for (const abbr of GERMAN_ABBREVIATIONS) {
+      if (lower === abbr.toLowerCase() || lower.endsWith(abbr.toLowerCase() + ".")) {
+        if (s.length < abbr.length +5) return false;
+      }
+    }
+    return true;
+  });
+}
+
 export function tokenize(text: string, options: TokenizeOptions): TokenizeResult {
   const allWords = text
     .split(/[\s\n]+/)

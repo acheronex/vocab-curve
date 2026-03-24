@@ -7,6 +7,7 @@ import {
   Tooltip,
   ResponsiveContainer,
   ComposedChart,
+  Cell,
 } from 'recharts';
 import type { AnalysisResult } from '../hooks/useAnalysisData';
 import { useLanguage } from '../App';
@@ -16,25 +17,40 @@ interface Panel3Props {
   data: AnalysisResult | null;
 }
 
+const TIER_LABELS: Record<string, { en: string; ru: string }> = {
+  hapax: { en: 'Hapax (1×)', ru: 'Гапакс (1×)' },
+  rare: { en: 'Rare (2-5×)', ru: 'Редкие (2-5×)' },
+  medium: { en: 'Medium (6-19×)', ru: 'Средние (6-19×)' },
+  core: { en: 'Core (20+×)', ru: 'Core (20+×)' },
+};
+
 export function Panel3({ data }: Panel3Props) {
   const { language } = useLanguage();
+  
   const chartData = useMemo(() => {
-    if (!data) return [];
-    return data.frequencyDistribution.map((d) => ({
-      name: `${d.minOccurrences}+`,
-      count: d.stemCount,
-      percentage: d.percentage,
+    if (!data?.tierStats) return [];
+    return data.tierStats.map((tier) => ({
+      name: TIER_LABELS[tier.name]?.[language] ?? tier.label,
+      tierName: tier.name,
+      wordCount: tier.wordCount,
+      tokenCount: tier.tokenCount,
+      coverage: tier.coveragePercentage,
+      color: tier.color,
     }));
-  }, [data]);
+  }, [data, language]);
 
   if (!data) return null;
 
   return (
-    <div className="w-full h-full bg-card border border-border rounded-xl p-6 shadow-sm flex flex-col">
+    <div className="w-full h-full max-h-[400px] bg-card border border-border rounded-xl p-6 shadow-sm flex flex-col">
       <div className="mb-6">
-        <h2 className="text-xl font-serif text-foreground mb-1">{language === 'ru' ? 'Частотность слов' : 'Word Frequency'}</h2>
+        <h2 className="text-xl font-serif text-foreground mb-1">
+          {language === 'ru' ? 'Частотные tiers' : 'Frequency Tiers'}
+        </h2>
         <p className="text-muted-foreground text-sm">
-          {language === 'ru' ? 'Сколько слов встречаются минимум N раз?' : 'How many words appear at least N times?'}
+          {language === 'ru' 
+            ? 'Распределение слов по частотности и покрытие текста' 
+            : 'Word distribution by frequency and text coverage'}
         </p>
       </div>
 
@@ -52,7 +68,8 @@ export function Panel3({ data }: Panel3Props) {
               fontSize={12}
               tickLine={false}
               axisLine={false}
-              domain={[0, data.meta.totalUniqueStems]}
+              domain={[0, 100]}
+              tickFormatter={(v) => `${v}%`}
             />
             <YAxis
               dataKey="name"
@@ -61,24 +78,26 @@ export function Panel3({ data }: Panel3Props) {
               fontSize={12}
               tickLine={false}
               axisLine={false}
-              width={40}
+              width={100}
             />
             <Tooltip
               content={({ active, payload }) => {
                 if (active && payload && payload.length) {
-                  const data = payload[0].payload;
+                  const d = payload[0].payload;
                   return (
                     <div className="bg-card border border-border p-3 rounded-lg shadow-lg">
-                      <p className="text-sm font-medium text-foreground mb-1">
-                        {data.name} {t('occurrences', language)}
-                      </p>
+                      <p className="text-sm font-medium text-foreground mb-2">{d.name}</p>
                       <div className="flex justify-between items-center text-sm gap-4">
                         <span className="text-muted-foreground">{t('Words:', language)}</span>
-                        <span className="font-mono text-primary">{data.count}</span>
+                        <span className="font-mono text-primary">{d.wordCount.toLocaleString()}</span>
                       </div>
                       <div className="flex justify-between items-center text-sm gap-4">
-                        <span className="text-muted-foreground">{t('Percentage:', language)}</span>
-                        <span className="font-mono text-secondary">{data.percentage.toFixed(1)}%</span>
+                        <span className="text-muted-foreground">{language === 'ru' ? 'Токены:' : 'Tokens:'}</span>
+                        <span className="font-mono">{d.tokenCount.toLocaleString()}</span>
+                      </div>
+                      <div className="flex justify-between items-center text-sm gap-4">
+                        <span className="text-muted-foreground">{language === 'ru' ? 'Покрытие:' : 'Coverage:'}</span>
+                        <span className="font-mono text-secondary">{d.coverage.toFixed(1)}%</span>
                       </div>
                     </div>
                   );
@@ -88,11 +107,14 @@ export function Panel3({ data }: Panel3Props) {
               cursor={{ fill: 'var(--color-muted)', opacity: 0.4 }}
             />
             <Bar
-              dataKey="count"
-              fill="var(--color-secondary)"
-              radius={[0, 2, 2, 0]}
-              barSize={24}
-            />
+              dataKey="coverage"
+              radius={[0, 4, 4, 0]}
+              barSize={28}
+            >
+              {chartData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.color} />
+              ))}
+            </Bar>
           </ComposedChart>
         </ResponsiveContainer>
       </div>

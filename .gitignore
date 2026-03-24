@@ -1,8 +1,21 @@
 node_modules/
 dist/
-output/
 .DS_Store
 *.log
 .venv/
+
+# Web app build output
 web/node_modules/
 web/dist/
+
+# Research reports (generated, not source)
+research/
+
+# Tooling artifacts
+.playwright-cli/
+.playwright/
+__pycache__/
+.superpowers/
+docs/superpowers/
+screenshots/
+anki-notes/

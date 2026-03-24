@@ -28,6 +28,7 @@ interface RawYaml {
   input?: {
     file?: string;
     language?: string;
+    label?: string;
   };
   structure?: {
     split_pattern?: string;
@@ -58,6 +59,7 @@ export function loadConfig(configPath: string): Config {
     input: {
       file: raw.input.file,
       language: raw.input.language ?? DEFAULTS.input.language,
+      label: raw.input.label,
     },
     structure: {
       splitPattern:

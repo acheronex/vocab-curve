@@ -4,6 +4,7 @@ export interface Config {
   input: {
     file: string;
     language: string;
+    label?: string;
   };
   structure: {
     /** Regex pattern to split document into sections (matched against line start) */
@@ -23,6 +24,25 @@ export interface Config {
   output: {
     path: string;
   };
+}
+
+// ──Frequency Tiers ─────────────────────────────────────────────
+
+export const FREQUENCY_TIERS = [
+  { name: "hapax", label: "1×", range: [1, 1] as const, color: "#94a3b8" },
+  { name: "rare", label: "2-5×", range: [2, 5] as const, color: "#60a5fa" },
+  { name: "medium", label: "6-19×", range: [6, 19] as const, color: "#f59e0b" },
+  { name: "core", label: "20+×", range: [20, Infinity] as const, color: "#22c55e" },
+] as const;
+
+export type FrequencyTierName = (typeof FREQUENCY_TIERS)[number]["name"];
+
+export function getFrequencyTier(count: number): FrequencyTierName {
+  for (const tier of FREQUENCY_TIERS) {
+    const [min, max] = tier.range;
+    if (count >= min && count <= max) return tier.name;
+  }
+  return "hapax";
 }
 
 // ── Ingested Document ───────────────────────────────────────────
@@ -58,6 +78,12 @@ export interface WordEntry {
   totalCount: number;
   /** Which sections this word appears in (by index) */
   sections: number[];
+  /** Count of occurrences per section (sectionIndex → count) */
+  sectionCounts: Record<number, number>;
+  /** Example sentence from source text (best match: 7-16 words, single occurrence) */
+  exampleSentence?: string;
+  /** Section index where example sentence was found */
+  exampleSentenceSection?: number;
 }
 
 export interface SectionStats {
@@ -88,10 +114,26 @@ export interface FrequencyBucket {
   percentage: number;
 }
 
+export interface FrequencyTierStats {
+  /** Tier name: hapax, rare, medium, core */
+  name: FrequencyTierName;
+  /** Display label: 1×, 2-5×, etc. */
+  label: string;
+  /** Tier color for visualization */
+  color: string;
+  /** Number of unique words in this tier */
+  wordCount: number;
+  /** Total token count (word instances) in this tier */
+  tokenCount: number;
+  /** Percentage of total text covered by this tier */
+  coveragePercentage: number;
+}
+
 export interface AnalysisResult {
   /** Metadata */
   meta: {
     source: string;
+    label?: string;
     language: string;
     analyzedAt: string;
     totalSections: number;
@@ -106,4 +148,6 @@ export interface AnalysisResult {
   vocabulary: WordEntry[];
   /** Frequency distribution buckets (how many words appear 1x, 2x, 5x, etc.) */
   frequencyDistribution: FrequencyBucket[];
+  /** Frequency tier statistics (hapax, rare, medium, core) */
+  tierStats: FrequencyTierStats[];
 }
