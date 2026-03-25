@@ -1,0 +1,16 @@
+input:
+  file: "./for-analysis/fontane-gesammelte-werke.md"
+  language: de
+  label: "Fontane: Effi Briest / Der Stechlin"
+
+structure:
+  split_pattern: "^## "
+  title_pattern: "^## (.+)"
+
+analysis:
+  stemmer: simplemma
+  min_word_length: 2
+  stop_words: true
+
+output:
+  path: "./output/fontane-gesammelte-werke.json"

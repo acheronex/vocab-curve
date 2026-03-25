@@ -1,0 +1,16 @@
+input:
+  file: "./for-analysis/freud-gesammelte-werke.md"
+  language: de
+  label: "Freud: Gesammelte Werke"
+
+structure:
+  split_pattern: "^## "
+  title_pattern: "^## (.+)"
+
+analysis:
+  stemmer: simplemma
+  min_word_length: 2
+  stop_words: true
+
+output:
+  path: "./output/freud-gesammelte-werke.json"

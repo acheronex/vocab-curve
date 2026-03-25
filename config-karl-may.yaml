@@ -1,0 +1,16 @@
+input:
+  file: "./for-analysis/karl-may-orientzyklus.md"
+  language: de
+  label: "Karl May: Orientzyklus"
+
+structure:
+  split_pattern: "^## "
+  title_pattern: "^## (.+)"
+
+analysis:
+  stemmer: simplemma
+  min_word_length: 2
+  stop_words: true
+
+output:
+  path: "./output/karl-may-orientzyklus.json"

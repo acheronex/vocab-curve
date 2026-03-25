@@ -1,0 +1,16 @@
+input:
+  file: "./for-analysis/kafka-gesammelte-werke.md"
+  language: de
+  label: "Kafka: Gesammelte Werke"
+
+structure:
+  split_pattern: "^## "
+  title_pattern: "^## (.+)"
+
+analysis:
+  stemmer: simplemma
+  min_word_length: 2
+  stop_words: true
+
+output:
+  path: "./output/kafka-gesammelte-werke.json"

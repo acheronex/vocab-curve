@@ -57,12 +57,19 @@ export interface AnalysisResult {
   tierStats: FrequencyTierStats[];
 }
 
-export function useAnalysisData(sourceFile: string = 'analysis.json') {
+export function useAnalysisData(sourceFile: string = '') {
   const [data, setData] = useState<AnalysisResult | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
+    if (!sourceFile) {
+      setData(null);
+      setLoading(false);
+      setError(null);
+      return;
+    }
+    
     setLoading(true);
     fetch(`/${sourceFile}`)
       .then((res) => {

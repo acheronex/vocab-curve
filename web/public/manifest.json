@@ -1,6 +1,15 @@
 {
-  "generatedAt": "2026-03-24T20:00:00.000Z",
+  "generatedAt": "2026-03-25T06:28:37.809Z",
   "texts": [
+    {
+      "id": "kant-kritik-der-reinen-vernunft",
+      "label": "Kant: Kritik der reinen Vernunft",
+      "file": "kant-kritik-der-reinen-vernunft.json",
+      "totalWords": 173977,
+      "totalTokens": 99913,
+      "totalUniqueStems": 6320,
+      "sections": 35
+    },
     {
       "id": "lutherbibel-1912",
       "label": "Lutherbibel 1912",
@@ -9,6 +18,78 @@
       "totalTokens": 358919,
       "totalUniqueStems": 12997,
       "sections": 26
+    },
+    {
+      "id": "karl-may-orientzyklus",
+      "label": "Karl May: Orientzyklus",
+      "file": "karl-may-orientzyklus.json",
+      "totalWords": 296023,
+      "totalTokens": 158218,
+      "totalUniqueStems": 13978,
+      "sections": 28
+    },
+    {
+      "id": "fontane-gesammelte-werke",
+      "label": "Fontane: Effi Briest / Der Stechlin",
+      "file": "fontane-gesammelte-werke.json",
+      "totalWords": 220195,
+      "totalTokens": 122850,
+      "totalUniqueStems": 15252,
+      "sections": 28
+    },
+    {
+      "id": "goethe-gesammelte-werke",
+      "label": "Goethe: Wilhelm Meisters Lehr- und Wanderjahre",
+      "file": "goethe-gesammelte-werke.json",
+      "totalWords": 340463,
+      "totalTokens": 189556,
+      "totalUniqueStems": 16911,
+      "sections": 26
+    },
+    {
+      "id": "thomas-mann-buddenbrooks",
+      "label": "Thomas Mann: Buddenbrooks",
+      "file": "thomas-mann-buddenbrooks.json",
+      "totalWords": 228153,
+      "totalTokens": 130923,
+      "totalUniqueStems": 17053,
+      "sections": 22
+    },
+    {
+      "id": "freud-gesammelte-werke",
+      "label": "Freud: Gesammelte Werke",
+      "file": "freud-gesammelte-werke.json",
+      "totalWords": 343490,
+      "totalTokens": 191320,
+      "totalUniqueStems": 20292,
+      "sections": 24
+    },
+    {
+      "id": "grimm-gesammelte-werke",
+      "label": "Brüder Grimm: Märchen und Sagen",
+      "file": "grimm-gesammelte-werke.json",
+      "totalWords": 504978,
+      "totalTokens": 281091,
+      "totalUniqueStems": 24041,
+      "sections": 32
+    },
+    {
+      "id": "kafka-gesammelte-werke",
+      "label": "Kafka: Gesammelte Werke",
+      "file": "kafka-gesammelte-werke.json",
+      "totalWords": 663477,
+      "totalTokens": 369091,
+      "totalUniqueStems": 26638,
+      "sections": 25
+    },
+    {
+      "id": "schopenhauer-gesammelte-werke",
+      "label": "Schopenhauer: Gesammelte Werke",
+      "file": "schopenhauer-gesammelte-werke.json",
+      "totalWords": 840385,
+      "totalTokens": 494237,
+      "totalUniqueStems": 37455,
+      "sections": 30
     }
   ]
 }

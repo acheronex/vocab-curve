@@ -1,0 +1,16 @@
+input:
+  file: "./for-analysis/schopenhauer-gesammelte-werke.md"
+  language: de
+  label: "Schopenhauer: Gesammelte Werke"
+
+structure:
+  split_pattern: "^## "
+  title_pattern: "^## (.+)"
+
+analysis:
+  stemmer: simplemma
+  min_word_length: 2
+  stop_words: true
+
+output:
+  path: "./output/schopenhauer-gesammelte-werke.json"

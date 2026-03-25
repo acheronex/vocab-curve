@@ -1,0 +1,16 @@
+input:
+  file: "./for-analysis/thomas-mann-buddenbrooks.md"
+  language: de
+  label: "Thomas Mann: Buddenbrooks"
+
+structure:
+  split_pattern: "^## "
+  title_pattern: "^## (.+)"
+
+analysis:
+  stemmer: simplemma
+  min_word_length: 2
+  stop_words: true
+
+output:
+  path: "./output/thomas-mann-buddenbrooks.json"

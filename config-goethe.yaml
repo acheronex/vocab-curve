@@ -1,0 +1,16 @@
+input:
+  file: "./for-analysis/goethe-gesammelte-werke.md"
+  language: de
+  label: "Goethe: Wilhelm Meisters Lehr- und Wanderjahre"
+
+structure:
+  split_pattern: "^## "
+  title_pattern: "^## (.+)"
+
+analysis:
+  stemmer: simplemma
+  min_word_length: 2
+  stop_words: true
+
+output:
+  path: "./output/goethe-gesammelte-werke.json"

@@ -1,0 +1,16 @@
+input:
+  file: "./for-analysis/grimm-gesammelte-werke.md"
+  language: de
+  label: "Brüder Grimm: Märchen und Sagen"
+
+structure:
+  split_pattern: "^## "
+  title_pattern: "^## (.+)"
+
+analysis:
+  stemmer: simplemma
+  min_word_length: 2
+  stop_words: true
+
+output:
+  path: "./output/grimm-gesammelte-werke.json"

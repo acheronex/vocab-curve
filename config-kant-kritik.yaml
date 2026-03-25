@@ -1,0 +1,16 @@
+input:
+  file: "./for-analysis/kant-kritik-der-reinen-vernunft.md"
+  language: de
+  label: "Kant: Kritik der reinen Vernunft"
+
+structure:
+  split_pattern: "^## "
+  title_pattern: "^## (.+)"
+
+analysis:
+  stemmer: simplemma
+  min_word_length: 2
+  stop_words: true
+
+output:
+  path: "./output/kant-kritik-der-reinen-vernunft.json"

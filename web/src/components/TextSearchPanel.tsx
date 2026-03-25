@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
-import { Search, X, Check, Plus } from 'lucide-react';
+import { Search, X, Check, Plus, AlertCircle } from 'lucide-react';
 import type { Manifest } from '../hooks/useManifest';
 import { useLanguage } from '../App';
 import { t } from '../i18n/translations';
 
 type ViewMode = 'single' | 'comparison';
+const MAX_TEXTS = 5;
 
 interface TextSearchPanelProps {
   open: boolean;
@@ -29,12 +30,23 @@ export function TextSearchPanel({
   const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const [limitWarning, setLimitWarning] = useState(false);
+
   useEffect(() => {
     if (open) {
       setQuery('');
+      setLimitWarning(false);
       setTimeout(() => inputRef.current?.focus(), 50);
     }
   }, [open]);
+
+  // Auto-dismiss limit warning after 2 seconds
+  useEffect(() => {
+    if (limitWarning) {
+      const timer = setTimeout(() => setLimitWarning(false), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [limitWarning]);
 
   const sortedTexts = useMemo(() => {
     return [...manifest.texts].sort((a, b) => a.label.localeCompare(b.label));
@@ -54,12 +66,24 @@ export function TextSearchPanel({
 
   const handleSelect = (text: typeof manifest.texts[0]) => {
     const isSelected = selectedIds.includes(text.id);
+    
     if (isSelected) {
+      // Removing from selection
       onToggle(text.id);
     } else {
-      onToggle(text.id);
+      // Adding to selection
+      if (selectedIds.length >= MAX_TEXTS) {
+        // Show limit warning instead of silently failing
+        setLimitWarning(true);
+        return;
+      }
+      
       if (viewMode === 'single') {
+        // In single mode, onSelectForSingle handles both adding and setting active
         onSelectForSingle(text.file, text.id);
+      } else {
+        // In comparison mode, just toggle
+        onToggle(text.id);
       }
     }
   };
@@ -98,12 +122,14 @@ export function TextSearchPanel({
             <div className="py-1">
               {filteredTexts.map((text) => {
                 const isSelected = selectedIds.includes(text.id);
+                const isDisabled = !isSelected && selectedIds.length >= MAX_TEXTS;
                 return (
                   <button
                     key={text.id}
                     onClick={() => handleSelect(text)}
-                    className={`w-full text-left px-4 py-3 flex items-center gap-3 transition-colors hover:bg-muted/50 ${
-                      isSelected ? 'bg-primary/5' : ''
+                    disabled={isDisabled}
+                    className={`w-full text-left px-4 py-3 flex items-center gap-3 transition-colors ${
+                      isSelected ? 'bg-primary/5' : isDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-muted/50'
                     }`}
                   >
                     <div className="flex-1 min-w-0">
@@ -117,6 +143,8 @@ export function TextSearchPanel({
                     <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center transition-colors ${
                       isSelected
                         ? 'bg-primary text-primary-foreground'
+                        : isDisabled
+                        ? 'border border-border/50 text-muted-foreground/50'
                         : 'border border-border text-muted-foreground hover:border-primary hover:text-primary'
                     }`}>
                       {isSelected ? <Check size={14} /> : <Plus size={14} />}
@@ -128,12 +156,14 @@ export function TextSearchPanel({
           )}
         </div>
 
-        <div className="px-4 py-2 border-t border-border text-xs text-muted-foreground flex justify-between">
+        <div className="px-4 py-2 border-t border-border text-xs text-muted-foreground flex justify-between items-center">
           <span>
             {filteredTexts.length} {language === 'ru' ? 'текстов' : 'texts'}
           </span>
-          <span>
-            {selectedIds.length}/4 {language === 'ru' ? 'выбрано' : 'selected'}
+          <span className={limitWarning ? 'text-destructive font-medium animate-pulse' : ''}>
+            {limitWarning && <AlertCircle size={12} className="inline mr-1" />}
+            {selectedIds.length}/{MAX_TEXTS} {language === 'ru' ? 'выбрано' : 'selected'}
+            {limitWarning && (language === 'ru' ? ' (максимум!)' : ' (max!)')}
           </span>
         </div>
       </div>

@@ -13,14 +13,44 @@ import { AnkiExportButton } from './components/AnkiExportButton';
 import { TextSearchPanel } from './components/TextSearchPanel';
 import { ActiveTextsBar } from './components/ActiveTextsBar';
 import { InfoTooltip } from './components/InfoTooltip';
-import { Loader2 } from 'lucide-react';
+import { Loader2, BookOpen, BarChart3 } from 'lucide-react';
 import { type Language, t } from './i18n/translations';
 
 type ViewMode = 'single' | 'comparison';
-const MAX_COMPARISON_TEXTS = 4;
+const MAX_COMPARISON_TEXTS = 5;
 
 function formatDensity(pct: number): string {
   return pct >= 10 ? `${pct.toFixed(1)}%` : `${pct.toFixed(2)}%`;
+}
+
+function EmptyState({ 
+  icon: Icon, 
+  title, 
+  description, 
+  buttonText, 
+  onButtonClick
+}: { 
+  icon: React.ComponentType<{ className?: string }>; 
+  title: string; 
+  description: string; 
+  buttonText: string; 
+  onButtonClick: () => void;
+}) {
+  return (
+    <div className="flex flex-col items-center justify-center py-16 px-4">
+      <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mb-4">
+        <Icon className="w-8 h-8 text-muted-foreground" />
+      </div>
+      <h2 className="text-xl font-serif text-foreground mb-2">{title}</h2>
+      <p className="text-muted-foreground text-sm text-center max-w-md mb-4">{description}</p>
+      <button
+        onClick={onButtonClick}
+        className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary border border-primary/30 rounded-lg hover:bg-primary/10 transition-colors"
+      >
+        {buttonText}
+      </button>
+    </div>
+  );
 }
 
 export const LanguageContext = createContext<{
@@ -36,39 +66,31 @@ function App() {
   const [language, setLanguage] = useLocalStorage<Language>('er-lang', 'en');
 
   const [viewModeHash, setViewModeHash] = useHashParam('view', '');
-  const [viewModeStored, setViewModeStored] = useLocalStorage<ViewMode>('er-viewMode', 'comparison');
   const viewMode: ViewMode = (viewModeHash === 'single' || viewModeHash === 'comparison')
     ? viewModeHash
-    : viewModeStored;
+    : 'comparison';
   const setViewMode = (mode: ViewMode) => {
     setViewModeHash(mode);
-    setViewModeStored(mode);
   };
 
   const { data: manifest, loading: manifestLoading } = useManifest();
 
   const [textsParam, setTextsParam] = useHashParam('texts', '');
-  const [storedTexts, setStoredTexts] = useLocalStorage<string[]>('er-selectedTexts', []);
   const [activeTextParam, setActiveTextParam] = useHashParam('text', '');
-  const [storedActiveText, setStoredActiveText] = useLocalStorage<string>('er-activeText', '');
 
-  const selectedTextIds: string[] = (() => {
-    if (textsParam) return textsParam.split(',').filter(Boolean);
-    if (storedTexts.length > 0) return storedTexts;
-    return [];
-  })();
+  const selectedTextIds: string[] = textsParam 
+    ? textsParam.split(',').filter(Boolean) 
+    : [];
 
-  const activeTextFile: string = activeTextParam || storedActiveText || 'analysis.json';
+  const activeTextFile: string = activeTextParam || '';
 
   const setSelectedTextIds = useCallback((ids: string[]) => {
     setTextsParam(ids.join(','));
-    setStoredTexts(ids);
-  }, [setTextsParam, setStoredTexts]);
+  }, [setTextsParam]);
 
   const setActiveTextFile = useCallback((file: string) => {
     setActiveTextParam(file);
-    setStoredActiveText(file);
-  }, [setActiveTextParam, setStoredActiveText]);
+  }, [setActiveTextParam]);
 
   const toggleTextForComparison = useCallback((id: string) => {
     const current = [...selectedTextIds];
@@ -88,19 +110,6 @@ function App() {
       setSelectedTextIds(next);
     }
   }, [selectedTextIds, setSelectedTextIds, setActiveTextFile]);
-
-  useEffect(() => {
-    if (!manifest) return;
-    if (selectedTextIds.length === 0 && manifest.texts.length > 0) {
-      const defaultIds = manifest.texts.slice(0, 2).map(t => t.id);
-      setSelectedTextIds(defaultIds);
-    }
-    if (!activeTextFile || activeTextFile === 'analysis.json') {
-      if (manifest.texts.length > 0) {
-        setActiveTextFile(manifest.texts[0].file);
-      }
-    }
-  }, [manifest]);
 
   const { data: singleData, loading: singleLoading, error: singleError } = useAnalysisData(activeTextFile);
   const { data: comparisonData, loading: comparisonLoading, error: comparisonError } = useComparisonData();
@@ -129,8 +138,8 @@ function App() {
     return () => window.removeEventListener('keydown', handler);
   }, []);
 
-  const loading = singleLoading || comparisonLoading || manifestLoading;
-  const error = singleError || comparisonError;
+  const loading = manifestLoading || (viewMode === 'comparison' && comparisonLoading) || (viewMode === 'single' && activeTextFile && singleLoading);
+  const error = comparisonError || (activeTextFile && singleError);
 
   if (loading) {
     return (
@@ -143,13 +152,26 @@ function App() {
     );
   }
 
-  if (error || (!singleData && viewMode === 'single') || (!comparisonData && viewMode === 'comparison')) {
+  if (error) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="bg-card border border-border p-6 rounded-xl max-w-md text-center">
           <h2 className="text-xl font-serif text-primary mb-2">{language === 'ru' ? 'Ошибка загрузки данных' : 'Failed to load data'}</h2>
           <p className="text-muted-foreground text-sm">
             {error?.message || (language === 'ru' ? 'При загрузке данных произошла неизвестная ошибка.' : 'Unknown error occurred while loading analysis data.')}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!manifest) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="bg-card border border-border p-6 rounded-xl max-w-md text-center">
+          <h2 className="text-xl font-serif text-primary mb-2">{language === 'ru' ? 'Манифест не найден' : 'Manifest not found'}</h2>
+          <p className="text-muted-foreground text-sm">
+            {language === 'ru' ? 'Не удалось загрузить список текстов.' : 'Could not load the list of texts.'}
           </p>
         </div>
       </div>
@@ -257,85 +279,121 @@ function App() {
           )}
 
           <main className="space-y-8">
-            {viewMode === 'comparison' && comparisonData ? (
-              <ComparisonView
-                data={comparisonData}
-                selectedIds={selectedTextIds}
-                onToggleText={toggleTextForComparison}
-              />
-            ) : singleData ? (
-              <>
-                <div className="flex flex-col gap-4">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <AnkiExportButton data={singleData} />
-                  </div>
-                  <div className="flex gap-3 sm:gap-4 text-sm font-mono text-muted-foreground bg-card px-3 sm:px-4 py-2 rounded-lg border border-border flex-wrap">
-                    <div className="flex flex-col">
-                      <span className="text-xs uppercase tracking-wider opacity-60">
-                        {t('Sections', language)}
-                      </span>
-                      <span className="text-foreground">{singleData.meta.totalSections}</span>
-                    </div>
-                    <div className="w-px bg-border"></div>
-                    <div className="flex flex-col">
-                      <span className="text-xs uppercase tracking-wider opacity-60">{t('Words', language)}</span>
-                      <span className="text-foreground">{(singleData.meta.totalWords ?? singleData.meta.totalTokens).toLocaleString()}</span>
-                    </div>
-                    <div className="w-px bg-border"></div>
-                    <div className="flex flex-col">
-                      <span className="text-xs uppercase tracking-wider opacity-60">{t('Unique Words', language)}</span>
-                      <span className="text-foreground">{singleData.meta.totalUniqueStems.toLocaleString()}</span>
-                    </div>
-                    <div className="w-px bg-border hidden sm:block"></div>
-                    <div className="hidden sm:flex flex-col">
-                      <span className="text-xs uppercase tracking-wider opacity-60">{t('Density', language)}</span>
-                      <span className="text-foreground">{formatDensity(singleData.meta.totalUniqueStems / (singleData.meta.totalWords ?? singleData.meta.totalTokens) * 100)}</span>
-                    </div>
-                    <div className="w-px bg-border hidden sm:block"></div>
-                    <div className="hidden sm:flex flex-col">
-                      <span className="text-xs uppercase tracking-wider flex items-center gap-1">
-                        <span className="opacity-60">{language === 'ru' ? 'Плотн. (норм.)' : 'Density (norm.)'}</span>
-                        <InfoTooltip />
-                      </span>
-                      <span className="text-foreground font-bold">{(singleData.meta.totalUniqueStems / Math.sqrt(singleData.meta.totalWords ?? singleData.meta.totalTokens)).toFixed(1)}</span>
-                    </div>
-                    <div className="w-px bg-border hidden md:block"></div>
-                    <div className="hidden md:flex flex-col">
-                      <span className="text-xs uppercase tracking-wider opacity-60">{t('Core Coverage', language)}</span>
-                      <span className="text-foreground">{singleData.tierStats.find(ts => ts.name === 'core')?.coveragePercentage.toFixed(1) ?? '—'}%</span>
-                    </div>
-                  </div>
-                </div>
-
-                <section>
-                  <Panel2 data={singleData} />
-                </section>
-
-                <section>
-                  <Panel1
-                    data={singleData}
-                    onSectionClick={setSelectedSectionIndex}
-                    selectedSectionIndex={selectedSectionIndex}
-                    wordMode={wordMode}
-                    onWordModeChange={setWordMode}
-                  />
-                </section>
-
-                <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                  <div className="lg:col-span-1">
-                    <Panel3 data={singleData} />
-                  </div>
-                  <div className="lg:col-span-2">
-                    <Panel4
-                      data={singleData}
-                      selectedSectionIndex={selectedSectionIndex}
-                      onClearSelection={() => setSelectedSectionIndex(null)}
-                      wordMode={wordMode}
+            {viewMode === 'comparison' ? (
+              selectedTextIds.length === 0 ? (
+                <EmptyState
+                  icon={BarChart3}
+                  title={language === 'ru' ? 'Выберите тексты для сравнения' : 'Select texts to compare'}
+                  description={language === 'ru' 
+                    ? 'Используйте панель поиска выше или нажмите ⌘K, чтобы добавить тексты для анализа.'
+                    : 'Use the search panel above or press ⌘K to add texts for analysis.'}
+                  buttonText={language === 'ru' ? 'Добавить тексты' : 'Add texts'}
+                  onButtonClick={() => setSearchPanelOpen(true)}
+                />
+              ) : comparisonData ? (
+                <ComparisonView
+                  data={comparisonData}
+                  selectedIds={selectedTextIds}
+                  onToggleText={toggleTextForComparison}
+                />
+              ) : null
+            ) : (
+              (() => {
+                const activeText = manifest?.texts.find(t => t.file === activeTextFile);
+                const isActiveTextSelected = activeText && selectedTextIds.includes(activeText.id);
+                
+                if (!activeText || !isActiveTextSelected || !singleData) {
+                  return (
+                    <EmptyState
+                      icon={BookOpen}
+                      title={language === 'ru' ? 'Выберите текст для анализа' : 'Select a text to analyze'}
+                      description={language === 'ru' 
+                        ? 'Используйте панель поиска выше или нажмите ⌘K, чтобы выбрать текст для детального анализа.'
+                        : 'Use the search panel above or press ⌘K to select a text for detailed analysis.'}
+                      buttonText={language === 'ru' ? 'Выбрать текст' : 'Select text'}
+                      onButtonClick={() => setSearchPanelOpen(true)}
                     />
-                  </div>
-                </section>
-              </>
-            ) : null}
+                  );
+                }
+                
+                return (
+                  <>
+                    <div className="flex flex-col gap-4">
+                      <div className="flex flex-wrap items-center gap-3">
+                        <h2 className="text-lg font-serif text-foreground">
+                          {singleData.meta.label || singleData.meta.source}
+                        </h2>
+                        <AnkiExportButton data={singleData} />
+                      </div>
+                      <div className="flex gap-3 sm:gap-4 text-sm font-mono text-muted-foreground bg-card px-3 sm:px-4 py-2 rounded-lg border border-border flex-wrap">
+                        <div className="flex flex-col">
+                          <span className="text-xs uppercase tracking-wider opacity-60">
+                            {t('Sections', language)}
+                          </span>
+                          <span className="text-foreground">{singleData.meta.totalSections}</span>
+                        </div>
+                        <div className="w-px bg-border"></div>
+                        <div className="flex flex-col">
+                          <span className="text-xs uppercase tracking-wider opacity-60">{t('Words', language)}</span>
+                          <span className="text-foreground">{(singleData.meta.totalWords ?? singleData.meta.totalTokens).toLocaleString()}</span>
+                        </div>
+                        <div className="w-px bg-border"></div>
+                        <div className="flex flex-col">
+                          <span className="text-xs uppercase tracking-wider opacity-60">{t('Unique Words', language)}</span>
+                          <span className="text-foreground">{singleData.meta.totalUniqueStems.toLocaleString()}</span>
+                        </div>
+                        <div className="w-px bg-border hidden sm:block"></div>
+                        <div className="hidden sm:flex flex-col">
+                          <span className="text-xs uppercase tracking-wider opacity-60">{t('Density', language)}</span>
+                          <span className="text-foreground">{formatDensity(singleData.meta.totalUniqueStems / (singleData.meta.totalWords ?? singleData.meta.totalTokens) * 100)}</span>
+                        </div>
+                        <div className="w-px bg-border hidden sm:block"></div>
+                        <div className="hidden sm:flex flex-col">
+                          <span className="text-xs uppercase tracking-wider flex items-center gap-1">
+                            <span className="opacity-60">{language === 'ru' ? 'Плотн. (норм.)' : 'Density (norm.)'}</span>
+                            <InfoTooltip />
+                          </span>
+                          <span className="text-foreground font-bold">{(singleData.meta.totalUniqueStems / Math.sqrt(singleData.meta.totalWords ?? singleData.meta.totalTokens)).toFixed(1)}</span>
+                        </div>
+                        <div className="w-px bg-border hidden md:block"></div>
+                        <div className="hidden md:flex flex-col">
+                          <span className="text-xs uppercase tracking-wider opacity-60">{t('Core Coverage', language)}</span>
+                          <span className="text-foreground">{singleData.tierStats.find(ts => ts.name === 'core')?.coveragePercentage.toFixed(1) ?? '—'}%</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <section>
+                      <Panel2 data={singleData} />
+                    </section>
+
+                    <section>
+                      <Panel1
+                        data={singleData}
+                        onSectionClick={setSelectedSectionIndex}
+                        selectedSectionIndex={selectedSectionIndex}
+                        wordMode={wordMode}
+                        onWordModeChange={setWordMode}
+                      />
+                    </section>
+
+                    <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                      <div className="lg:col-span-1">
+                        <Panel3 data={singleData} />
+                      </div>
+                      <div className="lg:col-span-2">
+                        <Panel4
+                          data={singleData}
+                          selectedSectionIndex={selectedSectionIndex}
+                          onClearSelection={() => setSelectedSectionIndex(null)}
+                          wordMode={wordMode}
+                        />
+                      </div>
+                    </section>
+                  </>
+                );
+              })()
+            )}
           </main>
 
           <footer className="pt-8 pb-4 text-center text-sm text-muted-foreground border-t border-border">
