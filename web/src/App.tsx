@@ -9,6 +9,7 @@ import { Panel2 } from './components/Panel2';
 import { Panel3 } from './components/Panel3';
 import { Panel4 } from './components/Panel4';
 import { ComparisonView } from './components/ComparisonView';
+import { CorpusStatsView } from './components/CorpusStatsView';
 import { AnkiExportButton } from './components/AnkiExportButton';
 import { TextSearchPanel } from './components/TextSearchPanel';
 import { ActiveTextsBar } from './components/ActiveTextsBar';
@@ -16,7 +17,7 @@ import { InfoTooltip } from './components/InfoTooltip';
 import { Loader2, BookOpen, BarChart3 } from 'lucide-react';
 import { type Language, t } from './i18n/translations';
 
-type ViewMode = 'single' | 'comparison';
+type ViewMode = 'single' | 'comparison' | 'corpus';
 const MAX_COMPARISON_TEXTS = 5;
 
 function formatDensity(pct: number): string {
@@ -66,7 +67,7 @@ function App() {
   const [language, setLanguage] = useLocalStorage<Language>('er-lang', 'en');
 
   const [viewModeHash, setViewModeHash] = useHashParam('view', '');
-  const viewMode: ViewMode = (viewModeHash === 'single' || viewModeHash === 'comparison')
+  const viewMode: ViewMode = (viewModeHash === 'single' || viewModeHash === 'comparison' || viewModeHash === 'corpus')
     ? viewModeHash
     : 'comparison';
   const setViewMode = (mode: ViewMode) => {
@@ -261,12 +262,22 @@ function App() {
                   >
                     {t('Single Text Analysis', language)}
                   </button>
+                  <button
+                    onClick={() => setViewMode('corpus')}
+                    className={`px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                      viewMode === 'corpus' 
+                        ? 'bg-primary text-primary-foreground shadow-sm' 
+                        : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                    }`}
+                  >
+                    {language === 'ru' ? 'Статистика корпуса' : 'Corpus Stats'}
+                  </button>
                 </div>
               </div>
             </div>
           </header>
 
-          {manifest && (
+          {manifest && viewMode !== 'corpus' && (
             <ActiveTextsBar
               manifest={manifest}
               selectedIds={selectedTextIds}
@@ -279,7 +290,11 @@ function App() {
           )}
 
           <main className="space-y-8">
-            {viewMode === 'comparison' ? (
+            {viewMode === 'corpus' ? (
+              comparisonData ? (
+                <CorpusStatsView data={comparisonData} />
+              ) : null
+            ) : viewMode === 'comparison' ? (
               selectedTextIds.length === 0 ? (
                 <EmptyState
                   icon={BarChart3}

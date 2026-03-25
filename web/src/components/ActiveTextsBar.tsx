@@ -5,7 +5,7 @@ import { t } from '../i18n/translations';
 import { getTextColor } from '../utils/colors';
 import { useMemo } from 'react';
 
-type ViewMode = 'single' | 'comparison';
+type ViewMode = 'single' | 'comparison' | 'corpus';
 
 interface ActiveTextsBarProps {
   manifest: Manifest;

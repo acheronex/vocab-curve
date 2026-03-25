@@ -5,6 +5,7 @@ import { PanelBCoverage } from './comparison/PanelBCoverage';
 import { PanelCCurves } from './comparison/PanelCCurves';
 import { PanelDBridge } from './comparison/PanelDBridge';
 import { PanelEOverview } from './comparison/PanelEOverview';
+import { PanelFCorpusStats } from './comparison/PanelFCorpusStats';
 import { useLanguage } from '../App';
 
 const MIN_SELECTED = 2;
@@ -83,6 +84,10 @@ export function ComparisonView({ data, selectedIds }: ComparisonViewProps) {
 
           <section>
             <PanelBCoverage data={filteredData} />
+          </section>
+
+          <section>
+            <PanelFCorpusStats data={filteredData} colorIndexMap={colorIndexMap} />
           </section>
 
           <section>

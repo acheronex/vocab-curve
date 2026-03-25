@@ -4,7 +4,7 @@ import type { Manifest } from '../hooks/useManifest';
 import { useLanguage } from '../App';
 import { t } from '../i18n/translations';
 
-type ViewMode = 'single' | 'comparison';
+type ViewMode = 'single' | 'comparison' | 'corpus';
 const MAX_TEXTS = 5;
 
 interface TextSearchPanelProps {

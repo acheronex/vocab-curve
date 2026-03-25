@@ -3,7 +3,13 @@ import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { useLanguage } from '../App';
 
-const CONTENT_EN = [
+type TooltipType = 'density' | 'tokens';
+
+interface InfoTooltipProps {
+  type?: TooltipType;
+}
+
+const DENSITY_EN = [
   { type: 'heading' as const, text: 'Normalized Density (Guiraud\'s Index)' },
   { type: 'formula' as const, text: 'V / √N' },
   { type: 'paragraph' as const, text: 'V = unique word stems · N = total words (raw, before filtering)' },
@@ -15,7 +21,7 @@ const CONTENT_EN = [
   { type: 'note' as const, text: 'This metric measures lexical richness only. It does not account for grammar complexity, sentence structure, or word familiarity. Use it as one signal among many, not as a definitive difficulty score.' },
 ];
 
-const CONTENT_RU = [
+const DENSITY_RU = [
   { type: 'heading' as const, text: 'Нормализованная плотность (индекс Гиро)' },
   { type: 'formula' as const, text: 'V / √N' },
   { type: 'paragraph' as const, text: 'V = уникальные основы слов · N = общее число слов (до фильтрации)' },
@@ -27,7 +33,37 @@ const CONTENT_RU = [
   { type: 'note' as const, text: 'Эта метрика измеряет только лексическое богатство. Она не учитывает сложность грамматики, структуру предложений или знакомость слов. Используйте как один из сигналов, а не как окончательную оценку сложности.' },
 ];
 
-export function InfoTooltip() {
+const TOKENS_EN = [
+  { type: 'heading' as const, text: 'What are Tokens?' },
+  { type: 'paragraph' as const, text: 'Tokens are the filtered, analyzable words from the text — after removing stop words, punctuation, and applying lemmatization.' },
+  { type: 'heading' as const, text: 'Words vs Tokens' },
+  { type: 'paragraph' as const, text: 'Words = raw word count in the original text. Tokens = words that actually contribute to vocabulary analysis.' },
+  { type: 'heading' as const, text: 'Example' },
+  { type: 'paragraph' as const, text: 'A sentence "Der Hund läuft schnell" has 4 words. After filtering (removing "der") and lemmatization ("läuft" → "laufen"), it yields 3 tokens: "Hund", "laufen", and "schnell".' },
+  { type: 'note' as const, text: 'Tokens are what get counted for unique stems and density calculations. They represent the meaningful vocabulary content.' },
+];
+
+const TOKENS_RU = [
+  { type: 'heading' as const, text: 'Что такое токены?' },
+  { type: 'paragraph' as const, text: 'Токены — это отфильтрованные, анализируемые слова из текста — после удаления стоп-слов, пунктуации и применения лемматизации.' },
+  { type: 'heading' as const, text: 'Слова vs Токены' },
+  { type: 'paragraph' as const, text: 'Слова = общее количество слов в оригинальном тексте. Токены = слова, которые реально участвуют в анализе словаря.' },
+  { type: 'heading' as const, text: 'Пример' },
+  { type: 'paragraph' as const, text: 'Предложение "Der Hund läuft schnell" содержит 4 слова. После фильтрации (удаление "der") и лемматизации ("läuft" → "laufen") получаем 3 токена: "Hund", "laufen" и "schnell".' },
+  { type: 'note' as const, text: 'Токены используются для подсчёта уникальных лемм и расчёта плотности. Они представляют значимое содержание словаря.' },
+];
+
+const CONTENT_MAP = {
+  density: { en: DENSITY_EN, ru: DENSITY_RU },
+  tokens: { en: TOKENS_EN, ru: TOKENS_RU },
+};
+
+const TITLE_MAP = {
+  density: { en: 'Normalized Density', ru: 'Нормализованная плотность' },
+  tokens: { en: 'Tokens', ru: 'Токены' },
+};
+
+export function InfoTooltip({ type = 'density' }: InfoTooltipProps) {
   const { language } = useLanguage();
   const [open, setOpen] = useState(false);
 
@@ -40,7 +76,8 @@ export function InfoTooltip() {
     return () => window.removeEventListener('keydown', handler);
   }, [open]);
 
-  const content = language === 'ru' ? CONTENT_RU : CONTENT_EN;
+  const content = CONTENT_MAP[type][language === 'ru' ? 'ru' : 'en'];
+  const title = TITLE_MAP[type][language === 'ru' ? 'ru' : 'en'];
 
   return (
     <>
@@ -61,7 +98,7 @@ export function InfoTooltip() {
           <div className="relative w-full max-w-lg mx-4 bg-card border border-border rounded-xl shadow-2xl overflow-hidden">
             <div className="flex items-center justify-between px-4 py-3 border-b border-border">
               <h3 className="font-serif text-base text-primary">
-                {language === 'ru' ? 'Нормализованная плотность' : 'Normalized Density'}
+                {title}
               </h3>
               <button
                 onClick={() => setOpen(false)}
