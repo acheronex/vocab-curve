@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-25T06:28:37.809Z",
+  "generatedAt": "2026-03-25T11:09:14.479Z",
   "texts": [
     {
       "id": "kant-kritik-der-reinen-vernunft",
@@ -68,10 +68,10 @@
       "id": "grimm-gesammelte-werke",
       "label": "Brüder Grimm: Märchen und Sagen",
       "file": "grimm-gesammelte-werke.json",
-      "totalWords": 504978,
-      "totalTokens": 281091,
-      "totalUniqueStems": 24041,
-      "sections": 32
+      "totalWords": 484983,
+      "totalTokens": 267360,
+      "totalUniqueStems": 21441,
+      "sections": 23
     },
     {
       "id": "kafka-gesammelte-werke",

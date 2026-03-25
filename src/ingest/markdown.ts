@@ -14,19 +14,27 @@ export function parseMarkdown(config: Config): Document {
   );
 
   const rawSections = splitIntoRawSections(lines, splitRe, titleRe);
-  const sections = rawSections.map((raw, index) => {
-    const text = extractAnalyzableText(
-      raw.lines,
-      config.structure.includeSections,
-      excludeRes,
-    );
-    return { index, title: raw.title, text };
-  });
+  const sectionsWithText = rawSections
+    .map((raw) => {
+      const text = extractAnalyzableText(
+        raw.lines,
+        config.structure.includeSections,
+        excludeRes,
+      );
+      return { title: raw.title, text };
+    })
+    .filter((s) => s.text.trim().length > 0);
+
+  const sections = sectionsWithText.map((s, index) => ({
+    index: index + 1,
+    title: s.title,
+    text: s.text,
+  }));
 
   return {
     source: config.input.file,
     language: config.input.language,
-    sections: sections.filter((s) => s.text.trim().length > 0),
+    sections,
   };
 }
 
