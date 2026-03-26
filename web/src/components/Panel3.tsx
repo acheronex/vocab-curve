@@ -89,7 +89,7 @@ export function Panel3({ data }: Panel3Props) {
                       <p className="text-sm font-medium text-foreground mb-2">{d.name}</p>
                       <div className="flex justify-between items-center text-sm gap-4">
                         <span className="text-muted-foreground">{t('Words:', language)}</span>
-                        <span className="font-mono text-primary">{d.wordCount.toLocaleString()}</span>
+                        <span className="font-mono text-primary-text">{d.wordCount.toLocaleString()}</span>
                       </div>
                       <div className="flex justify-between items-center text-sm gap-4">
                         <span className="text-muted-foreground">{language === 'ru' ? 'Токены:' : 'Tokens:'}</span>

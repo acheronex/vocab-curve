@@ -1,7 +1,7 @@
 import type { ComparisonResult } from '../../hooks/useComparisonData';
 import { useLanguage } from '../../App';
 import { t } from '../../i18n/translations';
-import { getCardColorClass } from '../../utils/colors';
+import { getCardStyle } from '../../utils/colors';
 import { InfoTooltip } from '../InfoTooltip';
 
 interface PanelEOverviewProps {
@@ -21,7 +21,7 @@ export function PanelEOverview({ data, colorIndexMap }: PanelEOverviewProps) {
   return (
     <div className="bg-card border border-border rounded-xl p-6 shadow-sm h-full">
       <div className="mb-6">
-        <h2 className="text-xl font-serif text-primary mb-1">{t('Text Overview', language)}</h2>
+        <h2 className="text-xl font-serif text-primary-text mb-1">{t('Text Overview', language)}</h2>
         <p className="text-sm text-muted-foreground">
           {t('Key statistics and most frequent words for each text.', language)}
         </p>
@@ -30,12 +30,12 @@ export function PanelEOverview({ data, colorIndexMap }: PanelEOverviewProps) {
       <div className={`grid ${gridCols} gap-4`}>
         {data.texts.map((text) => {
           const colorIdx = colorIndexMap.get(text.id) ?? 0;
-          const colorClass = getCardColorClass(colorIdx);
+          const cardStyle = getCardStyle(colorIdx);
           const densityPct = text.totalUniqueStems / text.totalWords * 100;
           const density = densityPct >= 10 ? `${densityPct.toFixed(1)}%` : `${densityPct.toFixed(2)}%`;
 
           return (
-            <div key={text.id} className={`border rounded-lg p-4 flex flex-col ${colorClass}`}>
+            <div key={text.id} className="border rounded-lg p-4 flex flex-col" style={cardStyle}>
               <h3 className="font-serif font-medium text-lg mb-3 truncate" title={text.label}>
                 {text.label}
               </h3>

@@ -1,4 +1,26 @@
-export const TEXT_COLORS = [
+const CHART_COLORS = [
+  '--chart-1',
+  '--chart-2',
+  '--chart-3',
+  '--chart-4',
+  '--chart-5',
+  '--chart-6',
+  '--chart-7',
+  '--chart-8',
+] as const;
+
+const CHART_COLORS_HEX_LIGHT = [
+  '#e8a080',
+  '#6ba8b8',
+  '#b898d9',
+  '#d4b896',
+  '#5fd896',
+  '#e87468',
+  '#5da8d8',
+  '#e8b858',
+];
+
+const CHART_COLORS_HEX_DARK = [
   '#d97757',
   '#4a8b9d',
   '#9b72cf',
@@ -9,34 +31,55 @@ export const TEXT_COLORS = [
   '#f39c12',
 ];
 
+function isDarkMode(): boolean {
+  if (typeof window === 'undefined') return true;
+  return document.documentElement.classList.contains('dark');
+}
+
+export function getChartVar(index: number): string {
+  return `var(${CHART_COLORS[index % CHART_COLORS.length]})`;
+}
+
 export function getTextColor(index: number): string {
-  return TEXT_COLORS[index % TEXT_COLORS.length];
+  return getChartVar(index);
 }
 
-export function getBarBgClass(index: number): string {
-  const classes = [
-    'bg-[#d97757]',
-    'bg-[#4a8b9d]',
-    'bg-[#9b72cf]',
-    'bg-[#d4a373]',
-    'bg-[#22c55e]',
-    'bg-[#e74c3c]',
-    'bg-[#3498db]',
-    'bg-[#f39c12]',
-  ];
-  return classes[index % classes.length];
+export function getTextContrastVar(index: number): string {
+  const fgVar = `${CHART_COLORS[index % CHART_COLORS.length]}-fg`;
+  return `var(${fgVar})`;
 }
 
-export function getCardColorClass(index: number): string {
-  const classes = [
-    'text-[#d97757] border-[#d97757]/20 bg-[#d97757]/5',
-    'text-[#4a8b9d] border-[#4a8b9d]/20 bg-[#4a8b9d]/5',
-    'text-[#9b72cf] border-[#9b72cf]/20 bg-[#9b72cf]/5',
-    'text-[#d4a373] border-[#d4a373]/20 bg-[#d4a373]/5',
-    'text-[#22c55e] border-[#22c55e]/20 bg-[#22c55e]/5',
-    'text-[#e74c3c] border-[#e74c3c]/20 bg-[#e74c3c]/5',
-    'text-[#3498db] border-[#3498db]/20 bg-[#3498db]/5',
-    'text-[#f39c12] border-[#f39c12]/20 bg-[#f39c12]/5',
-  ];
-  return classes[index % classes.length];
+export function getTextContrastColor(index: number): string {
+  if (isDarkMode()) {
+    const lightColors = ['#d4a373', '#f39c12', '#22c55e'];
+    const color = CHART_COLORS_HEX_DARK[index % CHART_COLORS_HEX_DARK.length];
+    return lightColors.includes(color) ? '#111110' : '#f4f4f0';
+  } else {
+    return '#1a1a19';
+  }
 }
+
+export function getBarBgStyle(index: number): React.CSSProperties {
+  return {
+    backgroundColor: getChartVar(index),
+  };
+}
+
+export function getCardStyle(index: number): React.CSSProperties {
+  const color = getChartVar(index);
+  return {
+    borderColor: color,
+    backgroundColor: `color-mix(in srgb, ${color} 8%, transparent)`,
+  };
+}
+
+export function getActiveTextStyle(index: number): React.CSSProperties {
+  const color = getChartVar(index);
+  return {
+    borderColor: color,
+    backgroundColor: color,
+    color: getTextContrastVar(index),
+  };
+}
+
+export { CHART_COLORS_HEX_LIGHT, CHART_COLORS_HEX_DARK };

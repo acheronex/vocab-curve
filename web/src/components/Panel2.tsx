@@ -82,7 +82,7 @@ export function Panel2({ data }: Panel2Props) {
   if (!data) return null;
 
   return (
-    <div className="w-full bg-card border border-border rounded-xl p-6 shadow-sm flex flex-col">
+    <div className="w-full bg-card border border-border rounded-xl p-4 sm:p-6 shadow-sm flex flex-col">
       <div className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
           <h2 className="text-2xl font-serif text-foreground mb-1">{language === 'ru' ? 'Сглаживание кривой' : 'Flatten the Curve'}</h2>
@@ -162,7 +162,7 @@ export function Panel2({ data }: Panel2Props) {
                         {d.title}
                       </p>
                       <div className="flex justify-between items-center text-sm">
-                        <span className="text-primary">{t('New Words', language)}:</span>
+                        <span className="text-primary-text">{t('New Words', language)}:</span>
                         <span className="font-mono">{d.newStems}</span>
                       </div>
                       <div className="flex justify-between items-center text-sm">
@@ -188,7 +188,7 @@ export function Panel2({ data }: Panel2Props) {
               type="monotone"
               dataKey="cumulative"
               stroke="var(--color-secondary)"
-              strokeWidth={3}
+              strokeWidth={2}
               dot={false}
               animationDuration={500}
             />

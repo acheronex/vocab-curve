@@ -208,11 +208,11 @@ export function Panel4({ data, selectedSectionIndex, onClearSelection, wordMode 
                 <button
                   key={word.stem}
                   onClick={() => setSelectedWord(word.stem)}
-                  className={`px-3 py-1.5 rounded-md text-sm transition-all ${
-                    selectedWord === word.stem
-                      ? 'bg-primary text-primary-foreground shadow-sm'
-                      : 'bg-background border border-border text-foreground hover:border-primary/50 hover:text-primary'
-                  }`}
+className={`px-3 py-1.5 rounded-md text-sm transition-all ${
+                      selectedWord === word.stem
+                        ? 'bg-primary text-primary-foreground shadow-sm'
+                        : 'bg-background border border-border text-foreground hover:border-primary/50 hover:text-primary-text'
+                    }`}
                 >
                   {word.displayForm}
                   <span className="ml-2 text-xs opacity-60 font-mono">
@@ -241,7 +241,7 @@ export function Panel4({ data, selectedSectionIndex, onClearSelection, wordMode 
             <div>
               <div className="flex justify-between items-baseline mb-1">
                 <h3 className="text-2xl font-serif text-foreground">{wordDetails.displayForm}</h3>
-                <span className="font-mono text-primary bg-primary/10 px-2 py-1 rounded text-sm">
+                <span className="font-mono text-primary-text bg-primary/10 px-2 py-1 rounded text-sm">
                   {wordDetails.totalCount}
                 </span>
               </div>

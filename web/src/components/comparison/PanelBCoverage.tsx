@@ -2,28 +2,48 @@ import { useMemo } from 'react';
 import type { ComparisonResult } from '../../hooks/useComparisonData';
 import { useLanguage } from '../../App';
 import { t } from '../../i18n/translations';
+import { useTheme } from '../../hooks/useTheme';
 
 interface PanelBCoverageProps {
   data: ComparisonResult;
 }
 
-function getHeatmapStyle(percent: number | null): React.CSSProperties {
-  if (percent === null) return { backgroundColor: 'var(--color-muted)', opacity: 0.15 };
-  const intensity = Math.min(percent / 70, 1);
-  const r = Math.round(217 * intensity + 26 * (1 - intensity));
-  const g = Math.round(119 * intensity + 26 * (1 - intensity));
-  const b = Math.round(87 * intensity + 26 * (1 - intensity));
-  return {
-    backgroundColor: `rgb(${r}, ${g}, ${b})`,
-    color: intensity > 0.45 ? '#f4f4f0' : 'var(--color-foreground)',
-    fontWeight: intensity > 0.35 ? 600 : 400,
+function getHeatmapStyle(percent: number | null, isDark: boolean): React.CSSProperties {
+  if (percent === null) return { 
+    backgroundColor: 'var(--color-muted)', 
+    color: 'var(--color-muted-foreground)',
   };
+  
+  const intensity = Math.min(percent / 70, 1);
+  
+  if (isDark) {
+    const r = Math.round(217 * intensity + 26 * (1 - intensity));
+    const g = Math.round(119 * intensity + 26 * (1 - intensity));
+    const b = Math.round(87 * intensity + 26 * (1 - intensity));
+    return {
+      backgroundColor: `rgb(${r}, ${g}, ${b})`,
+      color: '#ffffff',
+      fontWeight: intensity > 0.35 ? 600 : 400,
+    };
+  } else {
+    const r = Math.round(217 * intensity + 248 * (1 - intensity));
+    const g = Math.round(119 * intensity + 248 * (1 - intensity));
+    const b = Math.round(87 * intensity + 246 * (1 - intensity));
+    return {
+      backgroundColor: `rgb(${r}, ${g}, ${b})`,
+      color: '#1a1a19',
+      fontWeight: intensity > 0.35 ? 600 : 400,
+    };
+  }
 }
 
 export function PanelBCoverage({ data }: PanelBCoverageProps) {
   const { language } = useLanguage();
+  const { resolvedTheme } = useTheme();
   const texts = data.texts;
 
+  const isDark = resolvedTheme === 'dark';
+  
   const maxWidth = texts.length <= 2 ? 560 : texts.length <= 3 ? 740 : texts.length <= 4 ? 920 : undefined;
   
   const coverageMap = useMemo(() => {
@@ -40,15 +60,15 @@ export function PanelBCoverage({ data }: PanelBCoverageProps) {
   };
 
   return (
-    <div className="bg-card border border-border rounded-xl p-4 sm:p-6 shadow-sm">
+    <div className="bg-card border border-border rounded-xl p-4 sm:p-6 shadow-sm overflow-hidden">
       <div className="mb-6">
-        <h2 className="text-xl font-serif text-primary mb-1">{t('Coverage Matrix', language)}</h2>
+        <h2 className="text-xl font-serif text-primary-text mb-1">{t('Coverage Matrix', language)}</h2>
         <p className="text-sm text-muted-foreground">
           {t("What % of the target text's vocabulary is covered by the source text?", language)}
         </p>
       </div>
 
-      <div className="overflow-x-auto -mx-2 px-2" style={maxWidth ? { maxWidth } : undefined}>
+      <div className="overflow-x-auto" style={maxWidth ? { maxWidth } : undefined}>
         <table className="w-full border-collapse min-w-[400px]">
           <thead>
             <tr>
@@ -76,7 +96,7 @@ export function PanelBCoverage({ data }: PanelBCoverageProps) {
                     <td 
                       key={`${source.id}-${target.id}`}
                       className="p-3 sm:p-4 text-center text-sm sm:text-base border-b border-border/50 transition-all"
-                      style={getHeatmapStyle(coverage)}
+                      style={getHeatmapStyle(coverage, isDark)}
                     >
                       {coverage === null ? '—' : `${coverage.toFixed(1)}%`}
                     </td>

@@ -145,7 +145,7 @@ export function TextSearchPanel({
                         ? 'bg-primary text-primary-foreground'
                         : isDisabled
                         ? 'border border-border/50 text-muted-foreground/50'
-                        : 'border border-border text-muted-foreground hover:border-primary hover:text-primary'
+                        : 'border border-border text-muted-foreground hover:border-primary hover:text-primary-text'
                     }`}>
                       {isSelected ? <Check size={14} /> : <Plus size={14} />}
                     </div>

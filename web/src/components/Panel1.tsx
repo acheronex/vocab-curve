@@ -44,11 +44,11 @@ export function Panel1({ data, onSectionClick, selectedSectionIndex, wordMode, o
   if (!data) return null;
 
   return (
-    <div className="w-full h-[40vh] min-h-[400px] bg-card border border-border rounded-xl p-6 shadow-sm flex flex-col">
-      <div className="mb-6 flex flex-col md:flex-row md:items-start justify-between gap-4">
+    <div className="w-full h-[35vh] sm:h-[40vh] min-h-[300px] sm:min-h-[400px] bg-card border border-border rounded-xl p-4 sm:p-6 shadow-sm flex flex-col">
+      <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4">
         <div>
-          <h2 className="text-2xl font-serif text-foreground mb-1">{language === 'ru' ? 'Кривая словарного запаса' : 'The Vocabulary Curve'}</h2>
-          <p className="text-muted-foreground text-sm">
+          <h2 className="text-xl sm:text-2xl font-serif text-foreground mb-1">{language === 'ru' ? 'Кривая словарного запаса' : 'The Vocabulary Curve'}</h2>
+          <p className="text-xs sm:text-sm text-muted-foreground">
             {language === 'ru'
               ? 'Новые слова на раздел против накопленного словарного запаса.'
               : 'New words introduced per topic vs. cumulative vocabulary growth.'}
@@ -57,7 +57,7 @@ export function Panel1({ data, onSectionClick, selectedSectionIndex, wordMode, o
         <div className="flex gap-1 bg-background p-1 rounded-lg border border-border flex-shrink-0">
           <button
             onClick={() => onWordModeChange('all')}
-            className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+            className={`px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-medium rounded-md transition-colors ${
               wordMode === 'all'
                 ? 'bg-foreground text-background shadow-sm'
                 : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
@@ -67,7 +67,7 @@ export function Panel1({ data, onSectionClick, selectedSectionIndex, wordMode, o
           </button>
           <button
             onClick={() => onWordModeChange('new')}
-            className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+            className={`px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-medium rounded-md transition-colors ${
               wordMode === 'new'
                 ? 'bg-foreground text-background shadow-sm'
                 : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
@@ -121,7 +121,7 @@ export function Panel1({ data, onSectionClick, selectedSectionIndex, wordMode, o
                         {data.title}
                       </p>
                       <div className="flex justify-between items-center text-sm">
-                        <span className="text-primary">
+                        <span className="text-primary-text">
                           {wordMode === 'all' ? t('All unique', language) : t('New Words', language)}:
                         </span>
                         <span className="font-mono">{data.barValue}</span>
@@ -141,14 +141,13 @@ export function Panel1({ data, onSectionClick, selectedSectionIndex, wordMode, o
                 }
                 return null;
               }}
-              cursor={{ fill: 'var(--color-muted)', opacity: 0.4 }}
+              cursor={{ fill: 'var(--color-muted)', opacity: 0.3 }}
             />
             <Bar
               yAxisId="left"
               dataKey="barValue"
               radius={[2, 2, 0, 0]}
               className="cursor-pointer"
-              activeBar={{ stroke: 'var(--color-accent)', strokeWidth: 1 }}
               onClick={(data: any) => {
                 if (data && data.index !== undefined) {
                   onSectionClick(data.index);
@@ -167,10 +166,9 @@ export function Panel1({ data, onSectionClick, selectedSectionIndex, wordMode, o
               type="monotone"
               dataKey={wordMode === 'all' ? 'uniquePercent' : 'cumulative'}
               stroke="var(--color-secondary)"
-              strokeWidth={3}
+              strokeWidth={2}
               dot={false}
-              activeDot={{ r: 6, fill: 'var(--color-secondary)', stroke: 'var(--color-background)', strokeWidth: 2 }}
-              style={{ filter: 'drop-shadow(0 0 1px var(--color-background))' }}
+              activeDot={{ r: 4, fill: 'var(--color-secondary)', stroke: 'var(--color-background)', strokeWidth: 1 }}
             />
           </ComposedChart>
         </ResponsiveContainer>

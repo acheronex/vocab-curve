@@ -97,7 +97,7 @@ export function InfoTooltip({ type = 'density' }: InfoTooltipProps) {
           />
           <div className="relative w-full max-w-lg mx-4 bg-card border border-border rounded-xl shadow-2xl overflow-hidden">
             <div className="flex items-center justify-between px-4 py-3 border-b border-border">
-              <h3 className="font-serif text-base text-primary">
+              <h3 className="font-serif text-base text-primary-text">
                 {title}
               </h3>
               <button
@@ -113,7 +113,7 @@ export function InfoTooltip({ type = 'density' }: InfoTooltipProps) {
                 {content.map((block, i) => {
                   switch (block.type) {
                     case 'heading':
-                      return <h4 key={i} className="font-serif font-medium text-primary text-sm">{block.text}</h4>;
+                      return <h4 key={i} className="font-serif font-medium text-primary-text text-sm">{block.text}</h4>;
                     case 'formula':
                       return <div key={i} className="font-mono text-lg text-foreground text-center py-1.5 rounded-lg border border-border bg-muted">{block.text}</div>;
                     case 'paragraph':

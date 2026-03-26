@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import type { ComparisonResult } from '../../hooks/useComparisonData';
 import { useLanguage } from '../../App';
-import { getTextColor } from '../../utils/colors';
+import { getTextColor, getTextContrastColor } from '../../utils/colors';
 
 interface PanelFCorpusStatsProps {
   data: ComparisonResult;
@@ -54,59 +54,59 @@ export function PanelFCorpusStats({ data, colorIndexMap }: PanelFCorpusStatsProp
   }, [data]);
 
   return (
-    <div className="bg-card border border-border rounded-xl p-6 md:p-8 shadow-sm">
-      <div className="mb-8">
-        <h2 className="text-2xl font-serif text-primary mb-2">
+    <div className="bg-card border border-border rounded-xl p-4 sm:p-6 md:p-8 shadow-sm overflow-hidden">
+      <div className="mb-4 sm:mb-8">
+        <h2 className="text-xl sm:text-2xl font-serif text-primary-text mb-1 sm:mb-2">
           {language === 'ru' ? 'Статистика выбранных текстов' : 'Selected Texts Statistics'}
         </h2>
-        <p className="text-muted-foreground">
+        <p className="text-xs sm:text-sm text-muted-foreground">
           {language === 'ru'
             ? 'Обзор словарного запаса по выбранным текстам'
             : 'Vocabulary overview across selected texts'}
         </p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div className="bg-muted/30 rounded-lg p-4 text-center">
-          <div className="text-3xl font-bold text-primary">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 mb-6 sm:mb-8">
+        <div className="bg-muted/30 rounded-lg p-3 sm:p-4 text-center">
+          <div className="text-2xl sm:text-3xl font-bold text-primary-text">
             {stats.totalWords.toLocaleString()}
           </div>
-          <div className="text-sm text-muted-foreground mt-1">
+          <div className="text-xs sm:text-sm text-muted-foreground mt-1">
             {language === 'ru' ? 'Всего слов' : 'Total Words'}
           </div>
         </div>
         
-        <div className="bg-muted/30 rounded-lg p-4 text-center">
-          <div className="text-3xl font-bold text-primary">
+        <div className="bg-muted/30 rounded-lg p-3 sm:p-4 text-center">
+          <div className="text-2xl sm:text-3xl font-bold text-primary-text">
             {stats.totalUniqueStems.toLocaleString()}
           </div>
-          <div className="text-sm text-muted-foreground mt-1">
+          <div className="text-xs sm:text-sm text-muted-foreground mt-1">
             {language === 'ru' ? 'Уникальных лемм' : 'Unique Stems'}
           </div>
         </div>
         
-        <div className="bg-muted/30 rounded-lg p-4 text-center">
-          <div className="text-3xl font-bold text-primary">
+        <div className="bg-muted/30 rounded-lg p-3 sm:p-4 text-center">
+          <div className="text-2xl sm:text-3xl font-bold text-primary-text">
             {stats.overlapPercent}%
           </div>
-          <div className="text-sm text-muted-foreground mt-1">
+          <div className="text-xs sm:text-sm text-muted-foreground mt-1">
             {language === 'ru' ? 'Пересечение словаря' : 'Vocabulary Overlap'}
           </div>
         </div>
         
-        <div className="bg-muted/30 rounded-lg p-4 text-center">
-          <div className="text-3xl font-bold text-primary">
+        <div className="bg-muted/30 rounded-lg p-3 sm:p-4 text-center">
+          <div className="text-2xl sm:text-3xl font-bold text-primary-text">
             {stats.avgDensity}
           </div>
-          <div className="text-sm text-muted-foreground mt-1">
+          <div className="text-xs sm:text-sm text-muted-foreground mt-1">
             {language === 'ru' ? 'Ср. плотность' : 'Avg. Density'}
           </div>
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8">
+      <div className="grid lg:grid-cols-2 gap-4 sm:gap-8">
         <div>
-          <h3 className="text-lg font-serif text-primary mb-4">
+          <h3 className="text-base sm:text-lg font-serif text-primary-text mb-3 sm:mb-4">
             {language === 'ru' ? 'Рейтинг сложности' : 'Difficulty Ranking'}
           </h3>
           <p className="text-xs text-muted-foreground mb-3">
@@ -114,26 +114,26 @@ export function PanelFCorpusStats({ data, colorIndexMap }: PanelFCorpusStatsProp
               ? 'Отсортировано по нормализованной плотности (индекс Гиро)'
               : 'Sorted by normalized density (Guiraud\'s Index)'}
           </p>
-          <div className="space-y-2">
+          <div className="space-y-1.5 sm:space-y-2 max-h-[280px] sm:max-h-[400px] overflow-y-auto">
             {stats.sortedByDensity.map((text, idx) => {
               const colorIdx = colorIndexMap.get(text.id) ?? 0;
               const color = getTextColor(colorIdx);
               return (
                 <div
                   key={text.id}
-                  className="flex items-center justify-between p-2 rounded-lg bg-muted/20 hover:bg-muted/40 transition-colors"
+                  className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg bg-muted/20 hover:bg-muted/40 transition-colors min-w-0"
                 >
-                  <div className="flex items-center gap-3">
-                    <span
-                      className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white"
-                      style={{ backgroundColor: color }}
-                    >
-                      {idx + 1}
-                    </span>
-                    <span className="text-sm truncate max-w-[200px]">{text.label}</span>
+                  <span
+                    className="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center text-[10px] sm:text-xs font-bold flex-shrink-0"
+                    style={{ backgroundColor: color, color: getTextContrastColor(colorIdx) }}
+                  >
+                    {idx + 1}
+                  </span>
+                  <div className="flex-1 min-w-0 overflow-hidden">
+                    <span className="text-xs sm:text-sm truncate block">{text.label}</span>
                   </div>
-                  <div className="flex items-center gap-4 text-sm">
-                    <span className="text-muted-foreground">
+                  <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm flex-shrink-0">
+                    <span className="text-muted-foreground hidden sm:inline">
                       {text.totalUniqueStems.toLocaleString()} {language === 'ru' ? 'лемм' : 'stems'}
                     </span>
                     <span className="font-mono font-semibold" style={{ color }}>
@@ -147,7 +147,7 @@ export function PanelFCorpusStats({ data, colorIndexMap }: PanelFCorpusStatsProp
         </div>
 
         <div>
-          <h3 className="text-lg font-serif text-primary mb-4">
+          <h3 className="text-base sm:text-lg font-serif text-primary-text mb-3 sm:mb-4">
             {language === 'ru' ? 'Частые слова корпуса' : 'Most Common Corpus Words'}
           </h3>
           <p className="text-xs text-muted-foreground mb-3">
@@ -155,17 +155,17 @@ export function PanelFCorpusStats({ data, colorIndexMap }: PanelFCorpusStatsProp
               ? 'Слова, часто встречающиеся во всех текстах'
               : 'Words appearing frequently across all texts'}
           </p>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 max-h-[280px] sm:max-h-[400px] overflow-y-auto">
             {stats.topCorpusWords.slice(0, 16).map(({ word, count }, idx) => (
               <div
                 key={word}
-                className="flex items-center justify-between p-2 rounded bg-muted/20"
+                className="flex items-center justify-between p-1.5 sm:p-2 rounded bg-muted/20"
               >
-                <div className="flex items-center gap-2">
-                  <span className="text-xs text-muted-foreground w-4">{idx + 1}.</span>
-                  <span className="text-sm font-medium">{word}</span>
+                <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+                  <span className="text-xs text-muted-foreground w-4 flex-shrink-0">{idx + 1}.</span>
+                  <span className="text-xs sm:text-sm font-medium truncate">{word}</span>
                 </div>
-                <span className="text-xs text-muted-foreground">
+                <span className="text-xs text-muted-foreground flex-shrink-0">
                   {count.toLocaleString()}×
                 </span>
               </div>
@@ -174,8 +174,8 @@ export function PanelFCorpusStats({ data, colorIndexMap }: PanelFCorpusStatsProp
         </div>
       </div>
 
-      <div className="mt-8 pt-6 border-t border-border">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-sm">
+      <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-border">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-center text-xs sm:text-sm">
           <div>
             <span className="text-muted-foreground">
               {language === 'ru' ? 'Текстов:' : 'Texts:'}

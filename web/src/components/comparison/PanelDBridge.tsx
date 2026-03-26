@@ -67,7 +67,7 @@ export function PanelDBridge({ data }: PanelDBridgeProps) {
     <div className="bg-card border border-border rounded-xl p-6 md:p-8 shadow-sm">
       <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8">
         <div>
-          <h2 className="text-2xl font-serif text-primary mb-2">{t('Bridge Words', language)}</h2>
+          <h2 className="text-2xl font-serif text-primary-text mb-2">{t('Bridge Words', language)}</h2>
           <p className="text-muted-foreground max-w-2xl">
             {t('Words that appear in the target text but are NOT covered by the source text.', language)}
           </p>
@@ -103,7 +103,7 @@ export function PanelDBridge({ data }: PanelDBridgeProps) {
         </div>
         <div className="text-right">
           <span className="text-sm text-muted-foreground block">{t('Coverage', language)}</span>
-          <span className="text-lg font-medium text-primary">
+          <span className="text-lg font-medium text-primary-text">
             {currentCoverage.coveragePercent.toFixed(1)}%
           </span>
         </div>
@@ -161,7 +161,7 @@ export function PanelDBridge({ data }: PanelDBridgeProps) {
                       key={i}
                       className="flex items-center bg-background border border-border rounded-md overflow-hidden group hover:border-primary/50 hover:-translate-y-0.5 hover:shadow-md transition-all duration-150 cursor-default"
                     >
-                      <span className="px-3 py-1.5 text-sm text-foreground font-medium group-hover:text-primary transition-colors">
+                      <span className="px-3 py-1.5 text-sm text-foreground font-medium group-hover:text-primary-text transition-colors">
                         {word.displayForm}
                       </span>
                       <span className="px-2 py-1.5 text-xs bg-muted/50 text-muted-foreground border-l border-border group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-150">

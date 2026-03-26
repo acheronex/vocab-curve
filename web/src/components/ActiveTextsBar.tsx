@@ -2,7 +2,8 @@ import { X, Plus } from 'lucide-react';
 import type { Manifest } from '../hooks/useManifest';
 import { useLanguage } from '../App';
 import { t } from '../i18n/translations';
-import { getTextColor } from '../utils/colors';
+import { getChartVar, getTextContrastVar } from '../utils/colors';
+import { useTheme } from '../hooks/useTheme';
 import { useMemo } from 'react';
 
 type ViewMode = 'single' | 'comparison' | 'corpus';
@@ -27,6 +28,8 @@ export function ActiveTextsBar({
   onOpenSearch,
 }: ActiveTextsBarProps) {
   const { language } = useLanguage();
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === 'dark';
 
   const colorIndexMap = useMemo(() => {
     const map = new Map<string, number>();
@@ -48,7 +51,7 @@ export function ActiveTextsBar({
         </span>
         <button
           onClick={onOpenSearch}
-          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-primary border border-primary/30 rounded-md hover:bg-primary/10 transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-primary-text border border-primary/30 rounded-md hover:bg-primary/10 transition-colors"
         >
           <Plus size={14} />
           {t('Add to selection', language)}
@@ -64,8 +67,14 @@ export function ActiveTextsBar({
       </span>
       {selectedTexts.map((text) => {
         const colorIdx = colorIndexMap.get(text.id) ?? 0;
-        const color = getTextColor(colorIdx);
+        const color = getChartVar(colorIdx);
+        const contrastColor = getTextContrastVar(colorIdx);
         const isActiveInSingle = viewMode === 'single' && text.file === activeTextFile;
+
+        const bgOpacity = isDark 
+          ? (isActiveInSingle ? 0.25 : 0.1)
+          : (isActiveInSingle ? 0.2 : 0.12);
+        const textOpacity = isDark ? 1 : 0.85;
 
         return (
           <div
@@ -77,8 +86,9 @@ export function ActiveTextsBar({
             }`}
             style={{
               borderColor: color,
-              backgroundColor: `${color}${isActiveInSingle ? '25' : '10'}`,
-              color: color,
+              backgroundColor: `color-mix(in srgb, ${color} ${bgOpacity * 100}%, transparent)`,
+              color: contrastColor,
+              opacity: textOpacity,
               ...(isActiveInSingle ? { boxShadow: `0 0 0 2px var(--color-background), 0 0 0 4px ${color}` } : {}),
             }}
             onClick={() => {
@@ -102,7 +112,7 @@ export function ActiveTextsBar({
       })}
       <button
         onClick={onOpenSearch}
-        className="flex items-center justify-center w-7 h-7 rounded-full border border-dashed border-muted-foreground/40 text-muted-foreground hover:border-primary hover:text-primary transition-colors flex-shrink-0"
+        className="flex items-center justify-center w-7 h-7 rounded-full border border-dashed border-muted-foreground/40 text-muted-foreground hover:border-primary-text hover:text-primary-text transition-colors flex-shrink-0"
       >
         <Plus size={14} />
       </button>

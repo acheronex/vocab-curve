@@ -3,7 +3,7 @@ import type { ComparisonResult } from '../../hooks/useComparisonData';
 import { ArrowDown, GripVertical, RotateCcw } from 'lucide-react';
 import { useLanguage } from '../../App';
 import { t } from '../../i18n/translations';
-import { getBarBgClass } from '../../utils/colors';
+import { getBarBgStyle } from '../../utils/colors';
 
 interface PanelALadderProps {
   data: ComparisonResult;
@@ -128,33 +128,33 @@ export function PanelALadder({ data, colorIndexMap }: PanelALadderProps) {
   }, []);
 
   return (
-    <div className="bg-card border border-border rounded-xl p-6 md:p-8 shadow-sm">
-      <div className="mb-8 flex flex-col md:flex-row md:items-start justify-between gap-4">
+    <div className="bg-card border border-border rounded-xl p-4 sm:p-6 md:p-8 shadow-sm overflow-hidden">
+      <div className="mb-6 sm:mb-8 flex flex-col md:flex-row md:items-start justify-between gap-3 sm:gap-4">
         <div>
-          <h2 className="text-2xl font-serif text-primary mb-2">
+          <h2 className="text-xl sm:text-2xl font-serif text-primary-text mb-1 sm:mb-2">
             {t('The Language Learning Ladder', language)}
           </h2>
-          <p className="text-muted-foreground">
+          <p className="text-sm sm:text-base text-muted-foreground">
             {t('How vocabulary builds', language)}
           </p>
         </div>
-        <div className="flex items-center gap-3">
-          <span className="text-xs text-muted-foreground">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <span className="text-xs text-muted-foreground hidden sm:inline">
             {t('Drag to reorder', language)}
           </span>
           {!isDefaultOrder && (
             <button
               onClick={() => setOrder(defaultOrder)}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-background border border-border rounded-md hover:border-primary/50 transition-colors"
+              className="flex items-center gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-background border border-border rounded-md hover:border-primary/50 transition-colors"
             >
               <RotateCcw size={12} />
-              {t('Reset order', language)}
+              <span className="hidden sm:inline">{t('Reset order', language)}</span>
             </button>
           )}
         </div>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
         {steps.map((step, index) => {
           const previousCumulative =
             index > 0 ? steps[index - 1].cumulativeStems : 0;
@@ -180,61 +180,64 @@ export function PanelALadder({ data, colorIndexMap }: PanelALadderProps) {
               onDrop={(e) => handleDrop(e, index)}
               onDragEnd={handleDragEnd}
             >
-              <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-2 transition-all duration-200 group-hover:translate-x-1">
-                <div className="w-full md:w-48 font-medium text-foreground transition-colors group-hover:text-primary flex items-center gap-2 text-sm md:text-base">
+              <div className="flex flex-row items-center gap-2 sm:gap-4 mb-2 transition-all duration-200 group-hover:translate-x-1">
+                <div className="w-6 sm:w-8 flex-shrink-0">
                   <GripVertical
                     size={16}
-                    className="text-muted-foreground/50 cursor-grab active:cursor-grabbing flex-shrink-0"
+                    className="text-muted-foreground/50 cursor-grab active:cursor-grabbing"
                   />
-                  <span className="truncate">{step.label}</span>
                 </div>
-                <div className="flex-1 h-10 md:h-12 bg-background rounded-md overflow-hidden flex relative border border-border transition-shadow group-hover:shadow-md group-hover:border-primary/30">
-                  {index > 0 && (
-                    <div
-                      className="h-full bg-muted opacity-50 transition-all duration-1000 ease-out"
-                      style={{ width: `${previousWidthPercent}%` }}
-                    />
-                  )}
-                  <div
-                    className={`h-full ${getBarBgClass(colorIdx)} transition-all duration-1000 ease-out flex items-center px-3`}
-                    style={{ width: `${newWidthPercent}%` }}
-                  >
-                    {newWidthPercent > 10 && (
-                      <span className="text-xs font-mono text-background font-bold mix-blend-luminosity">
-                        +{effectiveStemsAdded.toLocaleString()}{' '}
-                        {t('new stems', language)}
-                      </span>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between gap-2 mb-1.5">
+                    <span className="text-sm sm:text-base font-medium text-foreground truncate group-hover:text-primary-text transition-colors">
+                      {step.label}
+                    </span>
+                    <span className="text-xs sm:text-sm text-muted-foreground flex-shrink-0">
+                      +{effectiveStemsAdded.toLocaleString()}
+                    </span>
+                  </div>
+                  <div className="h-6 sm:h-8 md:h-10 bg-background rounded-md overflow-hidden flex relative border border-border transition-shadow group-hover:shadow-md group-hover:border-primary/30">
+                    {index > 0 && (
+                      <div
+                        className="h-full bg-muted opacity-50 transition-all duration-1000 ease-out"
+                        style={{ width: `${previousWidthPercent}%` }}
+                      />
                     )}
+                    <div
+                      className="h-full transition-all duration-1000 ease-out"
+                      style={{ ...getBarBgStyle(colorIdx), width: `${newWidthPercent}%` }}
+                    />
                   </div>
                 </div>
-                <div className="w-28 md:w-32 text-right font-mono text-sm">
+                <div className="text-right font-mono text-xs sm:text-sm flex-shrink-0 w-20 sm:w-28 md:w-32">
                   <span className="text-foreground font-bold">
                     {step.cumulativeStems.toLocaleString()}
                   </span>
-                  <span className="text-muted-foreground text-xs block">
+                  <span className="text-muted-foreground text-[10px] sm:text-xs block">
                     {t('stems total', language)}
                   </span>
                 </div>
               </div>
 
               {step.coverageOfNext !== null && (
-                <div className="flex items-center gap-4 my-4 ml-8 md:ml-48">
+                <div className="flex items-center gap-2 sm:gap-4 my-3 sm:my-4 ml-6 sm:ml-8">
                   <div className="flex flex-col items-center">
-                    <div className="w-px h-8 bg-border"></div>
-                    <div className="bg-background border border-border rounded-full p-1 z-10 -my-3">
+                    <div className="w-px h-4 sm:h-8 bg-border"></div>
+                    <div className="bg-background border border-border rounded-full p-0.5 sm:p-1 z-10 -my-2 sm:-my-3">
                       <ArrowDown
-                        size={16}
-                        className="text-muted-foreground"
+                        size={14}
+                        className="text-muted-foreground sm:w-4 sm:h-4"
                       />
                     </div>
-                    <div className="w-px h-8 bg-border"></div>
+                    <div className="w-px h-4 sm:h-8 bg-border"></div>
                   </div>
-                  <div className="text-sm text-muted-foreground bg-background border border-border px-3 py-1.5 rounded-md">
+                  <div className="text-xs sm:text-sm text-muted-foreground bg-background border border-border px-2 sm:px-3 py-1 sm:py-1.5 rounded-md">
                     {t('Covers', language)}{' '}
                     <strong className="text-foreground">
                       {step.coverageOfNext.toFixed(1)}%
                     </strong>{' '}
-                    {t('of next text', language)}
+                    <span className="hidden sm:inline">{t('of next text', language)}</span>
+                    <span className="sm:hidden">→</span>
                   </div>
                 </div>
               )}

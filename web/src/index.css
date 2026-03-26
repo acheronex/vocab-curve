@@ -1,27 +1,47 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Fraunces", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 
-  --color-background: #111110;
-  --color-foreground: #f4f4f0;
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
   
-  --color-card: #1a1a19;
-  --color-card-foreground: #f4f4f0;
+  --color-card: var(--card);
+  --color-card-foreground: var(--fg);
   
-  --color-border: #2d2d2a;
-  --color-muted: #2d2d2a;
-  --color-muted-foreground: #a1a19a;
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-fg);
   
-  --color-accent: #e6b981;
-  --color-accent-foreground: #111110;
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-fg);
   
-  --color-primary: #d97757;
-  --color-primary-foreground: #f4f4f0;
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-fg);
+  --color-primary-text: var(--primary-text);
   
-  --color-secondary: #4a6b5d;
-  --color-secondary-foreground: #f4f4f0;
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-fg);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-1-foreground: var(--chart-1-fg);
+  --color-chart-2: var(--chart-2);
+  --color-chart-2-foreground: var(--chart-2-fg);
+  --color-chart-3: var(--chart-3);
+  --color-chart-3-foreground: var(--chart-3-fg);
+  --color-chart-4: var(--chart-4);
+  --color-chart-4-foreground: var(--chart-4-fg);
+  --color-chart-5: var(--chart-5);
+  --color-chart-5-foreground: var(--chart-5-fg);
+  --color-chart-6: var(--chart-6);
+  --color-chart-6-foreground: var(--chart-6-fg);
+  --color-chart-7: var(--chart-7);
+  --color-chart-7-foreground: var(--chart-7-fg);
+  --color-chart-8: var(--chart-8);
+  --color-chart-8-foreground: var(--chart-8-fg);
 
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
@@ -29,8 +49,80 @@
   --radius-xl: 1rem;
 }
 
+:root {
+  --bg: #ffffff;
+  --fg: #1a1a19;
+  --card: #f8f8f6;
+  --border: #e5e5e0;
+  --muted: #e5e5e0;
+  --muted-fg: #6b6b68;
+  --accent: #d4a882;
+  --accent-fg: #1a1a19;
+  --primary: #f1d7c3;
+  --primary-fg: #1a1a19;
+  --primary-text: #a85a35;
+  --secondary: #6ba8b8;
+  --secondary-fg: #1a1a19;
+
+  /* Chart colors - lighter pastels for light theme */
+  --chart-1: #e8a080;
+  --chart-1-fg: #1a1a19;
+  --chart-2: #6ba8b8;
+  --chart-2-fg: #1a1a19;
+  --chart-3: #b898d9;
+  --chart-3-fg: #1a1a19;
+  --chart-4: #d4b896;
+  --chart-4-fg: #1a1a19;
+  --chart-5: #5fd896;
+  --chart-5-fg: #1a1a19;
+  --chart-6: #e87468;
+  --chart-6-fg: #1a1a19;
+  --chart-7: #5da8d8;
+  --chart-7-fg: #1a1a19;
+  --chart-8: #e8b858;
+  --chart-8-fg: #1a1a19;
+}
+
+.dark {
+  --bg: #111110;
+  --fg: #f4f4f0;
+  --card: #1a1a19;
+  --border: #2d2d2a;
+  --muted: #2d2d2a;
+  --muted-fg: #a1a19a;
+  --accent: #e6b981;
+  --accent-fg: #111110;
+  --primary: #d97757;
+  --primary-fg: #f4f4f0;
+  --primary-text: #d97757;
+  --secondary: #4a6b5d;
+  --secondary-fg: #f4f4f0;
+
+  /* Chart colors - original vivid colors for dark theme */
+  --chart-1: #d97757;
+  --chart-1-fg: #f4f4f0;
+  --chart-2: #4a8b9d;
+  --chart-2-fg: #f4f4f0;
+  --chart-3: #9b72cf;
+  --chart-3-fg: #f4f4f0;
+  --chart-4: #d4a373;
+  --chart-4-fg: #111110;
+  --chart-5: #22c55e;
+  --chart-5-fg: #f4f4f0;
+  --chart-6: #e74c3c;
+  --chart-6-fg: #f4f4f0;
+  --chart-7: #3498db;
+  --chart-7-fg: #f4f4f0;
+  --chart-8: #f39c12;
+  --chart-8-fg: #111110;
+}
+
 @layer base {
   :root {
+    color-scheme: light;
+  }
+  
+  .dark {
     color-scheme: dark;
   }
   
@@ -53,6 +145,14 @@
 
   button, a {
     touch-action: manipulation;
+  }
+
+  .recharts-wrapper,
+  .recharts-wrapper *,
+  .recharts-surface,
+  .recharts-surface * {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
   }
 }
 

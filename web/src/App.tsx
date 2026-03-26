@@ -14,6 +14,7 @@ import { AnkiExportButton } from './components/AnkiExportButton';
 import { TextSearchPanel } from './components/TextSearchPanel';
 import { ActiveTextsBar } from './components/ActiveTextsBar';
 import { InfoTooltip } from './components/InfoTooltip';
+import { ThemeToggle } from './components/ThemeToggle';
 import { Loader2, BookOpen, BarChart3 } from 'lucide-react';
 import { type Language, t } from './i18n/translations';
 
@@ -46,7 +47,7 @@ function EmptyState({
       <p className="text-muted-foreground text-sm text-center max-w-md mb-4">{description}</p>
       <button
         onClick={onButtonClick}
-        className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary border border-primary/30 rounded-lg hover:bg-primary/10 transition-colors"
+        className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-primary-text border border-primary/30 rounded-lg hover:bg-primary/10 transition-colors"
       >
         {buttonText}
       </button>
@@ -157,7 +158,7 @@ function App() {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="bg-card border border-border p-6 rounded-xl max-w-md text-center">
-          <h2 className="text-xl font-serif text-primary mb-2">{language === 'ru' ? 'Ошибка загрузки данных' : 'Failed to load data'}</h2>
+          <h2 className="text-xl font-serif text-primary-text mb-2">{language === 'ru' ? 'Ошибка загрузки данных' : 'Failed to load data'}</h2>
           <p className="text-muted-foreground text-sm">
             {error?.message || (language === 'ru' ? 'При загрузке данных произошла неизвестная ошибка.' : 'Unknown error occurred while loading analysis data.')}
           </p>
@@ -170,7 +171,7 @@ function App() {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="bg-card border border-border p-6 rounded-xl max-w-md text-center">
-          <h2 className="text-xl font-serif text-primary mb-2">{language === 'ru' ? 'Манифест не найден' : 'Manifest not found'}</h2>
+          <h2 className="text-xl font-serif text-primary-text mb-2">{language === 'ru' ? 'Манифест не найден' : 'Manifest not found'}</h2>
           <p className="text-muted-foreground text-sm">
             {language === 'ru' ? 'Не удалось загрузить список текстов.' : 'Could not load the list of texts.'}
           </p>
@@ -181,31 +182,36 @@ function App() {
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>
-      <div className="min-h-screen bg-background text-foreground p-4 md:p-8 font-sans">
+      <div className="min-h-screen bg-background text-foreground p-4 md:p-8 font-sans overflow-x-hidden">
         <div className="max-w-7xl mx-auto space-y-6">
           <header className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-border">
             <div>
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-medium tracking-tight">
                   {t('Extensive Reading Analysis', language)}
                 </h1>
-                <div className="flex bg-card border border-border rounded-lg p-1 md:hidden">
-                  <button
-                    onClick={() => setLanguage('en')}
-                    className={`px-2 py-1 text-xs font-medium rounded-md transition-colors ${
-                      language === 'en' ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
-                    }`}
-                  >
-                    EN
-                  </button>
-                  <button
-                    onClick={() => setLanguage('ru')}
-                    className={`px-2 py-1 text-xs font-medium rounded-md transition-colors ${
-                      language === 'ru' ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
-                    }`}
-                  >
-                    RU
-                  </button>
+                <div className="flex items-center gap-2 self-start sm:self-auto">
+                  <div className="flex bg-card border border-border rounded-lg p-1 md:hidden">
+                    <button
+                      onClick={() => setLanguage('en')}
+                      className={`px-2 py-1 text-xs font-medium rounded-md transition-colors ${
+                        language === 'en' ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      EN
+                    </button>
+                    <button
+                      onClick={() => setLanguage('ru')}
+                      className={`px-2 py-1 text-xs font-medium rounded-md transition-colors ${
+                        language === 'ru' ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      RU
+                    </button>
+                  </div>
+                  <div className="md:hidden">
+                    <ThemeToggle />
+                  </div>
                 </div>
               </div>
               <p className="text-muted-foreground max-w-2xl text-sm sm:text-base">
@@ -214,25 +220,28 @@ function App() {
             </div>
             
             <div className="flex flex-col gap-4 items-end">
-              <div className="hidden md:flex bg-card border border-border rounded-lg p-1 mb-2">
-                <button
-                  onClick={() => setLanguage('en')}
-                  className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${
-                    language === 'en' ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
-                  }`}
-                >
-                  EN
-                </button>
-                <button
-                  onClick={() => setLanguage('ru')}
-                  className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${
-                    language === 'ru' ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
-                  }`}
-                >
-                  RU
-                </button>
-              </div>
-              <div className="flex gap-2 items-center">
+                <div className="hidden md:flex items-center gap-4">
+                  <div className="bg-card border border-border rounded-lg p-1">
+                    <button
+                      onClick={() => setLanguage('en')}
+                      className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${
+                        language === 'en' ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      EN
+                    </button>
+                    <button
+                      onClick={() => setLanguage('ru')}
+                      className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${
+                        language === 'ru' ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      RU
+                    </button>
+                  </div>
+                  <ThemeToggle />
+                </div>
+                <div className="flex gap-2 items-center">
                 <button
                   onClick={() => setSearchPanelOpen(true)}
                   className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground bg-card border border-border rounded-lg hover:border-primary/50 hover:text-foreground transition-colors"
@@ -340,40 +349,35 @@ function App() {
                         </h2>
                         <AnkiExportButton data={singleData} />
                       </div>
-                      <div className="flex gap-3 sm:gap-4 text-sm font-mono text-muted-foreground bg-card px-3 sm:px-4 py-2 rounded-lg border border-border flex-wrap">
+                      <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-4 text-xs sm:text-sm font-mono text-muted-foreground bg-card px-3 sm:px-4 py-3 rounded-lg border border-border">
                         <div className="flex flex-col">
-                          <span className="text-xs uppercase tracking-wider opacity-60">
+                          <span className="text-[10px] sm:text-xs uppercase tracking-wider opacity-60">
                             {t('Sections', language)}
                           </span>
-                          <span className="text-foreground">{singleData.meta.totalSections}</span>
+                          <span className="text-sm sm:text-base text-foreground font-medium">{singleData.meta.totalSections}</span>
                         </div>
-                        <div className="w-px bg-border"></div>
                         <div className="flex flex-col">
-                          <span className="text-xs uppercase tracking-wider opacity-60">{t('Words', language)}</span>
-                          <span className="text-foreground">{(singleData.meta.totalWords ?? singleData.meta.totalTokens).toLocaleString()}</span>
+                          <span className="text-[10px] sm:text-xs uppercase tracking-wider opacity-60">{t('Words', language)}</span>
+                          <span className="text-sm sm:text-base text-foreground font-medium">{(singleData.meta.totalWords ?? singleData.meta.totalTokens).toLocaleString()}</span>
                         </div>
-                        <div className="w-px bg-border"></div>
                         <div className="flex flex-col">
-                          <span className="text-xs uppercase tracking-wider opacity-60">{t('Unique Words', language)}</span>
-                          <span className="text-foreground">{singleData.meta.totalUniqueStems.toLocaleString()}</span>
+                          <span className="text-[10px] sm:text-xs uppercase tracking-wider opacity-60">{t('Unique', language)}</span>
+                          <span className="text-sm sm:text-base text-foreground font-medium">{singleData.meta.totalUniqueStems.toLocaleString()}</span>
                         </div>
-                        <div className="w-px bg-border hidden sm:block"></div>
-                        <div className="hidden sm:flex flex-col">
-                          <span className="text-xs uppercase tracking-wider opacity-60">{t('Density', language)}</span>
-                          <span className="text-foreground">{formatDensity(singleData.meta.totalUniqueStems / (singleData.meta.totalWords ?? singleData.meta.totalTokens) * 100)}</span>
+                        <div className="flex flex-col">
+                          <span className="text-[10px] sm:text-xs uppercase tracking-wider opacity-60">{t('Density', language)}</span>
+                          <span className="text-sm sm:text-base text-foreground font-medium">{formatDensity(singleData.meta.totalUniqueStems / (singleData.meta.totalWords ?? singleData.meta.totalTokens) * 100)}</span>
                         </div>
-                        <div className="w-px bg-border hidden sm:block"></div>
-                        <div className="hidden sm:flex flex-col">
-                          <span className="text-xs uppercase tracking-wider flex items-center gap-1">
-                            <span className="opacity-60">{language === 'ru' ? 'Плотн. (норм.)' : 'Density (norm.)'}</span>
+                        <div className="flex flex-col">
+                          <span className="text-[10px] sm:text-xs uppercase tracking-wider flex items-center gap-1">
+                            <span className="opacity-60">{language === 'ru' ? 'Плотн.' : 'Density'}</span>
                             <InfoTooltip />
                           </span>
-                          <span className="text-foreground font-bold">{(singleData.meta.totalUniqueStems / Math.sqrt(singleData.meta.totalWords ?? singleData.meta.totalTokens)).toFixed(1)}</span>
+                          <span className="text-sm sm:text-base text-foreground font-bold">{(singleData.meta.totalUniqueStems / Math.sqrt(singleData.meta.totalWords ?? singleData.meta.totalTokens)).toFixed(1)}</span>
                         </div>
-                        <div className="w-px bg-border hidden md:block"></div>
-                        <div className="hidden md:flex flex-col">
-                          <span className="text-xs uppercase tracking-wider opacity-60">{t('Core Coverage', language)}</span>
-                          <span className="text-foreground">{singleData.tierStats.find(ts => ts.name === 'core')?.coveragePercentage.toFixed(1) ?? '—'}%</span>
+                        <div className="flex flex-col">
+                          <span className="text-[10px] sm:text-xs uppercase tracking-wider opacity-60">{t('Core', language)}</span>
+                          <span className="text-sm sm:text-base text-foreground font-medium">{singleData.tierStats.find(ts => ts.name === 'core')?.coveragePercentage.toFixed(0) ?? '—'}%</span>
                         </div>
                       </div>
                     </div>
