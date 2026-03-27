@@ -10,54 +10,86 @@ interface PanelALadderProps {
   colorIndexMap: Map<string, number>;
 }
 
+interface LadderStep {
+  id: string;
+  label: string;
+  stemsAdded: number;
+  cumulativeStems: number;
+  coverageOfNext: number | null;
+  globalCoverage: number;
+}
+
 function recalculateLadder(
   orderedIds: string[],
   texts: ComparisonResult['texts']
-) {
-  const accumulated = new Set<string>();
-  const accumulatedAtStep: Set<string>[] = [];
-  const steps: Array<{
-    id: string;
-    label: string;
-    stemsAdded: number;
-    cumulativeStems: number;
-    coverageOfNext: number | null;
-  }> = [];
+): { steps: LadderStep[]; finalVocabulary: number } {
+  const accumulated = new Set<number>();
+  const accumulatedAtStep: Set<number>[] = [];
+  const steps: LadderStep[] = [];
 
+  // First pass: calculate stems added and cumulative vocabulary
   for (const id of orderedIds) {
-    const text = texts.find((t) => t.id === id)!;
-    const stemsAdded = text.stems.filter((s) => !accumulated.has(s)).length;
-    text.stems.forEach((s) => accumulated.add(s));
+    const text = texts.find((t) => t.id === id);
+    if (!text) continue;
+
+    const stemsAdded = text.stemIds.filter((stemId) => !accumulated.has(stemId)).length;
+    text.stemIds.forEach((stemId) => accumulated.add(stemId));
     accumulatedAtStep.push(new Set(accumulated));
+
     steps.push({
       id,
       label: text.label,
       stemsAdded,
       cumulativeStems: accumulated.size,
       coverageOfNext: null,
+      globalCoverage: 0,
     });
   }
 
+  // Second pass: calculate coverage of next text
   for (let i = 0; i < steps.length - 1; i++) {
-    const nextText = texts.find((t) => t.id === steps[i + 1].id)!;
+    const nextText = texts.find((t) => t.id === steps[i + 1].id);
+    if (!nextText) continue;
+
     let covered = 0;
-    for (const s of nextText.stems) {
-      if (accumulatedAtStep[i].has(s)) covered++;
+    for (const stemId of nextText.stemIds) {
+      if (accumulatedAtStep[i].has(stemId)) covered++;
     }
-    steps[i].coverageOfNext =
-      Math.round((covered / nextText.stems.length) * 1000) / 10;
+    steps[i].coverageOfNext = Math.round((covered / nextText.stemIds.length) * 1000) / 10;
+  }
+
+  // Third pass: calculate global coverage (coverage of all remaining texts' vocabulary)
+  const allRemainingStemIds = new Set<number>();
+  for (let i = steps.length - 1; i >= 0; i--) {
+    const currentText = texts.find((t) => t.id === steps[i].id);
+    if (currentText) {
+      currentText.stemIds.forEach((stemId) => allRemainingStemIds.add(stemId));
+    }
+
+    if (i < steps.length - 1) {
+      const accumulatedSoFar = accumulatedAtStep[i];
+      let covered = 0;
+      for (const stemId of allRemainingStemIds) {
+        if (accumulatedSoFar.has(stemId)) covered++;
+      }
+      steps[i].globalCoverage = Math.round((covered / allRemainingStemIds.size) * 1000) / 10;
+    } else {
+      steps[i].globalCoverage = 100;
+    }
   }
 
   return { steps, finalVocabulary: accumulated.size };
 }
 
+// Get default sort order by density (simplest first)
+function getDefaultOrderByDensity(texts: ComparisonResult['texts']): string[] {
+  return [...texts].sort((a, b) => a.densityNormalized - b.densityNormalized).map((t) => t.id);
+}
+
 export function PanelALadder({ data, colorIndexMap }: PanelALadderProps) {
   const { language } = useLanguage();
 
-  const defaultOrder = useMemo(
-    () => data.cumulativeLadder.steps.map((s) => s.id),
-    [data]
-  );
+  const defaultOrder = useMemo(() => getDefaultOrderByDensity(data.texts), [data.texts]);
 
   const [order, setOrder] = useState<string[]>(defaultOrder);
   useEffect(() => { setOrder(defaultOrder); }, [defaultOrder]);
@@ -68,21 +100,10 @@ export function PanelALadder({ data, colorIndexMap }: PanelALadderProps) {
     order.length === defaultOrder.length &&
     order.every((id, i) => id === defaultOrder[i]);
 
-  const { steps, finalVocabulary } = useMemo(() => {
-    if (isDefaultOrder) {
-      return data.cumulativeLadder;
-    }
-    const validIds = new Set(data.texts.map((t) => t.id));
-    const validOrder = order.filter((id) => validIds.has(id));
-    const missingIds = data.texts
-      .map((t) => t.id)
-      .filter((id) => !validOrder.includes(id));
-    const effectiveOrder = [...validOrder, ...missingIds];
-    if (effectiveOrder.length === 0) {
-      return { steps: [], finalVocabulary: 0 };
-    }
-    return recalculateLadder(effectiveOrder, data.texts);
-  }, [order, data, isDefaultOrder]);
+  const { steps, finalVocabulary } = useMemo(
+    () => recalculateLadder(order, data.texts),
+    [order, data.texts]
+  );
 
   const handleDragStart = useCallback(
     (e: React.DragEvent, index: number) => {
@@ -236,8 +257,19 @@ export function PanelALadder({ data, colorIndexMap }: PanelALadderProps) {
                     <strong className="text-foreground">
                       {step.coverageOfNext.toFixed(1)}%
                     </strong>{' '}
-                    <span className="hidden sm:inline">{t('of next text', language)}</span>
-                    <span className="sm:hidden">→</span>
+                    <span className="hidden sm:inline">
+                      {step.globalCoverage < 100 && (
+                        <span className="text-muted-foreground">
+                          ({t('global coverage', language)}: {step.globalCoverage.toFixed(1)}%){' '}
+                        </span>
+                      )}
+                      {t('of next text', language)}
+                    </span>
+                    <span className="sm:hidden">
+                      {step.globalCoverage < 100 && (
+                        <span>({step.globalCoverage.toFixed(1)}%→) </span>
+                      )}→
+                    </span>
                   </div>
                 </div>
               )}

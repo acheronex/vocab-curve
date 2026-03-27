@@ -29,32 +29,10 @@ export function ComparisonView({ data, selectedIds }: ComparisonViewProps) {
       (c) => textIds.has(c.sourceId) && textIds.has(c.targetId),
     );
 
-    const filteredSteps = data.cumulativeLadder.steps.filter((s) =>
-      textIds.has(s.id),
-    );
-    const stepsWithCoverage = filteredSteps.map((step, idx) => ({
-      ...step,
-      coverageOfNext:
-        idx < filteredSteps.length - 1
-          ? (data.coverage.find(
-              (c) =>
-                c.sourceId === step.id &&
-                c.targetId === filteredSteps[idx + 1].id,
-            )?.coveragePercent ?? null)
-          : null,
-    }));
-
     return {
       ...data,
       texts,
       coverage,
-      cumulativeLadder: {
-        steps: stepsWithCoverage,
-        finalVocabulary:
-          stepsWithCoverage.length > 0
-            ? stepsWithCoverage[stepsWithCoverage.length - 1].cumulativeStems
-            : 0,
-      },
     };
   }, [data, selectedIdSet]);
 

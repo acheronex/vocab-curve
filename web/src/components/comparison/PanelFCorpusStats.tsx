@@ -14,7 +14,7 @@ export function PanelFCorpusStats({ data, colorIndexMap }: PanelFCorpusStatsProp
   const stats = useMemo(() => {
     const totalWords = data.texts.reduce((sum, t) => sum + t.totalWords, 0);
     const totalTokens = data.texts.reduce((sum, t) => sum + t.totalTokens, 0);
-    const totalUniqueStems = data.cumulativeLadder.finalVocabulary;
+    const totalUniqueStems = data.globalVocabulary.length;
     
     const avgUniqueStems = Math.round(
       data.texts.reduce((sum, t) => sum + t.totalUniqueStems, 0) / data.texts.length

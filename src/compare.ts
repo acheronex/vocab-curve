@@ -38,23 +38,15 @@ interface TextSummary {
   densityNormalized: number;
   topWords: Array<{ displayForm: string; count: number }>;
   curve: Array<{ section: number; newStems: number; cumulative: number }>;
-  stems: string[];
+  stemIds: number[];
 }
 
 interface ComparisonResult {
   generatedAt: string;
+  globalVocabulary: string[];
+  globalWordCounts: number[];
   texts: TextSummary[];
   coverage: CoveragePair[];
-  cumulativeLadder: {
-    steps: Array<{
-      id: string;
-      label: string;
-      stemsAdded: number;
-      cumulativeStems: number;
-      coverageOfNext: number | null;
-    }>;
-    finalVocabulary: number;
-  };
 }
 
 // ── Auto-discover all analysis JSONs in output/ ─────────────────
@@ -135,22 +127,70 @@ const analyses = SOURCES.map((s) => ({
   data: loadAnalysis(s.file),
 }));
 
-// ── Sort ladder by ascending totalUniqueStems (simplest → most complex) ──
+// ── Build globalvocabulary (stem → numeric ID) ─────────────────
+
+const globalStemSet = new Set<string>();
+for (const { data } of analyses) {
+  for (const word of data.vocabulary) {
+    globalStemSet.add(word.stem);
+  }
+}
+
+const globalVocabulary = Array.from(globalStemSet).sort();
+const stemToId = new Map<string, number>();
+globalVocabulary.forEach((stem, idx) => {
+  stemToId.set(stem, idx);
+});
+
+const globalWordCounts = new Array(globalVocabulary.length).fill(0);
+for (const { data } of analyses) {
+  for (const word of data.vocabulary) {
+    const stemId = stemToId.get(word.stem);
+    if (stemId !== undefined) {
+      globalWordCounts[stemId] += word.totalCount;
+    }
+  }
+}
+
+console.log(`\nGlobal vocabulary: ${globalVocabulary.length.toLocaleString()} unique stems`);
+
+// ── Sort by density (Guiraud's Index: V/√N) ─────────────────────
+// Density is a better complexity proxy than raw stem count:
+// - Philosophical essay (dense vocabulary) → HIGH density
+// - Children's story (simple vocabulary) → LOW density
 
 const ladderOrder = [...analyses]
-  .sort((a, b) => a.data.meta.totalUniqueStems - b.data.meta.totalUniqueStems)
+  .sort((a, b) => {
+    const densityA = a.data.meta.totalUniqueStems / Math.sqrt(a.data.meta.totalWords ?? a.data.meta.totalTokens);
+    const densityB = b.data.meta.totalUniqueStems / Math.sqrt(b.data.meta.totalWords ?? b.data.meta.totalTokens);
+    return densityA - densityB;
+  })
   .map((a) => a.source.id);
 
 console.log(
-  `Ladder order: ${ladderOrder.map((id) => analyses.find((a) => a.source.id === id)!.source.label).join(" → ")}`,
+  `\nLadder order sorted by density (simplest → most complex):\n${ladderOrder.map((id) => {
+    const a = analyses.find((x) => x.source.id === id)!;
+    const N = a.data.meta.totalWords ?? a.data.meta.totalTokens;
+    const V = a.data.meta.totalUniqueStems;
+    const density = (V / Math.sqrt(N)).toFixed(2);
+    return `  ${a.source.label.padEnd(30)} density=${density.padStart(6)} (V=${V.toLocaleString()}, N=${N.toLocaleString()})`;
+  }).join("\n")}`,
 );
 
-// ── Build texts ─────────────────────────────────────────────────
+// ── Build texts with numeric stem IDs ───────────────────────────
 
 const texts: TextSummary[] = analyses.map(({ source, data }) => {
   const coreTier = data.tierStats?.find(t => t.name === 'core');
   const N = data.meta.totalWords ?? data.meta.totalTokens;
   const V = data.meta.totalUniqueStems;
+
+  const stemIds = data.vocabulary.map((w) => {
+    const id = stemToId.get(w.stem);
+    if (id === undefined) {
+      throw new Error(`Stem "${w.stem}" not found in global vocabulary`);
+    }
+    return id;
+  });
 
   return {
     id: source.id,
@@ -170,7 +210,7 @@ const texts: TextSummary[] = analyses.map(({ source, data }) => {
       newStems: s.newStems,
       cumulative: s.cumulativeUniqueStems,
     })),
-    stems: data.vocabulary.map((w) => w.stem),
+    stemIds,
   };
 });
 
@@ -191,48 +231,14 @@ for (let i = 0; i < analyses.length; i++) {
   }
 }
 
-// ── Build cumulative ladder ─────────────────────────────────────
-
-const cumulativeStems = new Set<string>();
-const ladderSteps = ladderOrder.map((id, idx) => {
-  const entry = analyses.find((a) => a.source.id === id)!;
-  const stemsBefore = cumulativeStems.size;
-  for (const w of entry.data.vocabulary) {
-    cumulativeStems.add(w.stem);
-  }
-  const stemsAdded = cumulativeStems.size - stemsBefore;
-
-  let coverageOfNext: number | null = null;
-  if (idx < ladderOrder.length - 1) {
-    const nextId = ladderOrder[idx + 1];
-    const nextAnalysis = analyses.find((a) => a.source.id === nextId)!;
-    const nextStems = getStemSet(nextAnalysis.data);
-    let covered = 0;
-    for (const stem of nextStems) {
-      if (cumulativeStems.has(stem)) covered++;
-    }
-    coverageOfNext = Math.round((covered / nextStems.size) * 1000) / 10;
-  }
-
-  return {
-    id,
-    label: entry.source.label,
-    stemsAdded,
-    cumulativeStems: cumulativeStems.size,
-    coverageOfNext,
-  };
-});
-
 // ── Write comparison.json ───────────────────────────────────────
 
 const result: ComparisonResult = {
   generatedAt: new Date().toISOString(),
+  globalVocabulary,
+  globalWordCounts,
   texts,
   coverage,
-  cumulativeLadder: {
-    steps: ladderSteps,
-    finalVocabulary: cumulativeStems.size,
-  },
 };
 
 const outputPath = resolve("./output/comparison.json");
@@ -266,7 +272,7 @@ console.log("\n✓ Comparison complete\n");
 console.log("=== TEXT OVERVIEW ===");
 for (const t of texts) {
   console.log(
-    `  ${t.label}: ${t.totalTokens.toLocaleString()} tokens, ${t.totalUniqueStems.toLocaleString()} unique stems, ${t.sections} sections`,
+    `  ${t.label}: ${t.totalTokens.toLocaleString()} tokens, ${t.totalUniqueStems.toLocaleString()} unique stems, ${t.sections} sections, density=${t.densityNormalized}`,
   );
 }
 
@@ -298,17 +304,7 @@ for (const sourceId of ladderOrder) {
   console.log(row);
 }
 
-console.log("\n=== CUMULATIVE LADDER ===");
-console.log("(Read in this order: how your vocabulary grows)\n");
-for (const step of ladderSteps) {
-  const nextInfo =
-    step.coverageOfNext !== null
-      ? ` → covers ${step.coverageOfNext}% of next text`
-      : "";
-  console.log(
-    `  ${step.label.padEnd(26)} +${String(step.stemsAdded).padStart(5)} new stems → ${String(step.cumulativeStems).padStart(6)} total${nextInfo}`,
-  );
-}
-
 console.log(`\nOutput: ${outputPath}`);
 console.log(`Manifest: ${manifestPath}`);
+console.log(`\nGlobal vocabulary size: ${globalVocabulary.length.toLocaleString()} stems`);
+console.log(`Average stems per text: ${Math.round(texts.reduce((sum, t) => sum + t.stemIds.length, 0) / texts.length).toLocaleString()}`);

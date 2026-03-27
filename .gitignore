@@ -19,3 +19,11 @@ __pycache__/
 docs/superpowers/
 screenshots/
 anki-notes/
+
+# Private/copyrighted materials
+additional-literature/
+src/analyze/stop-words.ts.zip
+
+# Generic template files
+web/README.md
+web/src/assets/

@@ -5,6 +5,7 @@ import { useLanguage } from '../App';
 import { getTextColor, getTextContrastColor } from '../utils/colors';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LabelList } from 'recharts';
 import { InfoTooltip } from './InfoTooltip';
+import { PanelGCumulativeCurve } from './PanelGCumulativeCurve';
 
 interface CorpusStatsViewProps {
   data: ComparisonResult;
@@ -22,7 +23,7 @@ export function CorpusStatsView({ data }: CorpusStatsViewProps) {
   const stats = useMemo(() => {
     const totalWords = data.texts.reduce((sum, t) => sum + t.totalWords, 0);
     const totalTokens = data.texts.reduce((sum, t) => sum + t.totalTokens, 0);
-    const totalUniqueStems = data.cumulativeLadder.finalVocabulary;
+    const totalUniqueStems = data.globalVocabulary.length;
     
     const avgUniqueStems = Math.round(
       data.texts.reduce((sum, t) => sum + t.totalUniqueStems, 0) / data.texts.length
@@ -479,6 +480,8 @@ export function CorpusStatsView({ data }: CorpusStatsViewProps) {
           </table>
         </div>
       </div>
+
+      <PanelGCumulativeCurve data={data} />
     </div>
   );
 }

@@ -99,9 +99,10 @@ This document describes the architecture and data flow of Vocab Curve. **Update 
 
 **Process:**
 1. Loads all analysis JSONs
-2. Calculates coverage matrix (what % of text A's vocabulary is in text B)
-3. Sorts texts by density (Guiraud's Index: V/√N) to build "ladder"
-4. Calculates cumulative vocabulary growth
+2. **Builds global vocabulary** — All unique stems across all texts → `globalVocabulary: string[]`
+3. **Converts stems to numeric IDs** — Each text gets `stemIds: number[]` (indices into global vocabulary)
+4. Sorts texts by density (Guiraud's Index: V/√N) — simplest → most complex
+5. Calculates coverage matrix (what % of text A's vocabulary is in text B)
 
 **Output:**
 - `output/comparison.json` — Full comparison data
@@ -111,6 +112,7 @@ This document describes the architecture and data flow of Vocab Curve. **Update 
 // comparison.json
 {
   "generatedAt": "2024-01-01T00:00:00Z",
+  "globalVocabulary": ["sein", "haben", "werden", ...],
   "texts": [
     {
       "id": "lutherbibel-1912",
@@ -123,20 +125,19 @@ This document describes the architecture and data flow of Vocab Curve. **Update 
       "densityNormalized": 21.7,
       "topWords": [...],
       "curve": [{ "section": 1, "newStems": 500, "cumulative": 500 }, ...],
-      "stems": ["sein", "haben", ...]
+      "stemIds": [0, 1, 5, 1024, ...]
     }
   ],
   "coverage": [
     { "sourceId": "a", "targetId": "b", "coveragePercent": 45.2 }
-  ],
-  "cumulativeLadder": {
-    "steps": [
-      { "id": "kant", "newStems": 6320, "cumulativeStems": 6320, "coverageOfNext": 15.1 }
-    ],
-    "finalVocabulary": 104476
-  }
+  ]
 }
 ```
+
+**Why numeric IDs?**
+- `Set<number>` operations are ~100x faster than `Set<string>`
+- Memory: 4 bytes per number vs ~20 bytes per string
+- Enables smooth drag-and-drop recalculation in UI
 
 ```json
 // manifest.json
@@ -182,7 +183,7 @@ This document describes the architecture and data flow of Vocab Curve. **Update 
 
 | Component | Purpose |
 |-----------|---------|
-| `PanelALadder.tsx` | Waterfall chart of vocabulary accumulation |
+| `PanelALadder.tsx` | Waterfall chart of vocabulary accumulation (calculates ladder on-the-fly) |
 | `PanelBCoverage.tsx` | N×N coverage matrix |
 | `PanelCCurves.tsx` | Overlaid vocabulary curves |
 | `PanelDBridge.tsx` | Bridge words between texts |
@@ -238,6 +239,30 @@ const density = totalUniqueStems / Math.sqrt(totalWords);
 ```
 
 Higher = more complex text. Compensates for text length via Heap's Law.
+
+### Ladder Calculation (Frontend)
+
+The ladder is calculated on-the-fly in `PanelALadder.tsx` using `Set<number>` for O(1) lookups:
+
+```typescript
+// Numeric IDs enable fast operations
+const accumulated = new Set<number>();
+
+for (const id of orderedIds) {
+  const text = texts.find(t => t.id === id);
+  // Filter new stems using Set.has() - O(1) per lookup
+  const stemsAdded = text.stemIds.filter(stemId => !accumulated.has(stemId)).length;
+  text.stemIds.forEach(stemId => accumulated.add(stemId));
+  // ... calculate coverage metrics
+}
+```
+
+**Three-pass algorithm:**
+1. First pass: Calculate stems added and cumulative vocabulary
+2. Second pass: Calculate coverage of next text
+3. Third pass: Calculate global coverage (coverage of all remaining texts' vocabulary)
+
+**Drag-and-drop recalculation:** Instant because `Set<number>` operations are fast enough for UI thread.
 
 ## Adding New Features
 

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-25T11:09:14.479Z",
+  "generatedAt": "2026-03-27T20:47:06.762Z",
   "texts": [
     {
       "id": "kant-kritik-der-reinen-vernunft",
@@ -16,7 +16,7 @@
       "file": "lutherbibel-1912.json",
       "totalWords": 696962,
       "totalTokens": 358919,
-      "totalUniqueStems": 12997,
+      "totalUniqueStems": 12985,
       "sections": 26
     },
     {
@@ -29,15 +29,6 @@
       "sections": 28
     },
     {
-      "id": "fontane-gesammelte-werke",
-      "label": "Fontane: Effi Briest / Der Stechlin",
-      "file": "fontane-gesammelte-werke.json",
-      "totalWords": 220195,
-      "totalTokens": 122850,
-      "totalUniqueStems": 15252,
-      "sections": 28
-    },
-    {
       "id": "goethe-gesammelte-werke",
       "label": "Goethe: Wilhelm Meisters Lehr- und Wanderjahre",
       "file": "goethe-gesammelte-werke.json",
@@ -47,13 +38,31 @@
       "sections": 26
     },
     {
-      "id": "thomas-mann-buddenbrooks",
-      "label": "Thomas Mann: Buddenbrooks",
-      "file": "thomas-mann-buddenbrooks.json",
-      "totalWords": 228153,
-      "totalTokens": 130923,
-      "totalUniqueStems": 17053,
-      "sections": 22
+      "id": "grimm-gesammelte-werke",
+      "label": "Brüder Grimm: Märchen und Sagen",
+      "file": "grimm-gesammelte-werke.json",
+      "totalWords": 484983,
+      "totalTokens": 267360,
+      "totalUniqueStems": 21423,
+      "sections": 23
+    },
+    {
+      "id": "fontane-gesammelte-werke",
+      "label": "Fontane: Effi Briest / Der Stechlin",
+      "file": "fontane-gesammelte-werke.json",
+      "totalWords": 220195,
+      "totalTokens": 122850,
+      "totalUniqueStems": 15252,
+      "sections": 28
+    },
+    {
+      "id": "kafka-gesammelte-werke",
+      "label": "Kafka: Gesammelte Werke",
+      "file": "kafka-gesammelte-werke.json",
+      "totalWords": 663477,
+      "totalTokens": 369091,
+      "totalUniqueStems": 26625,
+      "sections": 25
     },
     {
       "id": "freud-gesammelte-werke",
@@ -65,22 +74,13 @@
       "sections": 24
     },
     {
-      "id": "grimm-gesammelte-werke",
-      "label": "Brüder Grimm: Märchen und Sagen",
-      "file": "grimm-gesammelte-werke.json",
-      "totalWords": 484983,
-      "totalTokens": 267360,
-      "totalUniqueStems": 21441,
-      "sections": 23
-    },
-    {
-      "id": "kafka-gesammelte-werke",
-      "label": "Kafka: Gesammelte Werke",
-      "file": "kafka-gesammelte-werke.json",
-      "totalWords": 663477,
-      "totalTokens": 369091,
-      "totalUniqueStems": 26638,
-      "sections": 25
+      "id": "thomas-mann-buddenbrooks",
+      "label": "Thomas Mann: Buddenbrooks",
+      "file": "thomas-mann-buddenbrooks.json",
+      "totalWords": 228153,
+      "totalTokens": 130923,
+      "totalUniqueStems": 17053,
+      "sections": 22
     },
     {
       "id": "schopenhauer-gesammelte-werke",

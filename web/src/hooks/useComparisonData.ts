@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 
 export interface ComparisonResult {
+  globalVocabulary: string[];
+  globalWordCounts: number[];
   texts: Array<{
     id: string;
     label: string;
@@ -12,7 +14,7 @@ export interface ComparisonResult {
     densityNormalized: number;
     topWords: Array<{ displayForm: string; count: number }>;
     curve: Array<{ section: number; newStems: number; cumulative: number }>;
-    stems: string[];
+    stemIds: number[];
   }>;
   coverage: Array<{
     sourceId: string;
@@ -25,16 +27,6 @@ export interface ComparisonResult {
     bridgeWords: Array<{ displayForm: string; stem: string; countInTarget: number }>;
     bridgeWordsTotal: number;
   }>;
-  cumulativeLadder: {
-    steps: Array<{
-      id: string;
-      label: string;
-      stemsAdded: number;
-      cumulativeStems: number;
-      coverageOfNext: number | null;
-    }>;
-    finalVocabulary: number;
-  };
 }
 
 export function useComparisonData() {

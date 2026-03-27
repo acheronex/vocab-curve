@@ -106,7 +106,7 @@
   --chart-3: #9b72cf;
   --chart-3-fg: #f4f4f0;
   --chart-4: #d4a373;
-  --chart-4-fg: #111110;
+  --chart-4-fg: #f4f4f0;
   --chart-5: #22c55e;
   --chart-5-fg: #f4f4f0;
   --chart-6: #e74c3c;
@@ -114,7 +114,7 @@
   --chart-7: #3498db;
   --chart-7-fg: #f4f4f0;
   --chart-8: #f39c12;
-  --chart-8-fg: #111110;
+  --chart-8-fg: #f4f4f0;
 }
 
 @layer base {
