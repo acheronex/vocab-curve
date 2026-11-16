@@ -2,13 +2,9 @@
 
 An interactive vocabulary analysis tool for language learners. Quantifies vocabulary progression as you read, visualizes coverage across texts, and exports frequency-tiered vocabulary lists for Anki.
 
-## 🌐 Live Demo
+## Runs locally
 
-**Try it now:** [vocab-curve.erosheve.ru](https://vocab-curve.erosheve.ru/)
-
-Explore vocabulary statistics across 10 German literature texts (~4.3M words). All visualization features work in the demo.
-
-> **Note:** Anki export is disabled in the demo. Clone the repo to use this feature locally.
+There is no hosted demo: the app runs on your own computer (Node.js and Python 3 required). Clone the repo and follow [Quick Start](#quick-start) below; the dashboard opens at http://localhost:5173 with all features, including Anki export.
 
 ## Concept
 
